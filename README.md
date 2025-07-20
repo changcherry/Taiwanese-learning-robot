@@ -1,28 +1,12 @@
-# Taiwanese-learning-robot
-建立自己的分支， 確認沒問題後再傳到主頁 這樣比較不容易有衝突
-### **建立自己的分支**　　　
-```
-git checkout -b feature/分支名稱
-```
-### 把程式碼上傳到分支
-```
-git add .
-git commit -m "檔名"
-git push origin  feature/ 分支名稱
-```
-- 上傳後可以到 GitHub 上看到這個分支
+# React + Vite
 
-### 確認沒問題合併分支到主分支（main）
-```
-# 切換到 main
-git checkout main
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-# 拉最新的 main（從 GitHub）
-git pull origin main
+Currently, two official plugins are available:
 
-# 合併你的分支到 main
-git merge feature/about
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-# 把合併後的 main 推回 GitHub
-git push origin main
-```
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
