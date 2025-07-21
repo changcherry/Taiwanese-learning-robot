@@ -1,0 +1,145 @@
+#login-failure-page {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Kanit', sans-serif;
+  background-color: #fffbd3;
+  color: #545050;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-align: center;
+}
+
+#login-failure-page * {
+  box-sizing: border-box;
+}
+
+/* 結構 */
+#login-failure-page .login-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  max-width: 1920px;
+  scale: 1.3;
+}
+
+/* 左邊哭哭熊 */
+#login-failure-page .welcome-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 40px;
+}
+
+#login-failure-page .failure-title {
+  font-size: 80px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: #545050; /* 保持標題灰色 */
+}
+
+#login-failure-page .mascot-image {
+  width: 500px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* 表單 */
+#login-failure-page .form-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#login-failure-page .login-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  margin-bottom: 30px;
+}
+
+#login-failure-page .tab-link {
+  font-size: 40px;
+  font-weight: 800;
+  color: #545050;
+  text-decoration: none;
+}
+
+#login-failure-page .tab-link.active {
+  color: #f9ab5d;
+}
+
+#login-failure-page .login-form {
+  background-color: #fff7ab;
+  border: 5px solid #ffc081;
+  border-radius: 30px;
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 600px;
+}
+
+#login-failure-page .form-input {
+  height: 60px;
+  padding: 0 30px;
+  font-size: 24px;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+  color: #d86f6f !important; /* 登入失敗時紅色字 */
+}
+
+#login-failure-page .form-input::placeholder {
+  color: #d86f6f;
+}
+
+#login-failure-page .submit-button {
+  background-color: #f9ab5d;
+  color: #fff;
+  font-size: 36px;
+  font-weight: 800;
+  padding: 16px 0;
+  border: none;
+  border-radius: 60px;
+  cursor: pointer;
+  box-shadow: 0px 8px 4px rgba(0,0,0,0.25);
+  transition: 0.3s ease;
+}
+
+#login-failure-page .submit-button:hover {
+  background-color: #ff9800;
+  transform: translateY(-3px);
+}
+
+/* RWD 同登入 */
+@media (max-width: 1024px) {
+  #login-failure-page .login-container {
+    scale: 1.1;
+    flex-direction: column;
+  }
+  #login-failure-page .failure-title { font-size: 64px; }
+  #login-failure-page .mascot-image { width: 400px; }
+  #login-failure-page .tab-link { font-size: 32px; }
+  #login-failure-page .login-form { width: 500px; }
+}
+@media (max-width: 768px) {
+  #login-failure-page .login-container {
+    scale: 1;
+    flex-direction: column;
+    width: 90%;
+  }
+  #login-failure-page .failure-title { font-size: 48px; }
+  #login-failure-page .mascot-image { width: 280px; }
+  #login-failure-page .tab-link { font-size: 24px; }
+  #login-failure-page .login-form { width: 100%; }
+  #login-failure-page .form-input { font-size: 18px; height: 50px; }
+  #login-failure-page .submit-button { font-size: 28px; padding: 12px 0; }
+}

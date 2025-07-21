@@ -1,0 +1,51 @@
+#login-success-page {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Kanit', sans-serif;
+  background-color: #fffbd3;
+  color: #545050;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-align: center;
+}
+
+#login-success-page * {
+  box-sizing: border-box;
+}
+
+#login-success-page .success-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  transform: scale(2.2); /* 放大整個內容，特別是熊和文字 */
+}
+
+/* 成功訊息 */
+#login-success-page .success-message {
+  font-size: 72px;  /* 讓字也跟著大 */
+  font-weight: 800;
+  color: #545050;
+  margin: 0;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* 小熊圖片（點擊跳主頁） */
+#login-success-page .mascot-image {
+  width: 400px; /* 熊變大，原本 320px → 400px */
+  max-width: 100%;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#login-success-page .mascot-image:hover {
+  transform: scale(1.2); /* 滑過再放大 */
+}

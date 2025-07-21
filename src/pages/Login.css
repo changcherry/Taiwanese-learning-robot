@@ -1,0 +1,151 @@
+#login-page {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Kanit', sans-serif;
+  background-color: #fffbd3;
+  color: #545050;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-align: center;
+}
+
+#login-page * {
+  box-sizing: border-box;
+}
+
+/* 主要結構 */
+#login-page .login-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  max-width: 1920px;
+  scale: 1.3;
+}
+
+/* 左側小熊與標題 */
+#login-page .welcome-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 40px;
+}
+
+#login-page .welcome-title {
+  font-size: 80px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: #545050;
+}
+
+#login-page .mascot-image {
+  width: 500px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* 登入表單 */
+#login-page .form-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#login-page .login-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  margin-bottom: 30px;
+}
+
+#login-page .tab-link {
+  font-size: 40px;
+  font-weight: 800;
+  color: #545050;
+  text-decoration: none;
+}
+
+#login-page .tab-link.active {
+  color: #f9ab5d;
+}
+
+#login-page .login-form {
+  background-color: #fff7ab;
+  border: 5px solid #ffc081;
+  border-radius: 30px;
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 600px;
+}
+
+#login-page .form-input {
+  height: 60px;
+  padding: 0 30px;
+  font-size: 24px;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+  color: #545050 !important; /* 強制灰色 */
+}
+
+#login-page .form-input::placeholder {
+  color: #545050;
+}
+
+#login-page .submit-button {
+  background-color: #f9ab5d;
+  color: #fff;
+  font-size: 36px;
+  font-weight: 800;
+  padding: 16px 0;
+  border: none;
+  border-radius: 60px;
+  cursor: pointer;
+  box-shadow: 0px 8px 4px rgba(0,0,0,0.25);
+  transition: 0.3s ease;
+}
+
+#login-page .submit-button:hover {
+  background-color: #ff9800;
+  transform: translateY(-3px);
+}
+
+/* 防止錯誤驗證變紅 */
+#login-page input:invalid {
+  color: #545050 !important;
+  box-shadow: none;
+}
+
+/* RWD */
+@media (max-width: 1024px) {
+  #login-page .login-container {
+    scale: 1.1;
+    flex-direction: column;
+  }
+  #login-page .welcome-title { font-size: 64px; }
+  #login-page .mascot-image { width: 400px; }
+  #login-page .tab-link { font-size: 32px; }
+  #login-page .login-form { width: 500px; }
+}
+@media (max-width: 768px) {
+  #login-page .login-container {
+    scale: 1;
+    flex-direction: column;
+    width: 90%;
+  }
+  #login-page .welcome-title { font-size: 48px; }
+  #login-page .mascot-image { width: 280px; }
+  #login-page .tab-link { font-size: 24px; }
+  #login-page .login-form { width: 100%; }
+  #login-page .form-input { font-size: 18px; height: 50px; }
+  #login-page .submit-button { font-size: 28px; padding: 12px 0; }
+}
