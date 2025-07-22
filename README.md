@@ -48,4 +48,3 @@ export default tseslint.config({
   },
 })
 ```
-# My_React_App
