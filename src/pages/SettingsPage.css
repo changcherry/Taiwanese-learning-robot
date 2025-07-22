@@ -1,0 +1,289 @@
+:root {
+  --font-size-title: 3rem; /* 48px */
+  --font-size-body: 3rem; /* 48px */
+  --text-color: #545050;
+  --primary-bg: #ffec97;
+  --page-bg: #fffbd3;
+}
+
+body {
+  margin: 0;
+  font-family: 'Kanit', sans-serif;
+  background-color: var(--page-bg);
+  color: var(--text-color);
+}
+
+.page-container {
+  max-width: 1920px;
+  margin: 0 auto;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.background-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Responsive Typography & Layout */
+@media (max-width: 1200px) {
+  :root {
+    --font-size-title: 2.25rem;
+    --font-size-body: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --font-size-title: 1.5rem;
+    --font-size-body: 1.25rem;
+  }
+}
+
+/* CSS from section:header */
+.settings-header {
+  background-color: var(--primary-bg);
+  height: 124px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0 94px;
+  box-sizing: border-box;
+}
+
+.back-button {
+  position: absolute;
+  left: 94px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+}
+
+.back-button img {
+  width: 90px;
+  height: 90px;
+}
+
+.header-title {
+  font-size: var(--font-size-title);
+  font-weight: 800;
+  margin: 0;
+}
+
+@media (max-width: 1200px) {
+  .settings-header {
+    height: 100px;
+    padding: 0 40px;
+  }
+  .back-button {
+    left: 40px;
+  }
+  .back-button img {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .settings-header {
+    height: 80px;
+    padding: 0 20px;
+  }
+  .back-button {
+    left: 20px;
+  }
+  .back-button img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* CSS from section:profile */
+.profile-content {
+  padding: 63px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 62px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 42px;
+  width: 100%;
+  max-width: 1479px;
+  padding: 0 220px; /* Approximate padding to center content */
+  box-sizing: border-box;
+}
+
+.avatar {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  flex-shrink: 0;
+}
+
+.avatar img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.avatar .avatar-background {
+  width: 150px;
+  height: 150px;
+}
+
+.avatar .avatar-icon {
+  width: 84.27px;
+  height: 84.27px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.username {
+  font-size: var(--font-size-body);
+  font-weight: 400;
+  margin: 0;
+}
+
+.settings-menu {
+  width: 100%;
+  max-width: 1479px;
+  padding: 0 220px; /* Approximate padding to center content */
+  box-sizing: border-box;
+}
+
+.settings-menu ul {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.menu-item {
+  background-color: var(--primary-bg);
+  border-radius: 69px;
+  height: 138px;
+  display: flex;
+  align-items: center;
+  padding: 0 45px 0 33px;
+  box-sizing: border-box;
+  gap: 22px;
+}
+
+.menu-icon-container {
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.menu-icon-container img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.menu-text {
+  font-size: var(--font-size-body);
+  font-weight: 800;
+  flex-grow: 1;
+}
+
+.menu-arrow {
+  width: 90px;
+  height: 90px;
+  transform: rotate(180deg);
+  flex-shrink: 0;
+}
+
+@media (max-width: 1600px) {
+  .user-info, .settings-menu {
+    max-width: 100%;
+    padding: 0 5%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .profile-content {
+    padding: 40px 0;
+    gap: 40px;
+  }
+  .avatar {
+    width: 120px;
+    height: 120px;
+  }
+  .avatar .avatar-icon {
+    width: 68px;
+    height: 68px;
+  }
+  .settings-menu ul {
+    gap: 24px;
+  }
+  .menu-item {
+    height: 100px;
+    border-radius: 50px;
+    padding: 0 30px;
+  }
+  .menu-icon-container, .menu-arrow {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-content {
+    padding: 30px 0;
+    gap: 30px;
+  }
+  .user-info {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .avatar {
+    width: 100px;
+    height: 100px;
+  }
+  .avatar .avatar-icon {
+    width: 56px;
+    height: 56px;
+  }
+  .settings-menu ul {
+    gap: 16px;
+  }
+  .menu-item {
+    height: 80px;
+    border-radius: 40px;
+    padding: 0 20px;
+    gap: 16px;
+  }
+  .menu-icon-container, .menu-arrow {
+    width: 40px;
+    height: 40px;
+  }
+  .menu-text {
+    font-size: 1rem;
+  }
+}
