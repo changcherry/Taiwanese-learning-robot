@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./SettingsPage.css";
 
 const SettingsPage: React.FC = () => {
+    const navigate = useNavigate();
+
     return (
         <div className ="page-container">
             <img src="/page/f089e58c-fd4d-464a-9542-297548b10125/images/f11d553937110455b763db26fc3e78d3301ce0f1.png" className ="background-pattern" alt="" />

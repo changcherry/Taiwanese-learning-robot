@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import SettingsPage from "./pages/SettingsPage";
+import SettingsPage from "./components/SettingsPage";
 
 const App: React.FC = () => {
   return (
