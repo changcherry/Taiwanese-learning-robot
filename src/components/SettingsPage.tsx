@@ -1,62 +1,103 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import "./SettingsPage.css";
+// import { useNavigate } from "react-router-dom";
+import "../styles/SettingsPage.css";
 
 const SettingsPage: React.FC = () => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     return (
-        <div className ="page-container">
-            <img src="/page/f089e58c-fd4d-464a-9542-297548b10125/images/f11d553937110455b763db26fc3e78d3301ce0f1.png" className ="background-pattern" alt="" />
-                <header id="section-header" className ="settings-header">
-                    <a href="#" className ="back-button">
-                        <img src="/page/f089e58c-fd4d-464a-9542-297548b10125/images/1077_25412.svg" alt="Back" />
-                    </a>
-                    <h1 className ="header-title">設定</h1>
-                </header>
-                <section id="section-profile" className ="profile-content">
-                    <div className ="user-info">
-                        {/* merged image */}
-                        <div className ="avatar">
-                            <img className ="avatar-background" src="/page/f089e58c-fd4d-464a-9542-297548b10125/images/I1077_25415_74_9107.svg" alt="" />
-                            <img className ="avatar-icon" src="/page/f089e58c-fd4d-464a-9542-297548b10125/images/I1077_25415_74_9255.svg" alt="User Avatar" />
-                        </div>
-                        <p className ="username">Cherry</p>
-                    </div>
+        <div className="page-container">
+      {/* 背景圖案 */}
+      <img
+        src="/images/images_Settings/f11d553937110455b763db26fc3e78d3301ce0f1.png"
+        className="background-pattern"
+        alt="背景圖"
+      />
 
-                    <nav className ="settings-menu">
-                        <ul>
-                            <li>
-                                <a href="#" className ="menu-item">
-                                    <div className ="menu-icon-container">
-                                        <img src="/page/f089e58c-fd4d-464a-9542-297548b10125/images/I1077_25434_44_4406.svg" alt="" />
-                                    </div>
-                                    <span className ="menu-text">編輯資料</span>
-                                    <img className ="menu-arrow" src="/page/f089e58c-fd4d-464a-9542-297548b10125/images/1077_25433.svg" alt="Go" />
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className ="menu-item">
-                                    <div className ="menu-icon-container">
-                                        <img src="/page/f089e58c-fd4d-464a-9542-297548b10125/images/I1077_25428_44_8733.svg" alt="" />
-                                    </div>
-                                    <span className ="menu-text">使用說明</span>
-                                    <img className ="menu-arrow" src="/page/f089e58c-fd4d-464a-9542-297548b10125/images/1077_25430.svg" alt="Go" />
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className ="menu-item">
-                                    <div className ="menu-icon-container">
-                                        <img src="/page/f089e58c-fd4d-464a-9542-297548b10125/images/I1077_25426_44_9480.svg" alt="" />
-                                    </div>
-                                    <span className ="menu-text">問題反應</span>
-                                    <img className ="menu-arrow" src="/page/f089e58c-fd4d-464a-9542-297548b10125/images/1077_25424.svg" alt="Go" />
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </section>
+      {/* 頁首區塊 */}
+      <header className="settings-header">
+        <a href="#" className="back-button">
+          <img src="/images/images_Settings/1077_25412.png" alt="返回" />
+        </a>
+        <h1 className="header-title">設定</h1>
+      </header>
+
+      {/* 個人資料主體 */}
+      <section className="profile-content">
+        {/* 使用者資訊 */}
+        <div className="user-info">
+          <div className="avatar">
+            <img
+              src="/images/images_Settings/I1077_25415_74_9107.png"
+              className="avatar-background"
+              alt="頭像背景"
+            />
+            <img
+              src="/images/images_Settings/I1077_25415_74_9255.png"
+              className="avatar-icon"
+              alt="使用者頭像"
+            />
+          </div>
+          <p className="username">Cherry</p>
         </div>
+
+        {/* 功能選單 */}
+        <nav className="settings-menu">
+          <ul>
+            <li>
+              <a href="#" className="menu-item">
+                <div className="menu-icon-container">
+                  <img
+                    src="/images/images_Settings/I1077_25434_44_4406.png"
+                    alt="編輯資料圖示"
+                  />
+                </div>
+                <span className="menu-text">編輯資料</span>
+                <img
+                  src="/images/images_Settings/1077_25433.png"
+                  className="menu-arrow"
+                  alt="進入"
+                />
+              </a>
+            </li>
+
+            <li>
+              <a href="#" className="menu-item">
+                <div className="menu-icon-container">
+                  <img
+                    src="/images/images_Settings/I1077_25428_44_8733.png"
+                    alt="使用說明圖示"
+                  />
+                </div>
+                <span className="menu-text">使用說明</span>
+                <img
+                  src="/images/images_Settings/1077_25430.png"
+                  className="menu-arrow"
+                  alt="進入"
+                />
+              </a>
+            </li>
+
+            <li>
+              <a href="#" className="menu-item">
+                <div className="menu-icon-container">
+                  <img
+                    src="/images/images_Settings/I1077_25426_44_9480.png"
+                    alt="問題反應圖示"
+                  />
+                </div>
+                <span className="menu-text">問題反應</span>
+                <img
+                  src="/images/images_Settings/1077_25424.png"
+                  className="menu-arrow"
+                  alt="進入"
+                />
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </section>
+    </div>
     );
 };
 
