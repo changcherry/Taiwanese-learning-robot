@@ -1,12 +1,12 @@
 import React from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../styles/SettingsPage.css";
 
 const SettingsPage: React.FC = () => {
-    // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    return (
-        <div className="page-container">
+  return (
+    <div className="page-container">
       {/* 背景圖案 */}
       <img
         src="/images/images_Settings/f11d553937110455b763db26fc3e78d3301ce0f1.png"
@@ -45,7 +45,12 @@ const SettingsPage: React.FC = () => {
         <nav className="settings-menu">
           <ul>
             <li>
-              <a href="#" className="menu-item">
+              {/* 將 <a> 改為可點擊跳轉的 div */}
+              <div
+                className="menu-item"
+                onClick={() => navigate("/profile-edit")}
+                style={{ cursor: "pointer" }}
+              >
                 <div className="menu-icon-container">
                   <img
                     src="/images/images_Settings/I1077_25434_44_4406.png"
@@ -58,7 +63,7 @@ const SettingsPage: React.FC = () => {
                   className="menu-arrow"
                   alt="進入"
                 />
-              </a>
+              </div>
             </li>
 
             <li>
@@ -98,7 +103,7 @@ const SettingsPage: React.FC = () => {
         </nav>
       </section>
     </div>
-    );
+  );
 };
 
 export default SettingsPage;

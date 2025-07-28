@@ -1,0 +1,27 @@
+:root {
+    --text-primary: #545050;
+    --bg-main: #fffbd3;
+    --bg-header: #ffec97;
+    --bg-input: #ffffff;
+    --btn-confirm-bg: #f9ab5d;
+    --btn-cancel-bg: #bbbbbb;
+    --btn-text: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.25);
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg-main);
+    font-family: 'Inter', 'Kanit', sans-serif;
+    color: var(--text-primary);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a, button {
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+}
