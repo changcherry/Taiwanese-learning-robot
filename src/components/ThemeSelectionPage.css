@@ -1,0 +1,266 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Kanit', sans-serif;
+  background-color: #fffbd3;
+  color: #545050;
+}
+
+/* CSS from section:main */
+.page-container {
+  max-width: 1400px;
+  min-height: 800px;
+  margin: 40px auto;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  border-radius: 16px;
+  background-color: #fffbd3;
+}
+
+.background-image {
+  position: absolute;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  opacity: 0.5;
+  left: 0;
+  top: 0;
+  pointer-events: none; /* 這行最重要，讓背景不擋住點擊！ */
+}
+
+.page-header {
+  background-color: #ffec97;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 24px;
+  position: relative;
+  flex-shrink: 0;
+  border-radius: 16px 16px 0 0;
+}
+
+.back-icon-btn {
+  width: 60px;     /* 建議設大一點 */
+  height: 60px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute; /* 加上這行 */
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.header-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #545050;
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 32px 16px 32px 16px;
+  min-height: 40vh;
+  margin-top: 80px; /* 內容往上且置中 */
+}
+
+.main-title {
+  font-size: 64px;         /* 讓主題選擇更大 */
+  font-weight: 700;
+  color: #545050;
+  margin: 0 0 48px 0;
+  text-align: center;
+}
+
+.options-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;     /* 水平置中 */
+  gap: 32px;               /* 選項間距更大 */
+}
+
+.option-item {
+  font-size: 32px;         /* 選項文字更大 */
+  width: 400px;
+  height: 80px;
+  border-radius: 20px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.option-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.option-style-1 { background-color: #eae9e6; }
+.option-style-2 { background-color: #f9ab5d; }
+.option-style-3 { background-color: #dbdbdb; }
+
+/* 新增主題卡片樣式 */
+.theme-card-scroll {
+  width: 100%;
+  overflow-x: auto;
+  padding: 32px 0;
+  display: flex;
+  justify-content: center; /* 讓卡片區塊水平置中 */
+}
+
+.theme-card-list {
+  display: flex;
+  gap: 48px; /* 卡片間距加大 */
+  padding: 0 24px;
+  width: max-content;
+  justify-content: center; /* 讓卡片內容置中 */
+}
+
+.theme-card {
+  min-width: 320px;    /* 卡片更大 */
+  height: 320px;
+  border-radius: 32px;
+  font-size: 2.8rem;   /* 文字更大 */
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.theme-card:active,
+.theme-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.16);
+}
+
+.card-yellow {
+  background-color: #ffe680;
+  color: #333;
+}
+
+.card-orange {
+  background-color: #f89c3f;
+  color: #333;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .option-item {
+    width: 90vw;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-container {
+    min-height: 100vh;
+    max-width: 100vw;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .background-image {
+    left: 0;
+    transform: none;
+    width: 100%;
+    height: 100%;
+  }
+
+  .page-header {
+    height: 80px;
+    padding: 0 12px;
+    border-radius: 0;
+  }
+
+  .back-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .header-title {
+    font-size: 24px;
+  }
+
+  .main-content {
+    padding: 24px 8px;
+  }
+
+  .main-title {
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+
+  .options-list {
+    gap: 16px;
+  }
+
+  .option-item {
+    width: 95vw;
+    max-width: 95vw;
+    height: 56px;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header {
+    height: 56px;
+    padding: 0 6px;
+  }
+
+  .back-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .header-title {
+    font-size: 16px;
+  }
+
+  .main-content {
+    padding: 12px 4px;
+  }
+
+  .main-title {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .options-list {
+    gap: 8px;
+  }
+
+  .option-item {
+    height: 36px;
+    border-radius: 8px;
+  }
+}
