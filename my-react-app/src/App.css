@@ -1,0 +1,49 @@
+/* GameSelection.css */
+
+/* 基本樣式，確保 html, body 佔滿視窗 */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #fff6c7; /* 全局背景色 */
+}
+
+/* 遊戲選擇頁面背景容器 */
+.game-selection-bg {
+  min-height: 100vh;
+  min-width: 100vw; /* 確保佔滿整個寬度 */
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background: #fff6c7; /* 與 body 背景色一致 */
+  overflow-x: hidden; /* 防止水平滾動條出現 */
+  overflow-y: auto; /* 允許垂直滾動 */
+  z-index: 0;
+  display: flex; /* 使用 flex 佈局來垂直居中內容 */
+  flex-direction: column;
+}
+
+/* 背景圖層，半透明裝飾 */
+.game-selection-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: url('../assets/22600173.png') center no-repeat;
+  background-size: 120% auto; /* 圖片寬度60%，高度自動 */
+  opacity: 0.15; /* 透明度 */
+  pointer-events: none; /* 不影響下層元素點擊 */
+}
+
+/* 遊戲頭部固定欄 */
+.game-header {
+  position: fixed; /* 固定在頂部 */
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px; /* 頭部高度 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffec97; /* 頭部背景色 */
+  z-index: 1000; /* 確保在最上層 */}
