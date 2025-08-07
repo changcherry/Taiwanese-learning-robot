@@ -19,15 +19,14 @@
   box-sizing: border-box;
 }
 
-/* 主要結構 */
 #login-page .login-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 90%;
   max-width: 1920px;
-  scale: 1.3;
+  scale: 1.6;
 }
 
 /* 左側小熊與標題 */
@@ -35,18 +34,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 40px;
+  margin-right: 60px;
 }
 
 #login-page .welcome-title {
-  font-size: 80px;
+  font-size: 110px;
   font-weight: 800;
   margin-bottom: 20px;
   color: #545050;
 }
 
 #login-page .mascot-image {
-  width: 500px;
+  width: 1000px;  /* ✅ 放大 */
   max-width: 100%;
   height: auto;
 }
@@ -66,7 +65,7 @@
 }
 
 #login-page .tab-link {
-  font-size: 40px;
+  font-size: 48px;
   font-weight: 800;
   color: #545050;
   text-decoration: none;
@@ -79,73 +78,54 @@
 #login-page .login-form {
   background-color: #fff7ab;
   border: 5px solid #ffc081;
-  border-radius: 30px;
-  padding: 50px 40px;
+  border-radius: 40px;
+  padding: 80px 60px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  width: 600px;
+  gap: 40px;
+  width: 880px;
 }
 
+/* 輸入欄位 */
 #login-page .form-input {
-  height: 60px;
-  padding: 0 30px;
-  font-size: 24px;
+  height: 88px;              /* ✅ 跟 Figma 一樣 */
+  padding: 0 40px;
+  font-size: 32px;
   border: none;
   border-radius: 30px;
   box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
-  color: #545050 !important; /* 強制灰色 */
+  color: #545050 !important;
 }
 
 #login-page .form-input::placeholder {
   color: #545050;
 }
 
+/* 登入按鈕 */
 #login-page .submit-button {
   background-color: #f9ab5d;
-  color: #fff;
-  font-size: 36px;
-  font-weight: 800;
-  padding: 16px 0;
+  color: white;
+  font-size: 48px;
+  font-weight: 900;
+  padding: 30px 0;
+  width: 100%;
   border: none;
   border-radius: 60px;
   cursor: pointer;
-  box-shadow: 0px 8px 4px rgba(0,0,0,0.25);
-  transition: 0.3s ease;
+  text-align: center;
+
+  box-shadow: 0px 12px 18px rgba(0, 0, 0, 0.35);
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 #login-page .submit-button:hover {
-  background-color: #ff9800;
-  transform: translateY(-3px);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.4);
 }
 
-/* 防止錯誤驗證變紅 */
+/* 錯誤輸入不變紅 */
 #login-page input:invalid {
   color: #545050 !important;
   box-shadow: none;
-}
-
-/* RWD */
-@media (max-width: 1024px) {
-  #login-page .login-container {
-    scale: 1.1;
-    flex-direction: column;
-  }
-  #login-page .welcome-title { font-size: 64px; }
-  #login-page .mascot-image { width: 400px; }
-  #login-page .tab-link { font-size: 32px; }
-  #login-page .login-form { width: 500px; }
-}
-@media (max-width: 768px) {
-  #login-page .login-container {
-    scale: 1;
-    flex-direction: column;
-    width: 90%;
-  }
-  #login-page .welcome-title { font-size: 48px; }
-  #login-page .mascot-image { width: 280px; }
-  #login-page .tab-link { font-size: 24px; }
-  #login-page .login-form { width: 100%; }
-  #login-page .form-input { font-size: 18px; height: 50px; }
-  #login-page .submit-button { font-size: 28px; padding: 12px 0; }
 }
