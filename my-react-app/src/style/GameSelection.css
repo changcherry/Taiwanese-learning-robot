@@ -1,73 +1,13 @@
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background: #fff6c7;
-}
-
-.game-selection-bg {
-  min-height: 100vh;
-  min-width: 100vw;
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-  background: #fff6c7;
-  overflow-x: hidden;
-  overflow-y: auto;
-  z-index: 0;
-}
-
-.game-selection-bg::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: url('../assets/22600173.png') center no-repeat;
-  background-size: 120% auto; /* 寬度60%，高度自動 */
-  opacity: 0.15;         /* 透明度，0~1之間可調 */
-  pointer-events: none;  /* 不影響點擊 */
-}
-
-.game-header {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #ffec97;
-  z-index: 1000;
-}
-
-.back-button {
-  position: absolute;
-  left: 70px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 80px;
-  height: 80px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  border-radius: 50%;      /* 讓按鈕變圓形 */
-  display: flex;           /* 讓圖示置中 */
-  align-items: center;
-  justify-content: center;
-  padding: 0;              /* 移除預設 padding */
-}
-.back-button img {
-    width: 50px; /* 根據圖片調整大小 */
-    height: 50px;
-}
-
-.header-title {
-  width: 100%;
+.game-header-title {
+ width: 100%;
   text-align: center;
   margin: 0;
-  font-weight: 600;
-  font-size: 2rem;
-  color: #545050;
+  font-weight: 700; /* 字體可以再粗一點 */
+  font-size: 2.2rem; /* 稍微放大 */
+  color: #3f3e3e; /* 更深的顏色，增加對比 */
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); /* 輕微的文字陰影讓字體更突出 */
 }
+
 
 .game-selection-main {
   padding-top: 150px; /* 原本140px，請加大到180px或更高，直到不被切到為止 */
@@ -148,8 +88,6 @@ html, body {
   object-fit: cover;
   border-radius: 30px;
   z-index: 0;
-   opacity: 0.7; /* 調整圖片透明度，例如 0.6 或 0.7，你可以根據實際效果調整 */
-  /* 也可以稍微降低亮度，讓顏色變淺 */
 }
 
 .active-card-title {

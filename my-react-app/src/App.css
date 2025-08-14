@@ -1,49 +1,78 @@
-/* GameSelection.css */
-
-/* 基本樣式，確保 html, body 佔滿視窗 */
-html, body {
+/* 假設 body 和其他通用樣式不變 */
+body, html {
   height: 100%;
   margin: 0;
   padding: 0;
-  background: #fff6c7; /* 全局背景色 */
+  background: #ffedcd; /* 可以考慮換成更柔和的淺黃色或淺米色 */
 }
 
-/* 遊戲選擇頁面背景容器 */
-.game-selection-bg {
+.selection-bg {
   min-height: 100vh;
-  min-width: 100vw; /* 確保佔滿整個寬度 */
+  min-width: 100vw;
   width: 100vw;
   height: 100vh;
   position: relative;
-  background: #fff6c7; /* 與 body 背景色一致 */
-  overflow-x: hidden; /* 防止水平滾動條出現 */
-  overflow-y: auto; /* 允許垂直滾動 */
+  /* 背景色可以調整為更活潑的淺色，例如： */
+  background: linear-gradient(to bottom right, #fdffbc, #e0f2f7); /* 淺黃到淺藍漸變 */
+  overflow-x: hidden;
+  overflow-y: auto;
   z-index: 0;
-  display: flex; /* 使用 flex 佈局來垂直居中內容 */
-  flex-direction: column;
 }
 
-/* 背景圖層，半透明裝飾 */
-.game-selection-bg::before {
-  content: "";
+.selection-bg::before {
+   content: "";
   position: absolute;
   inset: 0;
   z-index: 0;
   background: url('../assets/22600173.png') center no-repeat;
-  background-size: 120% auto; /* 圖片寬度60%，高度自動 */
-  opacity: 0.15; /* 透明度 */
-  pointer-events: none; /* 不影響下層元素點擊 */
+  background-size: 120% auto; /* 寬度60%，高度自動 */
+  opacity: 0.15;         /* 透明度，0~1之間可調 */
+  pointer-events: none;  /* 不影響點擊 */
 }
 
-/* 遊戲頭部固定欄 */
-.game-header {
-  position: fixed; /* 固定在頂部 */
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 80px; /* 頭部高度 */
+.selection-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ffec97; /* 頭部背景色 */
-  z-index: 1000; /* 確保在最上層 */}
+  background: #ffec97; /* 更鮮明的黃色 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 增加一點陰影 */
+  z-index: 1000;
+}
+
+.back-button {
+  position: absolute;
+  left: 70px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 80px;
+  height: 80px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background-color 0.3s; /* 增加過渡效果 */
+}
+.back-button:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* 懸停時的背景效果 */
+}
+.back-button img {
+    width: 50px;
+    height: 50px;
+}
+
+.header-title {
+ width: 100%;
+  text-align: center;
+  margin: 0;
+  font-weight: 700; /* 字體可以再粗一點 */
+  font-size: 2.2rem; /* 稍微放大 */
+  color: #3f3e3e; /* 更深的顏色，增加對比 */
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); /* 輕微的文字陰影讓字體更突出 */
+}

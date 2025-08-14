@@ -1,5 +1,23 @@
 /* GameMain.css */
 
+/* GameQuestion.css - 電腦版適應調整 */
+
+.game-selection-bg {
+  min-height: 100vh;
+  min-width: 100vw;
+  width: 100vw;
+
+  height: auto;
+  /* <--- 確保高度可以自動調整 */
+  position: relative;
+  background: #302727a4;
+  /* 遊戲背景的底色 */
+  overflow-x: hidden;
+  overflow-y: auto;
+
+
+}
+
 
 .main-menu {
   display: flex;
@@ -8,14 +26,15 @@
   height: 100vh;
   background-position: center;
   background-size: cover;
-  position: relative;
-  /* 讓背景圖透明一點 */
-  background-color: rgba(242, 240, 240, 0.102); /* 可調整透明度 */
-  background-blend-mode: lighten; /* 或用 overlay, multiply, 依需求調整 */
+
+  background-color: rgba(242, 240, 240, 0.23);
+  /* 可調整透明度 */
+  background-blend-mode: lighten;
+  /* 或用 overlay, multiply, 依需求調整 */
 }
 
 .main-menu-overlay {
-  
+
   padding: 2rem 3rem;
   border-radius: 20px;
   text-align: center;
@@ -24,10 +43,14 @@
 }
 
 .main-menu-title {
-  font-size: 8rem; /* 調整標題大小 */
-  margin-bottom: -5rem; /* 減少下方距離，讓按鈕區塊更靠近 */
-  margin-top: 0rem; /* 移除多餘的上邊距，避免影響按鈕位置 */
-  text-shadow: 0 6px 16px rgba(0,0,0,0.9); /* 加陰影 */
+  font-size: 8rem;
+  /* 調整標題大小 */
+  margin-bottom: -5rem;
+  /* 減少下方距離，讓按鈕區塊更靠近 */
+  margin-top: 0rem;
+  /* 移除多餘的上邊距，避免影響按鈕位置 */
+  text-shadow: 0 6px 16px rgba(0, 0, 0, 0.9);
+  /* 加陰影 */
 }
 
 /* 調整按鈕區塊往下移動 */
@@ -36,8 +59,9 @@
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  margin-top: 20rem; /* 新增，往下移動 */
-  
+  margin-top: 20rem;
+  /* 新增，往下移動 */
+
 }
 
 .start-button {
@@ -54,7 +78,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
- box-shadow: 0 7px 10px rgba(0,0,0,0.7);
+  box-shadow: 0 7px 10px rgba(0, 0, 0, 0.7);
 }
 
 .exit-button {
@@ -71,7 +95,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 7px 10px rgba(0,0,0,0.7);
+  box-shadow: 0 7px 10px rgba(0, 0, 0, 0.7);
 }
 
 
