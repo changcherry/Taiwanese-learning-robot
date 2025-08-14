@@ -27,6 +27,8 @@
   width: 90%;
   max-width: 1920px;
   scale: 1.6;
+  gap: 0px;
+  transform: translateY(40px); /* 控制左右距離，替代原 margin-right */
 }
 
 /* 左側小熊與標題 */
@@ -34,19 +36,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 60px;
+  transform: translateX(-200px);
 }
 
 #login-page .welcome-title {
   font-size: 110px;
   font-weight: 800;
-  margin-bottom: 20px;
+  margin-top: 60px;
+  margin-bottom: -150px;
   color: #545050;
 }
 
 #login-page .mascot-image {
-  width: 1000px;  /* ✅ 放大 */
-  max-width: 100%;
+  width: 2000px; /* 放大 2 倍 */
+  max-width: none;
   height: auto;
 }
 
@@ -55,6 +58,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  transform: scale(1.25) translateX(-450px); /* 表單放大 */
+  transform-origin: left center; /* 從左側放大，靠近小熊 */
 }
 
 #login-page .login-tabs {
@@ -83,14 +88,14 @@
   display: flex;
   flex-direction: column;
   gap: 40px;
-  width: 880px;
+  width: 1000px; /* 略加寬，與放大比例一致 */
 }
 
 /* 輸入欄位 */
 #login-page .form-input {
-  height: 88px;              /* ✅ 跟 Figma 一樣 */
-  padding: 0 40px;
-  font-size: 32px;
+  height: 104px; /* 略高，比例更協調 */
+  padding: 0 48px;
+  font-size: 38px; /* 放大字體 */
   border: none;
   border-radius: 30px;
   box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
@@ -105,9 +110,9 @@
 #login-page .submit-button {
   background-color: #f9ab5d;
   color: white;
-  font-size: 48px;
+  font-size: 58px; /* 放大字體 */
   font-weight: 900;
-  padding: 30px 0;
+  padding: 38px 0;
   width: 100%;
   border: none;
   border-radius: 60px;

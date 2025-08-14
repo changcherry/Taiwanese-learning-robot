@@ -19,7 +19,7 @@
   box-sizing: border-box;
 }
 
-/* 結構 */
+/* 整體結構（與登入頁一致） */
 #login-failure-page .login-container {
   display: flex;
   flex-direction: row;
@@ -28,34 +28,39 @@
   width: 90%;
   max-width: 1920px;
   scale: 1.6;
+  gap: 0;
+  transform: translateY(40px); /* 整體往下 */
 }
 
-/* 左邊哭哭熊與失敗文字 */
+/* 左邊哭哭熊與標題 */
 #login-failure-page .welcome-panel {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 60px;
+  transform: translateX(-80px); /* 與登入頁相同的左移量 */
 }
 
 #login-failure-page .failure-title {
   font-size: 110px;
   font-weight: 800;
-  margin-bottom: 20px;
+  margin-top: 60px;
+  margin-bottom: -150px; /* 讓標題更貼近小熊 */
   color: #545050;
 }
 
 #login-failure-page .mascot-image {
-  width: 1000px;
-  max-width: 100%;
+  width: 2000px;     /* 放大到與登入頁相同 */
+  max-width: none;
   height: auto;
 }
 
-/* 表單 */
+/* 右側表單（與登入頁一致） */
 #login-failure-page .form-panel {
   display: flex;
   flex-direction: column;
   align-items: center;
+  transform: scale(1.25) translateX(-450px);
+  transform-origin: left center;
 }
 
 #login-failure-page .login-tabs {
@@ -84,14 +89,14 @@
   display: flex;
   flex-direction: column;
   gap: 40px;
-  width: 880px;
+  width: 1000px; /* 與登入頁相同寬度 */
 }
 
-/* 輸入欄位（紅色錯誤） */
+/* 輸入欄位（保留錯誤頁紅色樣式） */
 #login-failure-page .form-input {
-  height: 88px;
-  padding: 0 40px;
-  font-size: 32px;
+  height: 104px;
+  padding: 0 48px;
+  font-size: 38px;
   border: none;
   border-radius: 30px;
   box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
@@ -102,13 +107,13 @@
   color: #d86f6f;
 }
 
-/* 重新登入按鈕 */
+/* 重新登入按鈕（尺寸對齊登入頁） */
 #login-failure-page .submit-button {
   background-color: #f9ab5d;
   color: white;
-  font-size: 48px;
+  font-size: 58px;
   font-weight: 900;
-  padding: 30px 0;
+  padding: 38px 0;
   width: 100%;
   border: none;
   border-radius: 60px;
