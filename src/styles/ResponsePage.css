@@ -1,0 +1,189 @@
+/* ===== ResponsePage 專屬樣式 ===== */
+
+/* 外層容器置中 */
+.response-page {
+	max-width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	padding-top: 0; /* 聊天區靠近 header */
+	/* 不設固定高度，避免滾動條 */
+	/* 新增：鎖住背景與頁面高度，讓滾輪只影響聊天內容區 */
+	height: 100vh;
+	overflow: hidden;
+	background-attachment: fixed;
+}
+
+/* 聊天區 */
+.response-content {
+	margin: 0 auto;
+	padding: 20px 60px 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	width: 100%;
+	box-sizing: border-box;
+	/* 移除 overflow-y: auto; */
+	/* 新增：讓滾輪只滾動聊天區，並預留輸入欄高度避免被遮住 */
+	flex: 1;
+	overflow-y: auto;
+	padding-bottom: 180px; /* 增加與輸入列的距離 */
+	scroll-behavior: smooth;
+}
+
+/* 訊息區塊 */
+.message-group {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	max-width: 100%;
+}
+
+.message-group.received { align-self: flex-start; align-items: flex-start; }
+.message-group.sent { align-self: flex-end; align-items: flex-end; }
+
+/* 發送者名稱 */
+.sender-name {
+	font-weight: 800;
+	font-size: 16px;
+	line-height: 1.2;
+	padding-left: 10px;
+}
+
+/* 訊息泡泡 */
+.message-bubble {
+	border-radius: 25px;
+	padding: 10px 16px;
+	max-width: 100%;
+	white-space: pre-wrap;
+	font-size: 14px;
+	box-sizing: border-box;
+}
+
+/* 讓已送出訊息泡泡靠右 */
+.message-group.sent .message-bubble {
+	margin-left: auto;
+	text-align: right;
+}
+
+.received .message-bubble { background-color: #ffd991; }
+.sent .message-bubble { background-color: #fff7b1; }
+
+/* 固定底部輸入列 */
+.input-bar-fixed {
+	position: fixed;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 90%;
+	max-width: 900px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 12px 20px;
+	background-color: #ffffff;
+	border-radius: 30px;
+	box-shadow: 0px 4px 8px rgba(0,0,0,0.25);
+	z-index: 10;
+}
+
+.input-bar-fixed .input-placeholder {
+	flex-grow: 1;
+	height: 45px;
+	border: none;
+	border-radius: 30px;
+	padding: 0 16px;
+	font-size: 16px;
+}
+
+.input-bar-fixed .send-button {
+	background-color: #ffec97;
+	color: #545050;
+	font-weight: 700;
+	font-size: 16px;
+	padding: 0 20px;
+	height: 45px;
+	border-radius: 30px;
+	border: none;
+	cursor: pointer;
+}
+
+/* 響應式 */
+@media (max-width: 768px) {
+	.response-content { padding: 20px 30px 20px; }
+	.sender-name { font-size: 14px; }
+	.message-bubble { max-width: 90%; font-size: 14px; }
+	.input-bar-fixed .input-placeholder,
+	.input-bar-fixed .send-button { font-size: 14px; height: 40px; }
+}
+
+@media (max-width: 480px) {
+	.response-content { padding: 15px 20px 20px; }
+	.input-bar-fixed { width: 95%; }
+}
+
+/* ===== Scroll/visibility tweaks ===== */
+html, body {
+	height: 100%;
+	overflow: hidden; /* 隱藏全頁捲軸，只讓聊天區滾動 */
+}
+
+/* 只保留聊天內容滾動，但不顯示滾動條 */
+.response-content {
+	overflow-y: auto;
+	scrollbar-width: none;            /* Firefox 隱藏捲軸 */
+}
+.response-content::-webkit-scrollbar { /* Chrome/Safari 隱藏捲軸 */
+	width: 0;
+	height: 0;
+}
+
+/* 輸入框多行時在內部滾動，不推擠版面 */
+.input-bar-fixed .input-placeholder {
+	overflow-y: auto;
+	white-space: pre-wrap;
+	word-break: break-word;
+	resize: none; /* 若為 textarea 可防止用戶拖拉 */
+	line-height: 1.4;
+	max-height: 40vh; /* 限制最高，避免過高遮蔽內容 */
+}
+
+/* === Avoid overlap with fixed header === */
+.page-bg .response-content {
+	padding-top: calc(20px + var(--header-height, 80px));
+}
+
+/* === Larger chat bubble and text === */
+.message-group { gap: 8px; }
+.message-bubble {
+	font-size: 18px;
+	padding: 14px 20px;
+	border-radius: 28px;
+}
+.sender-name { font-size: 18px; }
+
+@media (max-width: 768px) {
+	.message-bubble { font-size: 16px; padding: 12px 18px; border-radius: 24px; }
+	.sender-name { font-size: 16px; }
+}
+@media (max-width: 480px) {
+	.message-bubble { font-size: 15px; padding: 10px 16px; border-radius: 22px; }
+	.sender-name { font-size: 15px; }
+}
+
+/* === Wider bubbles and tighter side padding for more characters per line === */
+.page-bg .response-content {
+	padding-left: 30px; /* 原為 60px → 30px，讓可用寬度更大 */
+	padding-right: 30px;
+}
+
+/* 桌機與行動裝置統一允許泡泡使用整個可用寬度 */
+.response-content .message-bubble { max-width: 100%; }
+
+@media (max-width: 768px) {
+	.response-content .message-bubble { max-width: 100%; }
+}
+
+
+
+  

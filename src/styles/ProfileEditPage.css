@@ -1,4 +1,5 @@
 :root {
+    /* 全站共用色彩變數 */
     --text-primary: #545050;
     --bg-main: #fffbd3;
     --bg-header: #ffec97;
@@ -9,286 +10,278 @@
     --shadow-color: rgba(0, 0, 0, 0.25);
 }
 
-body {
-    margin: 0;
-    background-color: var(--bg-main);
-    font-family: 'Inter', 'Kanit', sans-serif;
-    color: var(--text-primary);
+/* ===== ProfileEdit 專屬表單內容 ===== */
+
+/* 主要內容區容器 */
+.profile-content {
+    max-width: 1920px;           /* 最大寬度，桌面最大尺寸 */
+    margin: 0 auto;              /* 水平置中 */
+    position: relative;          /* 方便內部絕對定位 */
+    min-height: 100vh;           /* 至少佔滿視窗高度 */
+    padding-top: 80px;           /* 預留固定 header 高度空間 */
+    overflow-x: hidden;          /* 防止水平滾動條 */
+    padding-left: 20px;          /* 左側內距 */
+    padding-right: 20px;         /* 右側內距 */
 }
 
-* {
-    box-sizing: border-box;
+/* 表單容器，垂直排列置中 */
+.profile-form {
+display: flex;
+    flex-direction: column;
+align-items: center;
+    width: 100%;
 }
 
-a, button {
+/* 頭像區塊容器 */
+.avatar-section {
+    display: flex;               /* 水平排列 */
+    align-items: center;         /* 垂直置中 */
+    gap: 20px;                   /* 頭像與文字間隔 */
+    width: 100%;                 /* 寬度撐滿 */
+    max-width: 1479px;           /* 最大寬度限制 */
+    padding: 0 160px;            /* 左右內距相等 */
+    box-sizing: border-box;      /* padding 計入寬度 */
+    margin-bottom: 0;            /* 下方外距清空 */
+    margin-top: 40px;            /* 新增：增加與上方距離 */
+}
+
+/* 頭像外框容器 */
+.avatar-wrapper {
+    position: relative;          /* 方便內部絕對定位 */
+    width: 90px;                 /* 寬度 */
+    height: 90px;                /* 高度 */
+}
+
+/* 頭像背景圖片 */
+.avatar-bg {
+    position: absolute;          /* 絕對定位覆蓋容器 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* 頭像主圖片 */
+.avatar-icon {
+    position: absolute;          /* 絕對定位置中 */
+    width: 80px;                 /* 較背景略小 */
+    height: 80px;
+    top: 50%;                   /* 垂直置中 */
+    left: 50%;                  /* 水平置中 */
+    transform: translate(-50%, -50%); /* 精準中心點 */
+}
+
+/* 更換頭像文字標籤 */
+.avatar-change-label {
+    font-family: 'Kanit', sans-serif; /* 字型 */
+    font-weight: 600;                  /* 粗體 */
+    font-size: 32px;                   /* 文字大小 */
+    background: none;                  /* 背景透明 */
+    border: none;                     /* 無邊框 */
+    padding: 0;
+    cursor: pointer;                  /* 滑鼠變手指 */
+    user-select: none;                /* 禁止文字選取 */
+}
+
+/* 表單欄位容器，垂直排列且置中 */
+.form-fields {
+display: flex;
+    flex-direction: column;
+align-items: center;
+    gap: 30px;               /* 欄位間垂直間距 */
+    margin-bottom: 20px;     /* 下方外距 */
+    width: 100%;             /* 寬度滿 */
+    margin-top: 40px;            /* 新增：增加與上方距離 */
+}
+
+/* 單一欄位組合容器 */
+.form-group {
+    display: flex;           /* 水平排列標籤與輸入框 */
+    align-items: center;     /* 垂直置中 */
+    gap: 16px;               /* 間隔 */
+    width: 100%;             /* 寬度撐滿 */
+}
+
+/* 欄位標籤 */
+.form-label {
+    xfont-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 32px;
+    white-space: nowrap;     /* 不換行 */
+    width: 200px;            /* 固定寬度 */
+}
+
+/* 輸入框 */
+.form-input {
+    flex-grow: 1;            /* 撐滿剩餘寬度 */
+    max-width: 550px;  /* 限制最大寬度，自己調整數值 */
+    height: 70px;
+    background-color: #ffffff;
+    border-radius: 30px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* 陰影 */
+    border: none;
+    padding: 0 20px;         /* 文字內距左右 */
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+color: #545050;
+}
+
+/* 輸入框 placeholder 樣式 */
+.form-input::placeholder {
+    color: #545050;
+    opacity: 0.7;            /* 半透明 */
+}
+
+/* 送出取消按鈕容器 */
+.form-actions {
+display: flex;
+    gap: 40px;               /* 按鈕間隔 */
+    justify-content: center; /* 水平置中 */
+    width: 100%;
+    max-width: 650px;        /* 最大寬度 */
+    margin-top: 8px; /* 確保與上方區塊距離更近 */
+}
+
+/* 共用按鈕樣式 */
+.btn {
+    flex: 1;                 /* 等分寬度 */
+    height: 64px;
+    border-radius: 48px;     /* 圓角 */
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: none;
+    font-family: 'Kanit', sans-serif;
+font-weight: 800;
+    font-size: 28px;
+    color: #fff;
+    display: flex;           /* 文字置中 */
+align-items: center;
+    justify-content: center;
     cursor: pointer;
-    text-decoration: none;
-    color: inherit;
+    user-select: none;       /* 禁止文字選取 */
 }
 
-/* CSS from section:main */
-.profile-container {
-        max-width: 1920px;
-        min-height: 1080px;
-        margin: 0 auto;
-        background-color: var(--bg-main);
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-    }
+/* 確定按鈕背景色 */
+.btn-confirm {
+    background-color: #f9ab5d;
+}
 
-    .background-image {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: 0;
-    }
+/* 取消按鈕背景色 */
+.btn-cancel {
+    background-color: #bbbbbb;
+}
 
-    .profile-header {
-        background-color: var(--bg-header);
-        height: 124px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        z-index: 1;
-        flex-shrink: 0;
-    }
-
-    .back-button {
-        position: absolute;
-        left: 94px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 90px;
-        height: 90px;
-    }
-
-    .back-button img {
-        width: 100%;
-        height: 100%;
-    }
-
-    .header-title {
-        font-family: 'Kanit', sans-serif;
-        font-weight: 600;
-        font-size: 48px;
-        color: var(--text-primary);
-        margin: 0;
-    }
-
-    .profile-content {
-        flex-grow: 1;
-        display: flex;
-        justify-content: center;
-        position: relative;
-        z-index: 1;
-    }
-
-    .profile-form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        padding-top: 39px;
-        padding-bottom: 123px;
-    }
-
+/* RWD 手機螢幕尺寸以下調整 */
+@media (max-width: 768px) {
+    /* 頭像區塊改成垂直排列 */
     .avatar-section {
-        display: flex;
-        align-items: center;
-        gap: 61px;
-        margin-bottom: 39px;
-    }
-
-    .avatar-wrapper {
-        position: relative;
-        width: 150px;
-        height: 150px;
-    }
-
-    .avatar-bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-
-    .avatar-icon {
-        position: absolute;
-        width: 84.27px;
-        height: 84.27px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .avatar-change-label {
-        font-family: 'Kanit', sans-serif;
-        font-weight: 800;
-        font-size: 48px;
-        background: none;
-        border: none;
-        padding: 0;
-        color: var(--text-primary);
-    }
-
-    .form-fields {
-        display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: 71px;
-        margin-bottom: 202px;
+        gap: 15px;
     }
 
-    .form-group {
-        display: flex;
-        align-items: center;
-        gap: 16px;
+    /* 更換頭像文字縮小 */
+    .avatar-change-label {
+        font-size: 24px;
     }
 
+    /* 標籤字型縮小 */
     .form-label {
-        font-family: 'Inter', sans-serif;
-        font-weight: 800;
-        font-size: 48px;
-        white-space: nowrap;
+        font-size: 20px;
+        width: 120px;
     }
 
+    /* 輸入框高度與字型縮小 */
     .form-input {
-        width: 1040px;
-        height: 111px;
-        background-color: var(--bg-input);
-        border-radius: 30px;
-        box-shadow: 0px 4px 4px 0px var(--shadow-color);
-        border: none;
-        padding: 0 43px;
-        font-family: 'Inter', sans-serif;
-        font-weight: 800;
-        font-size: 32px;
-        color: var(--text-primary);
+        height: 50px;
+        font-size: 16px;
     }
 
-    .form-input::placeholder {
-        color: var(--text-primary);
-        opacity: 0.7;
-    }
-
+    /* 按鈕區改成垂直排列 */
     .form-actions {
-        display: flex;
-        gap: 158px;
+        flex-direction: column;
+        gap: 20px;
     }
 
+    /* 按鈕高度及字型縮小 */
     .btn {
-        width: 406px;
-        height: 110px;
-        border-radius: 60px;
-        box-shadow: 0px 4px 4px 0px var(--shadow-color);
-        border: none;
-        font-family: 'Kanit', sans-serif;
-        font-weight: 800;
-        font-size: 48px;
-        color: var(--btn-text);
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        height: 50px;
+        font-size: 20px;
     }
+}
 
-    .btn-confirm {
-        background-color: var(--btn-confirm-bg);
-    }
+/* ===== Layout stability overrides (do not move existing styles) ===== */
 
-    .btn-cancel {
-        background-color: var(--btn-cancel-bg);
-    }
+/* 固定表單欄位排版，避免文字長度改變時位置位移 */
+.form-group {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    grid-column-gap: 16px;
+    grid-template-areas:
+        "label input"
+        "label message";
+align-items: center;
+}
 
-    /* Responsive Styles */
-    @media (max-width: 1200px) {
-        .profile-container {
-            min-height: 100vh;
-        }
-        .profile-header {
-            height: 100px;
-        }
-        .back-button {
-            left: 40px;
-            width: 60px;
-            height: 60px;
-        }
-        .header-title {
-            font-size: 36px;
-        }
-        .profile-form {
-            padding: 40px 20px;
-        }
-        .form-group {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 10px;
-            width: 90%;
-        }
-        .form-input {
-            width: 100%;
-            height: 80px;
-        }
-        .form-fields {
-            width: 100%;
-            gap: 40px;
-            margin-bottom: 100px;
-        }
-        .form-actions {
-            gap: 40px;
-        }
-        .btn {
-            width: 280px;
-            height: 80px;
-            font-size: 32px;
-        }
-    }
+.form-label {
+    grid-area: label;
+    width: auto; /* 以網格欄寬為準，避免因內容長度撐開 */
+}
 
-    @media (max-width: 768px) {
-        .profile-header {
-            height: 80px;
-        }
-        .back-button {
-            left: 20px;
-            width: 40px;
-            height: 40px;
-        }
-        .header-title {
-            font-size: 24px;
-        }
-        .avatar-section {
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        .avatar-change-label {
-            font-size: 28px;
-        }
-        .form-label {
-            font-size: 24px;
-        }
-        .form-input {
-            height: 60px;
-            font-size: 18px;
-        }
-        .form-fields {
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-        .form-actions {
-            flex-direction: column;
-            width: 90%;
-            gap: 20px;
-        }
-        .btn {
-            width: 100%;
-            height: 60px;
-            font-size: 24px;
-        }
-    }
+.form-input {
+    grid-area: input;
+}
+
+/* 若有顯示訊息（例如錯誤/說明），請使用 .form-message */
+.form-message {
+    grid-area: message;
+    min-height: 1.25rem;   /* 預留高度避免訊息出現/消失造成跳動 */
+    line-height: 1.25rem;
+    color: var(--text-primary);
+    opacity: 0.9;
+    word-break: break-word; /* 長字換行不擠壓版面 */
+}
+
+
+/* 避免長字串影響周邊定位，改為省略號 */
+.avatar-section .avatar-change-label,
+.header-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* === Centering and tight alignment overrides === */
+.profile-form {
+	max-width: 950px;
+	margin: 0 auto;
+}
+
+.form-group {
+	grid-column-gap: 8px; /* 減少間距，讓標籤更貼近輸入框 */
+}
+
+.form-label {
+	text-align: right;
+	justify-self: end; /* 在網格中靠右對齊 */
+}
+
+/* === Actions positioning overrides (lift buttons up) === */
+.form-fields {
+    margin-bottom: 20px; /* 原為 60px，縮小間距讓按鈕往上 */
+}
+
+.form-actions {
+    margin-top: 8px; /* 確保與上方區塊距離更近 */
+}
+
+/* === Slight right offset for form rows === */
+.form-group {
+	margin-left: 32px;
+}
+
+@media (max-width: 768px) {
+	.form-group {
+		margin-left: 12px;
+	}
+}
