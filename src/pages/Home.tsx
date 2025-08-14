@@ -1,13 +1,12 @@
 import React from "react";
 import "./Home.css";
 import bearImage from "../assets/bear.png";
-import pencilIcon from "../assets/pencil.png";
-import profileIcon from "../assets/profile.png";
+
+
 import bellIcon from "../assets/icon-bell.png";
 import gearIcon from "../assets/icon-gear.png";
 import userIcon from "../assets/icon-user.png";
 import chevronIcon from "../assets/icon-chevron.png";
-import learningIcon from "../assets/icon-learning.png";
 
 const Home: React.FC = () => {
   return (
@@ -15,15 +14,9 @@ const Home: React.FC = () => {
       {/* Header */}
       <header className="site-header">
         <div className="header-left">
-          <img src={profileIcon} alt="Profile" className="profile-icon" />
-          <h1 className="greeting-title">阿琪哩賀！</h1>
+          <h1 className="greeting-title">情境對話</h1>
         </div>
         <nav className="main-navigation">
-          <button className="nav-button">
-            <img src={learningIcon} alt="學習模式" className="nav-icon" />
-            <span className="nav-label">學習模式</span>
-            <img src={chevronIcon} alt="Chevron" className="chevron-icon" />
-          </button>
           <button className="nav-button">
             <img src={bellIcon} alt="通知" className="nav-icon" />
             <span className="nav-label">通知提醒</span>
@@ -61,11 +54,7 @@ const Home: React.FC = () => {
               <div className="message-bubble bubble-style-1 large"></div>
             </div>
           </div>
-
-          <form className="chat-input-form">
-            <img src={pencilIcon} alt="pencil" className="input-icon" />
-            <input type="text" placeholder="請輸入..." />
-          </form>
+          
         </div>
       </main>
     </div>
