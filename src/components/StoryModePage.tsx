@@ -1,23 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './StoryModePage.css';
 import storyImage from '../assets/story.png';
 import backIcon from '../assets/back.svg';
 import searchIcon from '../assets/search.svg';
 import recommendTabBg from '../assets/recommendbg.svg';
 import recommendTabFg from '../assets/check.svg';
-import favoriteTabBg from '../assets/favoritebg.svg';
-import favoriteTabFg from '../assets/heart 11.svg';
+import favoriteTabFg from '../assets/heart 11.svg'; // 灰色愛心
+import favoriteTabFgActive from '../assets/red.svg'; // 紅色愛心
 import storyThumbnail from '../assets/moon.png';
 
 interface StoryModePageProps {
   onBack: () => void;
   onFavorite: () => void;
   onRecommend: () => void;
-  onStoryClick: (story: { id: number; title: string }) => void; // 新增 onStoryClick 屬性
+  onStoryClick: (story: { id: number; title: string }) => void;
 }
 
-const StoryModePage: React.FC<StoryModePageProps> = ({ onBack, onFavorite, onRecommend, onStoryClick }) => {
+const stories = [
+  { id: 0, title: '月娘花開的暗暝' },
+  { id: 1, title: '阿嬤的菜園' },
+  { id: 2, title: '海邊的寶藏' },
+  { id: 3, title: '貓咪去上學' },
+];
+
+const StoryModePage: React.FC<StoryModePageProps> = ({
+  onBack,
+  onFavorite,
+  onRecommend,
+  onStoryClick,
+}) => {
   const [searchText, setSearchText] = useState('');
+  const [favorites, setFavorites] = useState<{ [key: number]: boolean }>({});
+  const [isFavoriteTab, setIsFavoriteTab] = useState(false);
+
+  useEffect(() => {
+    setFavorites({});
+    setIsFavoriteTab(false);
+  }, []);
+
+  const handleFavoriteToggle = (e: React.MouseEvent, storyId: number) => {
+    e.stopPropagation();
+    setFavorites(prev => ({
+      ...prev,
+      [storyId]: !prev[storyId],
+    }));
+  };
+
+  const visibleStories = isFavoriteTab
+  ? stories.filter(story => favorites[story.id] === true)
+  : stories;
 
   return (
     <>
@@ -40,11 +71,7 @@ const StoryModePage: React.FC<StoryModePageProps> = ({ onBack, onFavorite, onRec
 
       <main id="stories">
         <div className="search-bar">
-          <img
-            src={searchIcon}
-            alt="Search Icon"
-            className="search-icon"
-          />
+          <img src={searchIcon} alt="Search Icon" className="search-icon" />
           <input
             type="text"
             className="search-input"
@@ -55,57 +82,59 @@ const StoryModePage: React.FC<StoryModePageProps> = ({ onBack, onFavorite, onRec
         </div>
 
         <div className="hero-image-container">
-          <img
-            src={storyImage}
-            alt="A bear reading a book in bed"
-            className="hero-image"
-          />
+          <img src={storyImage} alt="A bear reading a book in bed" className="hero-image" />
         </div>
 
-        {/* 推薦頁 tab 樣式 */}
         <nav className="filters">
-          <button className="filter-button active" onClick={onRecommend}>
+          <button
+            className={`filter-button ${!isFavoriteTab ? 'active' : ''}`}
+            onClick={() => {
+              onRecommend();
+              setIsFavoriteTab(false);
+            }}
+          >
             <div className="icon-wrapper">
-              <img
-                src={recommendTabBg}
-                alt=""
-                className="icon-bg"
-              />
-              <img
-                src={recommendTabFg}
-                alt="Check icon"
-                className="icon-fg"
-              />
+              <img src={recommendTabBg} alt="" className="icon-bg" />
+              <img src={recommendTabFg} alt="Check icon" className="icon-fg" />
             </div>
             <span className="filter-text">推薦</span>
           </button>
-          <button className="filter-button" onClick={onFavorite}>
+          <button
+            className={`filter-button ${isFavoriteTab ? 'active' : ''}`}
+            onClick={() => {
+              onFavorite();
+              setIsFavoriteTab(true);
+            }}
+          >
             <span className="filter-text">收藏</span>
           </button>
         </nav>
 
         <div className="story-grid">
-          {Array(4).fill(null).map((_, index) => (
-            <article
-              key={index}
-              className="story-card"
-              onClick={() => onStoryClick({ id: index, title: '月娘花開的暗暝' })}
-            >
-              <img
-                src={storyThumbnail}
-                alt="Story thumbnail"
-                className="story-thumbnail"
-              />
-              <div className="card-divider"></div>
-              <h2 className="story-title">《月娘花開的暗暝》</h2>
-              <button className={`favorite-button${index === 1 ? ' active' : ''}`}>
-                <img
-                  src={favoriteTabFg}
-                  alt={index === 1 ? 'Favorited' : 'Add to favorites'}
-                />
-              </button>
-            </article>
-          ))}
+          {isFavoriteTab && visibleStories.length === 0 ? (
+            <p className="empty-message">尚未有收藏的故事</p>
+          ) : (
+            visibleStories.map(story => (
+              <article
+                key={story.id}
+                className="story-card"
+                onClick={() => onStoryClick({ id: story.id, title: story.title })}
+              >
+                <img src={storyThumbnail} alt="Story thumbnail" className="story-thumbnail" />
+                <div className="card-divider"></div>
+                <h2 className="story-title">《{story.title}》</h2>
+                <button
+                  className={`favorite-button ${favorites[story.id] ? 'active' : ''}`}
+                  onClick={e => handleFavoriteToggle(e, story.id)}
+                >
+                  <img
+                    src={favorites[story.id] ? favoriteTabFgActive : favoriteTabFg}
+                    alt={favorites[story.id] ? 'Favorited' : 'Add to favorites'}
+                  />
+                </button>
+              </article>
+            ))
+          )}
         </div>
       </main>
     </>

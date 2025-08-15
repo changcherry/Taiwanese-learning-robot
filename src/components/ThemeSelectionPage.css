@@ -32,7 +32,7 @@ body {
   opacity: 0.5;
   left: 0;
   top: 0;
-  pointer-events: none; /* 這行最重要，讓背景不擋住點擊！ */
+  pointer-events: none;
 }
 
 .page-header {
@@ -40,7 +40,7 @@ body {
   height: 100px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   padding: 0 24px;
   position: relative;
   flex-shrink: 0;
@@ -48,7 +48,7 @@ body {
 }
 
 .back-icon-btn {
-  width: 60px;     /* 建議設大一點 */
+  width: 60px;
   height: 60px;
   background: none;
   border: none;
@@ -56,10 +56,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute; /* 加上這行 */
-  left: 24px;
-  top: 50%;
-  transform: translateY(-50%);
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: none;
   z-index: 10;
 }
 
@@ -69,8 +69,40 @@ body {
   color: #545050;
   margin: 0;
   position: absolute;
+  top: 35%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/* 關鍵：再次放大收藏集按鈕的樣式 */
+.favorite-collection-btn {
+  display: flex;
+  align-items: center;
+  gap: 24px; /* 進一步加大圖標與文字間距 */
+  padding: 20px 40px; /* 進一步加大按鈕內邊距 */
+  background-color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.favorite-collection-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.favorite-icon {
+  width: 56px; /* 進一步加大圖標尺寸 */
+  height: 56px;
+}
+
+.favorite-text {
+  font-size: 32px; /* 進一步加大文字尺寸 */
+  font-weight: 700;
+  color: #545050;
 }
 
 .main-content {
@@ -81,11 +113,11 @@ body {
   justify-content: flex-start;
   padding: 32px 16px 32px 16px;
   min-height: 40vh;
-  margin-top: 80px; /* 內容往上且置中 */
+  margin-top: 80px;
 }
 
 .main-title {
-  font-size: 64px;         /* 讓主題選擇更大 */
+  font-size: 64px;
   font-weight: 700;
   color: #545050;
   margin: 0 0 48px 0;
@@ -98,12 +130,12 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;     /* 水平置中 */
-  gap: 32px;               /* 選項間距更大 */
+  align-items: center;
+  gap: 32px;
 }
 
 .option-item {
-  font-size: 32px;         /* 選項文字更大 */
+  font-size: 32px;
   width: 400px;
   height: 80px;
   border-radius: 20px;
@@ -123,28 +155,27 @@ body {
 .option-style-2 { background-color: #f9ab5d; }
 .option-style-3 { background-color: #dbdbdb; }
 
-/* 新增主題卡片樣式 */
 .theme-card-scroll {
   width: 100%;
   overflow-x: auto;
   padding: 32px 0;
   display: flex;
-  justify-content: center; /* 讓卡片區塊水平置中 */
+  justify-content: center;
 }
 
 .theme-card-list {
   display: flex;
-  gap: 48px; /* 卡片間距加大 */
+  gap: 48px;
   padding: 0 24px;
   width: max-content;
-  justify-content: center; /* 讓卡片內容置中 */
+  justify-content: center;
 }
 
 .theme-card {
-  min-width: 320px;    /* 卡片更大 */
+  min-width: 320px;
   height: 320px;
   border-radius: 32px;
-  font-size: 2.8rem;   /* 文字更大 */
+  font-size: 2.8rem;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -197,17 +228,35 @@ body {
 
   .page-header {
     height: 80px;
-    padding: 0 12px;
+    padding: 0 20px;
     border-radius: 0;
   }
 
-  .back-icon {
+  .back-icon-btn {
     width: 40px;
     height: 40px;
   }
 
   .header-title {
     font-size: 24px;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* 響應式：再次放大收藏集按鈕 */
+  .favorite-collection-btn {
+    padding: 12px 24px;
+    gap: 18px;
+  }
+
+  .favorite-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .favorite-text {
+    font-size: 28px;
   }
 
   .main-content {
@@ -237,13 +286,31 @@ body {
     padding: 0 6px;
   }
 
-  .back-icon {
+  .back-icon-btn {
     width: 28px;
     height: 28px;
   }
 
   .header-title {
     font-size: 16px;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* 響應式：再次放大收藏集按鈕 */
+  .favorite-collection-btn {
+    padding: 10px 20px;
+    gap: 12px;
+  }
+
+  .favorite-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .favorite-text {
+    font-size: 20px;
   }
 
   .main-content {

@@ -206,48 +206,34 @@ button {
   padding: 5px 0;
   line-height: 1.2;
   font-size: 100px;
-  font-weight: 800; /* 用於拼音 */
+  font-weight: 800; /* 一般預設加粗 */
 }
 
 .flashcard-text-chinese {
   font-size: 80px;
-  font-weight: 400; /* 不加粗中文 */
+  font-weight: 400; /* 中文不加粗 */
 }
 
-/* Responsive Text Size for Chinese */
-@media (max-width: 1400px) {
-  .flashcard-text-chinese {
-    font-size: 6vw;
-    font-weight: 400;
-  }
+/* ✅ 只放大正面卡片的文字 */
+.flashcard-front .flashcard-text-line {
+  font-size: 120px;
 }
 
-@media (max-width: 768px) {
-  .flashcard-text-chinese {
-    font-size: 8vw;
-    font-weight: 400;
-  }
+.flashcard-front .flashcard-text-chinese {
+  font-size: 100px;
+  font-weight: 400;
 }
 
-/* Image */
-.flashcard-side-image {
-  width: 1500px;
-  height: 1150px;
-  object-fit: cover;
-  border-radius: 80px;
-  background: #fffbd3;
-  overflow: hidden;
-  display: block;
-}
-
+/* Responsive Text Size */
 @media (max-width: 1400px) {
   .flashcard {
     width: 70vw;
     height: 40vw;
   }
 
-  .flashcard-text-line {
-    font-size: 10vw;
+  .flashcard-side-image {
+    width: 70vw;
+    height: 40vw;
   }
 
   .card-icons {
@@ -261,9 +247,12 @@ button {
     height: 60px;
   }
 
-  .flashcard-side-image {
-    width: 70vw;
-    height: 40vw;
+  .flashcard-front .flashcard-text-line {
+    font-size: 8vw;
+  }
+
+  .flashcard-front .flashcard-text-chinese {
+    font-size: 6vw;
   }
 }
 
@@ -284,8 +273,11 @@ button {
     max-height: 60vh;
   }
 
-  .flashcard-text-line {
-    font-size: 15vw;
+  .flashcard-side-image {
+    width: 90vw;
+    height: 50vw;
+    max-width: 100%;
+    max-height: 60vh;
   }
 
   .card-icons {
@@ -299,6 +291,14 @@ button {
     height: 44px;
   }
 
+  .flashcard-front .flashcard-text-line {
+    font-size: 10vw;
+  }
+
+  .flashcard-front .flashcard-text-chinese {
+    font-size: 8vw;
+  }
+
   .card-navigation {
     gap: 24px;
   }
@@ -307,13 +307,17 @@ button {
     width: 18px;
     height: 24px;
   }
+}
 
-  .flashcard-side-image {
-    width: 90vw;
-    height: 50vw;
-    max-width: 100%;
-    max-height: 60vh;
-  }
+/* Image */
+.flashcard-side-image {
+  width: 1500px;
+  height: 1150px;
+  object-fit: cover;
+  border-radius: 80px;
+  background: #fffbd3;
+  overflow: hidden;
+  display: block;
 }
 
 /* Icons */

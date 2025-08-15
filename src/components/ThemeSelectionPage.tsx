@@ -1,15 +1,18 @@
+// src/components/ThemeSelectionPage.tsx
 import React from 'react';
 import './ThemeSelectionPage.css';
 import '../App.css';
 import bgImage from '../assets/bg.png';
 import backIcon from '../assets/back.svg';
+import favoriteIcon from '../assets/favorite 1.svg'; // 導入星星圖案
 
 interface ThemeSelectionPageProps {
   onBack?: () => void;
   onSelectTheme?: (theme: string) => void;
+  onGoToFavorites?: () => void; // 新增：處理收藏集按鈕點擊的事件
 }
 
-const ThemeSelectionPage: React.FC<ThemeSelectionPageProps> = ({ onBack, onSelectTheme }) => {
+const ThemeSelectionPage: React.FC<ThemeSelectionPageProps> = ({ onBack, onSelectTheme, onGoToFavorites }) => {
   return (
     <section id="theme-selection">
       <img
@@ -19,22 +22,44 @@ const ThemeSelectionPage: React.FC<ThemeSelectionPageProps> = ({ onBack, onSelec
       />
 
       <header className="page-header">
+        <div className="header-left">
+          <button
+            type="button"
+            aria-label="返回上一頁"
+            className="back-icon-btn"
+            onClick={() => {
+              onBack && onBack();
+            }}
+          >
+            <img src={backIcon} alt="返回圖示" className="back-icon" />
+          </button>
+          <h1 className="header-title">台語單字卡</h1>
+        </div>
+
+        {/* 新增的收藏集按鈕 */}
         <button
           type="button"
-          aria-label="Back"
-          className="back-icon-btn"
+          aria-label="前往收藏集"
+          className="favorite-collection-btn"
           onClick={() => {
-            onBack && onBack();
+            console.log("收藏集按鈕被點擊！");
+            // 在這裡進行一個額外的檢查
+            if (onGoToFavorites) {
+              console.log("onGoToFavorites 函式存在，正在呼叫...");
+              onGoToFavorites();
+            } else {
+              console.log("錯誤：onGoToFavorites 函式未被傳入！");
+            }
           }}
         >
-          <img src={backIcon} alt="Back Icon" className="back-icon" />
+          <img src={favoriteIcon} alt="收藏集圖示" className="favorite-icon" />
+          <span className="favorite-text">收藏集</span>
         </button>
-        <h1 className="header-title">台語單字卡</h1>
       </header>
 
       <main className="theme-card-scroll">
         <h2 className="main-title">主題選擇</h2>
-        <nav aria-label="Theme selection">
+        <nav aria-label="主題選擇">
           <div className="theme-card-list">
             <button
               className="theme-card card-yellow"
