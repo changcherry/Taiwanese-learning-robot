@@ -69,6 +69,12 @@ html, body {
   align-items: center;
   justify-content: center;
   padding: 0;
+  outline: none; /* 移除點擊時的藍色外框 */
+}
+
+.back-button:focus,
+.back-button:active {
+  outline: none; /* 再次確保在聚焦和激活狀態下也沒有外框 */
 }
 
 .back-button img {
