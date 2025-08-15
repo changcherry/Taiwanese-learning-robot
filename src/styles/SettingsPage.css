@@ -35,28 +35,32 @@
 /* 頭像容器 */
 .avatar {
   position: relative;
-  width: 90px;
-  height: 90px;
+  width: 6vmin; /* Base size, scales with viewport */
+  height: 6vmin; /* Base size, scales with viewport */
+  min-width: 90px; /* Minimum size to prevent it from being too small on very small screens */
+  min-height: 90px; /* Minimum size to prevent it from being too small on very small screens */
   flex-shrink: 0;
 }
 
-.avatar img {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.avatar .avatar-background {
-  width: 90px;
-  height: 90px;
-}
-
+.avatar .avatar-background,
 .avatar .avatar-icon {
-  width: 80px;
-  height: 80px;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  max-width: 100%; /* Ensure images scale down */
+  max-height: 100%;
+}
+
+.avatar .avatar-background {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Adjust as needed: cover, contain, fill */
+}
+
+.avatar .avatar-icon {
+  width: 80%; /* Adjust as needed to fit within background */
+  height: 80%; /* Adjust as needed to fit within background */
 }
 
 /* 使用者名稱 */
@@ -137,6 +141,8 @@
     padding: 40px 0;
     gap: 40px;
   }
+  /* Remove fixed avatar size, let vmin handle it */
+  /*
   .avatar {
     width: 120px;
     height: 120px;
@@ -145,6 +151,7 @@
     width: 68px;
     height: 68px;
   }
+  */
   .settings-menu ul {
     gap: 24px;
   }
@@ -178,6 +185,8 @@
     gap: 16px;
     padding: 0 20px; /* 小螢幕左右留白 */
   }
+  /* Remove fixed avatar size, let vmin handle it */
+  /*
   .avatar {
     width: 100px;
     height: 100px;
@@ -186,6 +195,7 @@
     width: 56px;
     height: 56px;
   }
+  */
   .settings-menu {
     padding: 0 20px; /* 同上 */
   }
