@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/ProfileEditPage.css"; // 請確認路徑正確
 
-const defaultAvatar = "/images/images_ProfileEdit/I1077_25490_74_9255.png";
+const defaultAvatar = "/images/images_ProfileEdit/avatar.png";
 
 const ProfileEditPage: React.FC = () => {
   const navigate = useNavigate();
@@ -87,7 +87,7 @@ const ProfileEditPage: React.FC = () => {
           onClick={() => navigate("/")}
         >
           <img
-            src="/images/images_ProfileEdit/1077_25486.png"
+            src="/images/back.png"
             alt="Back Icon"
           />
         </button>
@@ -102,7 +102,7 @@ const ProfileEditPage: React.FC = () => {
           <div className="avatar-section">
             <div className="avatar-wrapper">
               <img
-                src="/images/images_ProfileEdit/I1077_25490_74_9107.png"
+                src="/images/images_ProfileEdit/avatar_bg.png"
                 className="avatar-bg"
                 alt="Avatar background"
               />

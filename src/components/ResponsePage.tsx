@@ -49,7 +49,7 @@ const ResponsePage: React.FC = () => {
       {/* 頁首 */}
       <header className="game-header">
         <button className="back-button" onClick={handleBack} aria-label="返回上一頁">
-          <img src="/images/images_Response/back.png" alt="Back" />
+          <img src="/images/back.png" alt="Back" />
         </button>
         <h1 className="header-title">問題反映</h1>
       </header>

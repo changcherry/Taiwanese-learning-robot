@@ -21,7 +21,7 @@ const InstructionsPage: React.FC = () => {
           aria-label="Go back"
         >
           <img
-            src="/images/images_Instructions/1077_25539.png"
+            src="/images/back.png"
             alt="Back Icon"
           />
         </button>
