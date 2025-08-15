@@ -51,7 +51,7 @@ const ResponsePage: React.FC = () => {
         <button className="back-button" onClick={handleBack} aria-label="返回上一頁">
           <img src="/images/back.png" alt="Back" />
         </button>
-        <h1 className="header-title">問題反映</h1>
+        <h1 className="header-title">問題反應</h1>
       </header>
 
       {/* 聊天區 */}

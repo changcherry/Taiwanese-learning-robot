@@ -5,7 +5,7 @@
   --bg-max-width: 1920px;
   --bg-max-height: 1080px;
   /* 頁面頂部橫幅高度 */
-  --header-height: 80px;
+  --header-height: clamp(60px, 6vw, 80px);
 }
 
 /* 設定 HTML 與 body 的高度與背景 */
@@ -56,11 +56,11 @@ html, body {
 /* 返回按鈕 */
 .back-button {
   position: absolute;
-  left: 70px;
+  left: clamp(20px, 5vw, 70px); 
   top: 50%;
   transform: translateY(-50%);
-  width: 80px;
-  height: 80px;
+  width: clamp(45px, 8vw, 80px); 
+  height: clamp(45px, 8vw, 80px); 
   border: none;
   background: transparent;
   cursor: pointer;
@@ -78,8 +78,8 @@ html, body {
 }
 
 .back-button img {
-  width: 50px;
-  height: 50px;
+  width: clamp(30px, 6vw, 50px); 
+  height: clamp(30px, 6vw, 50px);
 }
 
 /* 標題文字 */
@@ -88,7 +88,7 @@ html, body {
   text-align: center;
   margin: 0;
   font-weight: 600;
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 3vw, 2rem); 
   color: #545050;
 }
 

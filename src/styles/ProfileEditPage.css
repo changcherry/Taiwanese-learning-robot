@@ -36,13 +36,13 @@ align-items: center;
 .avatar-section {
     display: flex;               /* 水平排列 */
     align-items: center;         /* 垂直置中 */
-    gap: 20px;                   /* 頭像與文字間隔 */
+    gap: clamp(15px, 3vw, 20px); /* Responsive gap */
     width: 100%;                 /* 寬度撐滿 */
     max-width: 1479px;           /* 最大寬度限制 */
-    padding: 0 160px;            /* 左右內距相等 */
+    padding: 0 clamp(20px, 10vw, 160px); /* Responsive horizontal padding */
     box-sizing: border-box;      /* padding 計入寬度 */
     margin-bottom: 0;            /* 下方外距清空 */
-    margin-top: 40px;            /* 新增：增加與上方距離 */
+    margin-top: clamp(20px, 5vw, 40px); /* Responsive top margin */
 }
 
 /* 頭像外框容器 */
@@ -88,42 +88,45 @@ align-items: center;
 display: flex;
     flex-direction: column;
 align-items: center;
-    gap: 30px;               /* 欄位間垂直間距 */
-    margin-bottom: 20px;     /* 下方外距 */
+    gap: clamp(20px, 4vw, 30px);               /* Responsive vertical gap */
+    margin-bottom: clamp(10px, 3vw, 20px);     /* Responsive bottom margin */
     width: 100%;             /* 寬度滿 */
-    margin-top: 40px;            /* 新增：增加與上方距離 */
+    max-width: 1479px;           /* Align with avatar-section max-width */
+    padding: 0 clamp(20px, 10vw, 160px); /* Align horizontal padding with avatar-section */
+    box-sizing: border-box; /* Include padding in width calculation */
+    margin-top: clamp(20px, 5vw, 40px);            /* Responsive top margin */
 }
 
 /* 單一欄位組合容器 */
 .form-group {
     display: flex;           /* 水平排列標籤與輸入框 */
     align-items: center;     /* 垂直置中 */
-    gap: 16px;               /* 間隔 */
+    gap: clamp(8px, 2vw, 16px);               /* Responsive gap */
     width: 100%;             /* 寬度撐滿 */
 }
 
 /* 欄位標籤 */
 .form-label {
-    xfont-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 600;
-    font-size: 32px;
+    font-size: clamp(16px, 3vw, 32px); /* Responsive font size */
     white-space: nowrap;     /* 不換行 */
-    width: 200px;            /* 固定寬度 */
+    width: clamp(100px, 15vw, 200px);            /* Responsive width */
 }
 
 /* 輸入框 */
 .form-input {
     flex-grow: 1;            /* 撐滿剩餘寬度 */
-    max-width: 550px;  /* 限制最大寬度，自己調整數值 */
-    height: 70px;
+    max-width: clamp(300px, 60vw, 550px);  /* Responsive max-width */
+    height: clamp(50px, 8vw, 70px);
     background-color: #ffffff;
     border-radius: 30px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* 陰影 */
     border: none;
-    padding: 0 20px;         /* 文字內距左右 */
+    padding: 0 clamp(10px, 3vw, 20px);         /* Responsive text padding */
     font-family: 'Inter', sans-serif;
     font-weight: 600;
-    font-size: 24px;
+    font-size: clamp(14px, 2.5vw, 24px); /* Responsive font size */
 color: #545050;
 }
 
@@ -136,23 +139,23 @@ color: #545050;
 /* 送出取消按鈕容器 */
 .form-actions {
 display: flex;
-    gap: 40px;               /* 按鈕間隔 */
+    gap: clamp(20px, 5vw, 40px);               /* Responsive button gap */
     justify-content: center; /* 水平置中 */
     width: 100%;
-    max-width: 650px;        /* 最大寬度 */
-    margin-top: 8px; /* 確保與上方區塊距離更近 */
+    max-width: clamp(300px, 80vw, 650px);        /* Responsive max-width */
+    margin-top: clamp(8px, 2vw, 20px); /* Responsive top margin */
 }
 
 /* 共用按鈕樣式 */
 .btn {
     flex: 1;                 /* 等分寬度 */
-    height: 64px;
+    height: clamp(40px, 7vw, 64px);
     border-radius: 48px;     /* 圓角 */
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border: none;
     font-family: 'Kanit', sans-serif;
 font-weight: 800;
-    font-size: 28px;
+    font-size: clamp(18px, 3.5vw, 28px); /* Responsive font size */
     color: #fff;
     display: flex;           /* 文字置中 */
 align-items: center;
@@ -176,36 +179,36 @@ align-items: center;
     /* 頭像區塊改成垂直排列 */
     .avatar-section {
         flex-direction: column;
-        gap: 15px;
+        gap: clamp(10px, 2vw, 15px); /* Responsive gap for mobile */
     }
 
     /* 更換頭像文字縮小 */
     .avatar-change-label {
-        font-size: 24px;
+        font-size: clamp(18px, 3vw, 24px); /* Responsive font size for mobile */
     }
 
     /* 標籤字型縮小 */
     .form-label {
-        font-size: 20px;
-        width: 120px;
+        font-size: clamp(14px, 2.5vw, 20px); /* Responsive font size for mobile */
+        width: clamp(80px, 15vw, 120px); /* Responsive width for mobile */
     }
 
     /* 輸入框高度與字型縮小 */
     .form-input {
-        height: 50px;
-        font-size: 16px;
+        height: clamp(40px, 7vw, 50px); /* Responsive height for mobile */
+        font-size: clamp(12px, 2vw, 16px); /* Responsive font size for mobile */
     }
 
     /* 按鈕區改成垂直排列 */
     .form-actions {
         flex-direction: column;
-        gap: 20px;
+        gap: clamp(15px, 3vw, 20px); /* Responsive gap for mobile */
     }
 
     /* 按鈕高度及字型縮小 */
     .btn {
-        height: 50px;
-        font-size: 20px;
+        height: clamp(35px, 6vw, 50px); /* Responsive height for mobile */
+        font-size: clamp(16px, 2.8vw, 20px); /* Responsive font size for mobile */
     }
 }
 
@@ -214,9 +217,9 @@ align-items: center;
 /* 固定表單欄位排版，避免文字長度改變時位置位移 */
 .form-group {
     display: grid;
-    grid-template-columns: 200px minmax(0, 1fr);
+    grid-template-columns: clamp(100px, 15vw, 200px) minmax(0, 1fr); /* Responsive column width for label */
     grid-template-rows: auto auto;
-    grid-column-gap: 16px;
+    grid-column-gap: clamp(8px, 1.5vw, 16px); /* Responsive column gap */
     grid-template-areas:
         "label input"
         "label message";
@@ -225,7 +228,7 @@ align-items: center;
 
 .form-label {
     grid-area: label;
-    width: auto; /* 以網格欄寬為準，避免因內容長度撐開 */
+    width: auto; /* Allow grid to control width */
 }
 
 .form-input {
@@ -276,14 +279,20 @@ align-items: center;
 }
 
 /* === Slight right offset for form rows === */
+/* Removed margin-left from .form-group for proper centering */
+/*
 .form-group {
 	margin-left: 32px;
 }
+*/
 
 @media (max-width: 768px) {
+	/* Removed margin-left from .form-group for proper centering */
+	/*
 	.form-group {
 		margin-left: 12px;
 	}
+	*/
 }
 
 .back-button {
@@ -308,5 +317,3 @@ align-items: center;
 .back-button:active {
   outline: none; /* 再次確保在聚焦和激活狀態下也沒有外框 */
 }
-
-.back-button img {

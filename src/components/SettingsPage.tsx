@@ -4,11 +4,14 @@ import "../styles/SettingsPage.css";
 import "../App.css";
 
 const SettingsPage: React.FC = () => {
+  // React Router 導航 Hook
   const navigate = useNavigate();
 
   return (
     <div className="page-bg">
+      {/* ===== 頁首（Header 區） ===== */}
       <header className="game-header">
+        {/* 返回上一頁按鈕 */}
         <button
           className="back-button"
           onClick={() => navigate(-1)}
@@ -19,11 +22,15 @@ const SettingsPage: React.FC = () => {
             alt="返回"
           />
         </button>
+        {/* 頁面標題 */}
         <h1 className="header-title">設定</h1>
       </header>
 
+      {/* ===== 主要內容區（Main Content） ===== */}
       <main className="page-container">
         <section className="profile-content">
+          
+          {/* --- 使用者資訊區（頭像 + 名稱） --- */}
           <div className="user-info">
             <div className="avatar">
               <img
@@ -40,8 +47,10 @@ const SettingsPage: React.FC = () => {
             <p className="username">Cherry</p>
           </div>
 
+          {/* --- 設定功能選單（編輯資料 / 使用說明 / 問題反應） --- */}
           <nav className="settings-menu" aria-label="設定功能選單">
             <ul>
+              {/* 編輯資料 */}
               <li>
                 <div
                   className="menu-item"
@@ -62,6 +71,8 @@ const SettingsPage: React.FC = () => {
                   />
                 </div>
               </li>
+
+              {/* 使用說明 */}
               <li>
                 <div
                   className="menu-item"
@@ -82,6 +93,8 @@ const SettingsPage: React.FC = () => {
                   />
                 </div>
               </li>
+
+              {/* 問題反應 */}
               <li>
                 <div
                   className="menu-item"
@@ -107,7 +120,8 @@ const SettingsPage: React.FC = () => {
         </section>
       </main>
 
-      {/* 開發用：快速前往通知頁（非 production 顯示），刪除此區塊不影響頁面 */}
+      {/* ===== 開發用快捷按鈕（非 production 顯示） =====
+          這個按鈕方便開發階段快速進入通知頁，正式版會自動隱藏 */}
       {import.meta.env.MODE !== "production" && (
         <button
           type="button"
@@ -135,6 +149,3 @@ const SettingsPage: React.FC = () => {
 };
 
 export default SettingsPage;
-
-
-
