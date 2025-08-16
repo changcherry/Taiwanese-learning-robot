@@ -1,0 +1,213 @@
+/* 假設 body 和其他通用樣式不變 */
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #fdf5e6; /* 可以考慮換成更柔和的淺黃色或淺米色 */
+}
+
+.learn-selection-bg {
+  min-height: 100vh;
+  min-width: 100vw;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  /* 背景色可以調整為更活潑的淺色，例如： */
+  background: linear-gradient(to bottom right, #fdf5e6, #e0f2f7); /* 淺黃到淺藍漸變 */
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 0;
+}
+
+.learn-selection-bg::before {
+   content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: url('../assets/22600173.png') center no-repeat;
+  background-size: 120% auto; /* 寬度60%，高度自動 */
+  opacity: 0.15;         /* 透明度，0~1之間可調 */
+  pointer-events: none;  /* 不影響點擊 */
+}
+
+.selection-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffec97; /* 更鮮明的黃色 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 增加一點陰影 */
+  z-index: 1000;
+}
+
+.back-button {
+  position: absolute;
+  left: 70px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 80px;
+  height: 80px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background-color 0.3s; /* 增加過渡效果 */
+}
+.back-button:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* 懸停時的背景效果 */
+}
+.back-button img {
+    width: 50px;
+    height: 50px;
+}
+
+.header-title {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  font-weight: 700; /* 字體可以再粗一點 */
+  font-size: 2.2rem; /* 稍微放大 */
+  color: #3f3e3e; /* 更深的顏色，增加對比 */
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); /* 輕微的文字陰影讓字體更突出 */
+}
+
+/* 確保 learn-selection-main 是個 flex 容器，且內容居中 */
+.learn-selection-main {
+  padding-top: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex-grow: 1;
+  height: calc(100vh - 80px);
+  box-sizing: border-box;
+}
+
+.learn-cards-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  padding-bottom: 20px;
+}
+
+.learn-cards-container::-webkit-scrollbar {
+  display: none;
+}
+
+.learn-modes-container {
+  display: flex;
+  gap: 50px; /* 增加卡片間距，讓每個卡片更突出 */
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: auto;
+  padding: 20px; /* 增加內邊距 */
+}
+
+.learn-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 針對中間三張卡片的核心修改 */
+.learn-card {
+  flex: 0 0 auto;
+  width: 320px; /* 稍微縮小一點，讓間距感更明顯 */
+  height: 350px; /* 配合寬度調整 */
+  border-radius: 40px; /* **大幅增加圓角，看起來更可愛和圓潤** */
+  /* background-color: #ffaf53;  原來的橙色 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; /* 調整過渡效果，更平滑 */
+  box-shadow: 0 8px 15px rgba(0,0,0,0.2); /* 增加陰影強度，讓卡片有浮動感 */
+  position: relative;
+  z-index: 1;
+  overflow: hidden; /* 確保內容不會溢出圓角 */
+  border: 4px solid transparent; /* 預留邊框空間，hover時使用 */
+  cursor: pointer; /* 顯示可點擊 */
+}
+
+/* 建議為三張卡片設定不同的鮮豔顏色，而不是單一顏色 */
+/* 範例：你可以為不同的卡片加不同的 class，或在 JS 中動態賦予顏色 */
+.learn-card:nth-child(1) { /* 第一張卡片 */
+  background-color: #a8dadc; /* 活潑的淺藍色 */
+}
+
+.learn-card:nth-child(2) { /* 第二張卡片 */
+  background-color: #fca3b7; /* 溫暖的粉紅色 */
+}
+
+.learn-card:nth-child(3) { /* 第三張卡片 */
+  background-color: #c9e265; /* 清新的淺綠色 */
+}
+
+/* 調整 .learn-card.color-red 的定義，如果還需要使用 */
+.learn-card.color-red {
+  background-color: #F9AB5D; /* 保持原有的，或改成更活潑的橙紅色 */
+}
+
+
+.learn-active-card-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: none;
+  color: #ffffff; /* 文字顏色保持白色，與鮮豔背景形成對比 */
+  font-family: 'Arial Rounded MT Bold', '微軟正黑體', sans-serif; /* **建議使用圓潤、可愛的字體** (需確保字體已導入) */
+  font-size: 3.8rem; /* 稍微調整字體大小，確保在新的卡片大小下仍清晰 */
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.3; /* 增加行高，讓文字不那麼擁擠 */
+  letter-spacing: 0.08em; /* 稍微調整字間距 */
+  z-index: 2;
+  white-space: pre-line;
+  padding: 0;
+  margin: 0;
+  width: 90%;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); /* 更明顯的陰影，讓文字更突出 */
+}
+
+button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+:root {
+  --card-focus-border: #ffffff; /* 保持白色邊框，但可以加粗 */
+}
+
+.learn-card:hover {
+  transform: scale(1.08) rotate(2deg); /* **增加輕微的旋轉效果，更有趣** */
+  box-shadow: 0 16px 25px -8px rgba(89, 79, 79, 0.55); /* 增強 hover 時的陰影 */
+  border: 6px solid var(--card-focus-border); /* **加粗邊框，更明顯** */
+  z-index: 2;
+}
+
+/* 可以為卡片加入一個小小的圖標或裝飾，這部分需要用到圖片或 icon font */
+/* 範例： */
+/*
+.learn-card::after {
+  content: '';
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 60px;
+  height: 60px;
+  background: url('../assets/star-icon.png') center no-repeat;
+  background-size: contain;
+  opacity: 0.8;
+  z-index: 3;
+}
+*/

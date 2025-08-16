@@ -1,0 +1,490 @@
+:root {
+  --font-primary: 'Inter', sans-serif;
+  --font-secondary: 'Kanit', sans-serif;
+  --color-background: #fffbd3;
+  --color-header-bg: #ffec97;
+  --color-card-bg: #ffd991;
+  --color-text-primary: #000000;
+  --color-text-secondary: #545050;
+  --color-text-placeholder: #908a8a;
+  --color-divider: #9595a1;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-background);
+  font-family: var(--font-primary);
+  color: var(--color-text-primary);
+}
+
+.page-container {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* CSS from section:header */
+.site-header {
+  background-color: var(--color-header-bg);
+  padding: 27px 0;
+}
+.header-content {
+  max-width: 1646px; /* Approx content width */
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+}
+.back-button {
+  width: 90px;
+  height: 90px;
+  margin-right: 16px;
+  /* 或用 position: absolute; left: 24px; top: 50%; transform: translateY(-50%); */
+}
+.header-title {
+  flex: 1;
+  font-family: var(--font-secondary);
+  font-weight: 600;
+  font-size: 48px;
+  color: var(--color-text-secondary);
+  margin: 0;
+  /* Centering title relative to the page, not just the remaining space */
+  text-align: center;
+  position: relative;
+  right: 45px; /* Half of back button width to compensate */
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    padding: 0 20px;
+  }
+  .back-button {
+    width: 40px;
+    height: 40px;
+  }
+  .header-title {
+    font-size: 30px;
+    right: 20px;
+  }
+}
+
+/* CSS from section:stories */
+.stories-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 38px;
+  padding-top: 39px;
+  padding-bottom: 100px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #ffffff;
+  border-radius: 30px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  padding: 6px 24px;
+  width: 100%;
+  max-width: 1614px;
+  box-sizing: border-box;
+}
+.search-icon {
+  width: 25px;
+  height: 25px;
+}
+.search-placeholder {
+  font-family: var(--font-primary);
+  font-weight: 200;
+  font-size: 20px;
+  color: var(--color-text-placeholder);
+}
+.search-input {
+  color: #545050;         /* 深灰色，確保可見 */
+  background: #fff;       /* 白色背景 */
+  font-size: 20px;
+  border: none;
+  outline: none;
+  padding: 8px 16px;
+  border-radius: 16px;
+  width: 100%;
+}
+
+.hero-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 32px 0;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 64px;         /* 原本 568px，改小一點 */
+  width: 100%;
+  margin: 32px 0;
+  max-width: none;   /* 移除 max-width 限制 */
+}
+.filter-button {
+  display: flex;
+  align-items: center;
+  gap: 28px; /* Visual gap between icon and text */
+  font-family: var(--font-primary);
+  font-weight: 800;
+  font-size: 36px;
+  color: var(--color-text-primary);
+  padding-bottom: 10px;
+  border-bottom: 2px solid transparent;
+}
+.filter-button.active {
+  border-bottom-color: var(--color-text-secondary);
+}
+.icon-wrapper {
+  position: relative;
+  width: 50px;
+  height: 50px;
+}
+.icon-wrapper .icon-bg,
+.icon-wrapper .icon-fg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.story-card {
+  background: #ffeea4;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.story-thumbnail {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+}
+.card-divider {
+  width: 2px;
+  height: 106px;
+  background-color: var(--color-divider);
+  flex-shrink: 0;
+}
+.story-title {
+  color: #545050; /* 深灰色 */
+  font-weight: 800;
+  font-size: 48px;
+  line-height: 1.2;
+  text-align: center;
+  margin: 0;
+  flex: 1;
+}
+
+.favorite-button {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+}
+
+.story-header {
+  background-color: #ffec97;
+  width: 100%;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 124px;
+}
+
+.back-button {
+  position: absolute;
+  left: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-button img {
+  width: 48px;
+  height: 48px;
+  display: block;
+}
+
+@media (max-width: 1200px) {
+  .filters {
+    gap: 200px;
+  }
+  .story-grid {
+    grid-template-columns: 1fr;
+    max-width: 790px;
+  }
+}
+
+@media (max-width: 768px) {
+  .stories-section {
+    gap: 24px;
+    padding-top: 24px;
+  }
+  .search-bar {
+    padding: 4px 16px;
+  }
+  .search-placeholder {
+    font-size: 16px;
+  }
+  .filters {
+    gap: 50px;
+    justify-content: space-around;
+  }
+  .filter-button {
+    font-size: 24px;
+    gap: 10px;
+  }
+  .story-grid {
+    gap: 20px;
+  }
+  .story-card {
+    padding: 8px 12px;
+  }
+  .story-title {
+    font-size: 22px;
+  }
+  .story-thumbnail {
+    width: 80px;
+    height: 80px;
+  }
+  .favorite-button {
+    width: 35px;
+    height: 35px;
+  }
+  .card-divider {
+    height: 80px;
+  }
+}
+
+.main-card {
+  max-width: 900px;
+  margin: 60px auto;
+  background: #fffbd3;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  padding-bottom: 40px;
+}
+
+.page-container.stories-section {
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.page-container.stories-section {
+  width: 100%;
+  max-width: 1400px;
+  margin: 40px auto;
+  background: #fffbd3;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  padding-bottom: 40px;
+}
+
+.story-header {
+  background: #ffec97;
+  border-radius: 24px 24px 0 0;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  padding: 0 48px;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.back-button {
+  position: absolute;
+  left: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.header-title, .story-title {
+  font-size: 48px;
+  font-weight: 800;
+  flex: 1;
+  text-align: center;
+  color: #545050;
+  margin: 0;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin: 32px auto;
+  max-width: 900px;
+}
+
+.search-icon {
+  width: 32px;
+  height: 32px;
+  margin-right: 12px;
+}
+
+.search-placeholder {
+  font-size: 20px;
+  color: #9595a1;
+}
+
+.hero-image-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 32px 0;
+}
+
+.hero-image {
+  width: 100%;
+  max-width: 900px;
+  border-radius: 16px;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 64px;
+  margin: 32px 0;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  max-width: 1200px;
+  margin: 32px auto 0 auto;
+  max-height: 500px;      /* 設定最大高度 */
+  overflow-y: auto;       /* 超過高度時可上下滑動 */
+  padding-right: 8px;     /* 預留捲軸空間 */
+}
+
+.story-card {
+  background: #ffeea4;
+  border-radius: 16px;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  gap: 20px;
+  font-size: 28px;
+  width: 100%;
+}
+
+.story-thumbnail {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+}
+
+.favorite-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 16px;
+}
+
+.favorite-button img {
+  width: 40px;
+  height: 40px;
+}
+
+/* 響應式設計 */
+@media (max-width: 900px) {
+  .page-container.stories-section {
+    max-width: 100vw;
+    border-radius: 0;
+    margin: 0;
+    padding-bottom: 0;
+  }
+  .story-header {
+    border-radius: 0;
+    padding: 0 16px;
+    height: 80px;
+  }
+  .header-title, .story-title {
+    font-size: 32px;
+  }
+  .story-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 100vw;
+  }
+  .story-thumbnail {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* 只影響學習模式頁卡片，不影響主題選擇頁 */
+.learning-main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;   /* 垂直置中 */
+  min-height: 60vh;         /* 讓卡片往下移 */
+  padding-top: 40px;        /* 可微調往下距離 */
+}
