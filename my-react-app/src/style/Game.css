@@ -134,24 +134,27 @@
 
 .confirm-box {
   background: white;
-  padding: 2rem;
-  border-radius: 1rem;
+  padding: 3rem; /* 從 2rem 增大到 3rem，增加內邊距 */
+  border-radius: 1.5rem; /* 從 1rem 增大到 1.5rem，圓角也隨之變大 */
   text-align: center;
-  max-width: 300px;
+  /* 關鍵調整：增大 max-width，從 300px 改為更大的值 */
+  /* 使用相對單位確保彈性放大，例如 vw，或保持 rem */
+  max-width: 40vw; /* 調整為視窗寬度的 40%，讓它顯著變大 */
+  min-width: 350px; /* 設置最小寬度，避免在小螢幕上過小 */
 }
 
 .confirm-box p {
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.8rem; /* 從 1.2rem 增大到 1.8rem，文字變大 */
+  margin-bottom: 2rem; /* 從 1.5rem 增大到 2rem，段落下方間距變大 */
   color: #333;
 }
 
 .confirm-actions button {
-  margin: 0 0.5rem;
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
+  margin: 0 0.8rem; /* 從 0.5rem 增大到 0.8rem，按鈕間距變大 */
+  padding: 0.8rem 1.6rem; /* 從 0.6rem 1.2rem 增大，按鈕內邊距變大 */
+  font-size: 1.3rem; /* 從 1rem 增大到 1.3rem，按鈕文字變大 */
   border: none;
-  border-radius: 8px;
+  border-radius: 1rem; /* 從 8px (0.5rem) 增大到 1rem，圓角變大 */
   cursor: pointer;
 }
 
@@ -161,5 +164,6 @@
 }
 
 .confirm-actions button:last-child {
-  background-color: #ccc;
+  background-color: #94DA2C; /* 根據你的截圖，這裡可能是綠色而不是紅色 */
+  color: white;
 }

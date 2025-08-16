@@ -16,12 +16,12 @@ const cards = [
     {
     title: "家用品大揭秘",
     img: appliances,
-    path: "/nature-game",
+    path: "/AppliancesGame",
   },
     {
     title: "建築空間探險去",
     img: building,
-    path: "/nature-game",
+    path: "/BuildingGame",
   },
   {
     title: "森林\n俱樂部",
@@ -31,7 +31,7 @@ const cards = [
   {
     title: "大家一起動一動",
     img: sport,
-    // path: "/sportGame",
+     path: "/sportGame",
   },
   {
     title: "地名小學家",
@@ -49,7 +49,7 @@ const cards = [
     path: "/CarGame",
   },
   {
-    title: "食物探險家",
+    title: "美食探險家",
     img: food,
     path: "/FoodGame",
   },

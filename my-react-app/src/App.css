@@ -1,3 +1,17 @@
+/* 根元素字體大小：用於 rem 單位換算，可以根據需要調整 */
+:root {
+  font-size: 16px; /* 基礎字體大小，1rem = 16px */
+
+  /* 保持原有變數 */
+  --bg-color: #fffbd3;
+  --header-bg: #ffec97;
+  --text-primary: #545050;
+  --text-secondary: #5e5e64;
+  --bubble-bg-1: #ffd991;
+  --bubble-bg-2: #fff7b1;
+  --input-bg: #ffffff;
+}
+
 /* 假設 body 和其他通用樣式不變 */
 body, html {
   height: 100%;
@@ -6,13 +20,19 @@ body, html {
   background: #ffedcd; /* 可以考慮換成更柔和的淺黃色或淺米色 */
 }
 
+/* 確保全域盒模型 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 .selection-bg {
   min-height: 100vh;
   min-width: 100vw;
   width: 100vw;
-  height: 100vh;
+  height: 100vh; /* 使用 vh 確保高度佔滿視窗 */
   position: relative;
-  /* 背景色可以調整為更活潑的淺色，例如： */
   background: linear-gradient(to bottom right, #fdffbc, #e0f2f7); /* 淺黃到淺藍漸變 */
   overflow-x: hidden;
   overflow-y: auto;
@@ -20,12 +40,14 @@ body, html {
 }
 
 .selection-bg::before {
-   content: "";
+  content: "";
   position: absolute;
-  inset: 0;
+  inset: 0; /* top, right, bottom, left 都為 0 */
   z-index: 0;
   background: url('../assets/22600173.png') center no-repeat;
-  background-size: 120% auto; /* 寬度60%，高度自動 */
+  /* 調整 background-size：使用百分比或 vmin 單位使其更具彈性 */
+  background-size: 60vmin auto; /* 寬度佔視窗較小邊的 60%，高度自動 */
+                                /* 也可以試試 80% auto; 或 contain/cover */
   opacity: 0.15;         /* 透明度，0~1之間可調 */
   pointer-events: none;  /* 不影響點擊 */
 }
@@ -33,22 +55,28 @@ body, html {
 .selection-header {
   position: fixed;
   top: 0; left: 0; right: 0;
-  height: 80px;
+  height: 10vh; /* 從 80px 改為視窗高度的 10%，更具彈性 */
+  min-height: 60px; /* 設置最小高度，避免在小螢幕上過於扁平 */
+  max-height: 100px; /* 設置最大高度，避免在大螢幕上過高 */
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ffec97; /* 更鮮明的黃色 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 增加一點陰影 */
+  background: #ffec97;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* 陰影使用 rem */
   z-index: 1000;
 }
 
 .back-button {
   position: absolute;
-  left: 70px;
+  left: 5vw; /* 從 70px 改為視窗寬度的 5% */
   top: 50%;
   transform: translateY(-50%);
-  width: 80px;
-  height: 80px;
+  width: 5vw; /* 從 80px 改為視窗寬度的 5% */
+  height: 5vw; /* 保持正方形比例 */
+  min-width: 40px; /* 設置按鈕的最小尺寸 */
+  min-height: 40px;
+  max-width: 80px; /* 設置按鈕的最大尺寸 */
+  max-height: 80px;
   border: none;
   background: transparent;
   cursor: pointer;
@@ -57,22 +85,106 @@ body, html {
   align-items: center;
   justify-content: center;
   padding: 0;
-  transition: background-color 0.3s; /* 增加過渡效果 */
+  transition: background-color 0.3s;
 }
 .back-button:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* 懸停時的背景效果 */
+  background-color: rgba(255, 255, 255, 0.2);
 }
 .back-button img {
-    width: 50px;
-    height: 50px;
+  width: 60%; /* 圖片寬度佔按鈕的 60% */
+  height: 60%; /* 圖片高度佔按鈕的 60% */
+  object-fit: contain;
 }
 
 .header-title {
- width: 100%;
+  width: 100%;
   text-align: center;
   margin: 0;
-  font-weight: 700; /* 字體可以再粗一點 */
-  font-size: 2.2rem; /* 稍微放大 */
-  color: #3f3e3e; /* 更深的顏色，增加對比 */
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); /* 輕微的文字陰影讓字體更突出 */
+  font-weight: 700;
+  font-size: 4vw; /* 從 2.2rem 改為視窗寬度的 4%，更具彈性 */
+  min-font-size: 1.5rem; /* 設置最小字體大小，確保可讀性 */
+  max-font-size: 2.5rem; /* 設置最大字體大小，避免過大 */
+  color: #3f3e3e;
+  text-shadow: 0.0625rem 0.0625rem 0.125rem rgba(255, 255, 255, 0.5); /* 陰影使用 rem */
+}
+
+/* --- 媒體查詢 (Media Queries) --- */
+
+/* 針對平板和較小的桌面螢幕 (例如寬度小於 1024px) */
+@media (max-width: 1024px) {
+  .selection-header {
+    height: 9vh; /* 稍微縮小 header 高度 */
+    min-height: 55px;
+  }
+
+  .back-button {
+    left: 4vw; /* 調整左邊距 */
+    width: 6vw;
+    height: 6vw;
+    min-width: 35px;
+    min-height: 35px;
+  }
+
+  .header-title {
+    font-size: 5vw; /* 字體根據視窗寬度調整 */
+    min-font-size: 1.3rem;
+    max-font-size: 2.2rem;
+  }
+
+  .selection-bg::before {
+    background-size: 70vmin auto; /* 背景圖片在平板上可能需要大一點 */
+  }
+}
+
+/* 針對手機 (例如寬度小於 768px) */
+@media (max-width: 768px) {
+  .selection-header {
+    height: 8vh; /* 在手機上header可以再小一點 */
+    min-height: 50px;
+  }
+
+  .back-button {
+    left: 3vw; /* 更小的左邊距 */
+    width: 8vw; /* 按鈕可以再大一點方便點擊 */
+    height: 8vw;
+    min-width: 30px;
+    min-height: 30px;
+  }
+
+  .header-title {
+    font-size: 6.5vw; /* 手機上標題字體佔比可以更大 */
+    min-font-size: 1.2rem;
+    max-font-size: 2rem;
+  }
+
+  .selection-bg::before {
+    background-size: 90vmin auto; /* 背景圖片在手機上可能需要更大，甚至考慮 contain */
+    opacity: 0.1; /* 在小螢幕上可能需要更淡一些 */
+  }
+}
+
+/* 針對極小螢幕手機 (例如寬度小於 480px) */
+@media (max-width: 480px) {
+  .selection-header {
+    height: 7vh;
+    min-height: 45px;
+  }
+
+  .back-button {
+    left: 2vw;
+    width: 10vw;
+    height: 10vw;
+    min-width: 25px;
+    min-height: 25px;
+  }
+
+  .header-title {
+    font-size: 7.5vw;
+    min-font-size: 1.1rem;
+    max-font-size: 1.8rem;
+  }
+
+  .selection-bg::before {
+    background-size: 100vmin auto; /* 讓圖片更明顯 */
+  }
 }

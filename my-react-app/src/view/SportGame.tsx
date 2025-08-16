@@ -24,13 +24,13 @@ export default function Game() {
         style={{ backgroundImage: `url(${CardImg})`, backgroundSize: "cover" }}
       >
         <div className="main-menu-overlay">
-          <h1 className="main-menu-title">誰是交通王</h1>
+          <h1 className="main-menu-title">大家一起動一動</h1>
           <div className="menu-buttons">
             <button
               className="start-button"
               onClick={() => {
                 playButtonClickSound(); // <--- 播放音效
-                navigate("/nature-game-being");
+                navigate("/SportQuestion");
               }}
             >
               開始遊戲

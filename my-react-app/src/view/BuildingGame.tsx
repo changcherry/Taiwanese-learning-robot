@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import CardImg from "../assets/建築空間探險去.png";
 import ButtonClickSound from "../assets/遊戲開始介面音效.wav"; // <--- 引入按鈕點擊音效檔案
 import "../style/Game.css";
-
+import "../Main.css";
 export default function Game() {
   const navigate = useNavigate();
   const [showExitConfirm, setShowExitConfirm] = useState(false);
@@ -24,13 +24,13 @@ export default function Game() {
         style={{ backgroundImage: `url(${CardImg})`, backgroundSize: "cover" }}
       >
         <div className="main-menu-overlay">
-          <h1 className="main-menu-title">誰是交通王</h1>
+          <h1 className="main-menu-title">建築空間探險去</h1>
           <div className="menu-buttons">
             <button
               className="start-button"
               onClick={() => {
                 playButtonClickSound(); // <--- 播放音效
-                navigate("/nature-game-being");
+                navigate("/BuildingQuestion");
               }}
             >
               開始遊戲

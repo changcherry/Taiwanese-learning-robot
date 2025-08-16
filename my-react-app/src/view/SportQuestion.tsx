@@ -1,44 +1,88 @@
 import { useRef, useState, useEffect } from "react";
 import "../style/GameQuestion.css";
+import "../Main.css";
+import "../App.css";
 import BackIcon from "../assets/Back.svg";
 import SpeakerIcon from "../assets/播放鍵.svg";
 import CheckIcon from "../assets/正確.png"; 
 import WrongIcon from "../assets/錯誤.png"; 
-import ScoreDisplay from '../view/ScoreDisplay.tsx'; 
+import ScoreDisplay from './ScoreDisplay.tsx'; 
 // 引入音效檔案
 import CorrectSound from "../assets/正確音效.wav";   
 import WrongSound from "../assets/錯誤音效.wav";     
 import GameOverSound from "../assets/查看分數音效2.wav"; 
 import ButtonClickSound from "../assets/遊戲開始介面音效.wav"; 
 
-export default function GameQuestion() {
+export default function SportQuestion() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [quizCompleted, setQuizCompleted] = useState(false);
 
-  const questions = [
+  const Sportquestions = [
     {
-      id: 1,
-      text: "我細細粒，白白的，炒飯會愛我。是啥米？",
-      options: ["鹽", "糖", "胡椒粉", "麵粉"],
-      correctAnswer: "鹽",
-    },
-    {
-      id: 2,
-      text: "我有很多兄弟姐妹，顏色鮮豔，常常被排成一排。是啥米？",
-      options: ["積木", "彩虹", "鉛筆", "樂高"],
-      correctAnswer: "鉛筆",
-    },
-    {
-      id: 3,
-      text: "什麼東西有頭有尾，卻沒有身體？",
-      options: ["硬幣", "蛇", "繩子", "魚"],
-      correctAnswer: "硬幣",
-    },
-    // ... 更多題目
+  id: 1,
+  text: "我穿地下隧道，城市捷徑代步方便。是啥米？",
+  options: ["流籠", "腳踏車", "捷運", "貨車"],
+  correctAnswer: "捷運",
+},
+{
+  id: 2,
+  text: "我有鐵手臂，挖土搬石頭攏是我。是啥米？",
+  options: ["高鐵", "計程車", "怪手", "機車"],
+  correctAnswer: "怪手",
+},
+{
+  id: 3,
+  text: "我用鋼索走山路，吊來吊去載工人。是啥米？",
+  options: ["救護車", "公車", "流籠", "飛行機"],
+  correctAnswer: "流籠",
+},
+{
+  id: 4,
+  text: "我會飛，載你出國看世界。是啥米？",
+  options: ["救護車", "飛行機", "跤踏車", "高鐵"],
+  correctAnswer: "飛行機",
+},
+{
+  id: 5,
+  text: "我會直直升起，救災常常看到我。是啥米？",
+  options: ["客運", "直升機", "機車", "計程車"],
+  correctAnswer: "直升機",
+},
+{
+  id: 6,
+  text: "我定點來定點去，市區代步靠我行。是啥米？",
+  options: ["消防車", "卡車", "公車", "腳踏車"],
+  correctAnswer: "公車",
+},
+{
+  id: 7,
+  text: "我行鐵路，從南跑到北，載人載貨無問題。是啥米？",
+  options: ["火車", "機車", "跤踏車", "消防車"],
+  correctAnswer: "火車",
+},
+{
+  id: 8,
+  text: "我細細台，雙輪快，市區穿來穿去攏方便。是啥米？",
+  options: ["捷運", "飛行機", "機車", "怪手"],
+  correctAnswer: "機車",
+},
+{
+  id: 9,
+  text: "我四輪跑，能載全家，開出去兜風好舒服。是啥米？",
+  options: ["火車", "汽車", "跤踏車", "消防車"],
+  correctAnswer: "汽車",
+},
+{
+  id: 10,
+  text: "我肚子大，專門搬重貨，工地愛我。是啥米？",
+  options: ["卡車", "公車", "高鐵", "校車"],
+  correctAnswer: "卡車",
+},
+  
   ];
 
-  const currentQuestion = questions[currentQuestionIndex];
+  const currentQuestion = Sportquestions[currentQuestionIndex];
 
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [showResult, setShowResult] = useState(false);
@@ -69,7 +113,7 @@ export default function GameQuestion() {
 
       // 答對時，2 秒後自動跳到下一題
       setTimeout(() => {
-        if (currentQuestionIndex < questions.length - 1) {
+        if (currentQuestionIndex < Sportquestions.length - 1) {
           setCurrentQuestionIndex(prevIndex => prevIndex + 1); // 跳到下一題
           // 重置狀態，為下一題做準備
           setSelectedOption(null);
@@ -92,7 +136,7 @@ export default function GameQuestion() {
     buttonClickAudio.current.play(); // <--- 在點擊「下一題」按鈕時播放音效
 
     // 檢查是否還有下一題
-    if (currentQuestionIndex < questions.length - 1) {
+    if (currentQuestionIndex < Sportquestions.length - 1) {
       setCurrentQuestionIndex(prevIndex => prevIndex + 1); // 跳到下一題
       // 重置狀態，為下一題做準備
       setSelectedOption(null);
@@ -123,15 +167,15 @@ export default function GameQuestion() {
     return (
       <ScoreDisplay
         score={score}
-        totalQuestions={questions.length}
+        totalQuestions={Sportquestions.length}
         onRestartGame={handleRestartGame}
       />
     );
   }
 
   return (
-    <div className="game-GameQuestion-bg">
-      <header className="game-header">
+    <div className="selection-bg ">
+      <header className="selection-header ">
         <button
           type="button"
           className="back-button"
@@ -140,7 +184,7 @@ export default function GameQuestion() {
         >
           <img src={BackIcon} alt="返回" />
         </button>
-        <h1 className="header-title">森林俱樂部</h1>
+        <h1 className="car-header-title">大家一起動一動</h1>
       </header>
 
       <main className="game-question-main">
@@ -149,7 +193,7 @@ export default function GameQuestion() {
           <span className="question-number-label">第</span>
           <span className="current-question-num">{currentQuestionIndex + 1}</span>
           <span className="question-number-label">/</span>
-          <span className="total-questions-num">{questions.length}</span>
+          <span className="total-questions-num">{Sportquestions.length}</span>
           <span className="question-number-label">題</span>
         </div>
 
@@ -211,7 +255,7 @@ export default function GameQuestion() {
         {/* 「下一題」按鈕 (只在答錯時顯示，或在最後一題結束時顯示「查看結果」) */}
         {nextButtonVisible && ( // 只有當 nextButtonVisible 為 true 時才顯示
           <button className="next-question-button" onClick={handleNextQuestion}>
-            {currentQuestionIndex < questions.length - 1 ? "下一題" : "查看結果"}
+            {currentQuestionIndex < Sportquestions.length - 1 ? "下一題" : "查看結果"}
           </button>
         )}
       </main>

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import CardImg from "../assets/誰是交通王.png";
 import ButtonClickSound from "../assets/遊戲開始介面音效.wav"; 
 import "../style/Game.css";
-
+import "../Main.css";
 export default function Game() {
   const navigate = useNavigate();
   const [showExitConfirm, setShowExitConfirm] = useState(false);
