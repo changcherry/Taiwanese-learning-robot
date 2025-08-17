@@ -4,7 +4,7 @@ import './App.css';
 import LearningMode from './components/LearningMode';
 import StoryModePage from './components/StoryModePage';
 import ThemeSelectionPage from './components/ThemeSelectionPage';
-// import Flashcard2App from './components/Flashcard2App'; // 暫時註解掉這行
+import Favoritestory from './components/Favoritestory'; // ⬅️ 新增：收藏集頁
 
 function App() {
   const [page, setPage] = useState<'learning' | 'story' | 'theme' | 'favorites'>('learning');
@@ -17,34 +17,33 @@ function App() {
           onSelectWordCard={() => setPage('theme')}
         />
       )}
+
       {page === 'theme' && (
-        <>
-          <ThemeSelectionPage
-            onBack={() => setPage('learning')}
-            onSelectTheme={theme => {
-              console.log(`選擇了主題：${theme}`);
-            }}
-            onGoToFavorites={() => { 
-              console.log("正在跳轉到收藏集...");
-              setPage('favorites');
-            }}
-          />
-        </>
+        <ThemeSelectionPage
+          onBack={() => setPage('learning')}
+          onSelectTheme={(theme) => {
+            console.log(`選擇了主題：${theme}`);
+          }}
+          onGoToFavorites={() => {
+            console.log('正在跳轉到收藏集...');
+            setPage('favorites'); // ⬅️ 轉到收藏集
+          }}
+        />
       )}
+
       {page === 'story' && (
         <StoryModePage
           onBack={() => setPage('learning')}
-          onFavorite={() => {}}
           onRecommend={() => {}}
           onStoryClick={() => {}}
         />
       )}
-      {/* 頁面狀態為 'favorites' 時，渲染一個簡單的 div */}
+
       {page === 'favorites' && (
-        <div>
-          <h1>這是收藏集頁面！</h1>
-          <button onClick={() => setPage('theme')}>返回</button>
-        </div>
+        <Favoritestory
+          onBack={() => setPage('theme')} // ⬅️ 收藏集返回到主題頁
+          onStoryClick={() => {}}        // 需要時可打開故事詳情
+        />
       )}
     </div>
   );
