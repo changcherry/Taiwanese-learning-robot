@@ -108,6 +108,14 @@ body, html {
   text-shadow: 0.0625rem 0.0625rem 0.125rem rgba(255, 255, 255, 0.5); /* 陰影使用 rem */
 }
 
+
+.game-selection-main {
+  padding-top: 100px; /* 原本140px，請加大到180px或更高，直到不被切到為止 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* --- 媒體查詢 (Media Queries) --- */
 
 /* 針對平板和較小的桌面螢幕 (例如寬度小於 1024px) */

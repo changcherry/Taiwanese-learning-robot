@@ -1,3 +1,4 @@
+//台語單字卡
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // 1. 引入 useNavigate
 import '../style/ThemeSelectionPage.css'; 

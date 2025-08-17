@@ -94,16 +94,16 @@ body {
 }
 
 .header-title {
-  font-size: 32px;
-  font-weight: 600;
-  color: #545050;
+ width: 100%;
+  text-align: center;
   margin: 0;
-  /* 移除絕對定位，讓它在 Flexbox 流中 */
-  /* position: absolute; top: 35%; left: 50%; transform: translate(-50%, -50%); */
-  text-align: left;
-  /* 讓標題文字靠左，因為它現在在 header-left 裡 */
-  flex-grow: 1;
-  /* 允許標題佔用剩餘空間 */
+  font-weight: 700;
+  font-size: 4vw; /* 從 2.2rem 改為視窗寬度的 4%，更具彈性 */
+  min-font-size: 1.5rem; /* 設置最小字體大小，確保可讀性 */
+  max-font-size: 2.5rem; /* 設置最大字體大小，避免過大 */
+  color: #3f3e3e;
+  text-shadow: 0.0625rem 0.0625rem 0.125rem rgba(255, 255, 255, 0.5); /* 陰影使用 rem */
+
 }
 
 /* 收藏集按鈕樣式 */
@@ -111,18 +111,19 @@ body {
   display: flex;
   position: fixed;
   top: 10px;
-  right: 5px;
+  right: 50px;
   gap: 24px;
   /* 圖標與文字間距 */
   padding: 10px 10px;
   /* 按鈕內邊距 */
-  background-color: #e9c4c4;
+  background-color: #ffffff;
   border: none;
   border-radius: 50px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   z-index: 10;
+
   /* 確保在 header-title 之上 */
 
 }
@@ -130,12 +131,14 @@ body {
 .favorite-collection-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+
 }
 
 .favorite-icon {
   width: 40px;
   /* 圖標尺寸 */
   height: 40px;
+  
 }
 
 .favorite-text {
@@ -143,6 +146,8 @@ body {
   /* 文字尺寸 */
   font-weight: 700;
   color: #545050;
+  right:10px;
+
 }
 
 /* 主要內容區塊 */

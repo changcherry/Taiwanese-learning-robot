@@ -11,13 +11,17 @@ const cards = [
 
         path: "/ThemeSelection",
     },
+
     {
-        title: "台語\n故事集",
-        path: "/Game",
+        title: "情境\n對話",
+        path: "/Home",
     },
     {
-        title: "互動\n遊戲",
+       title: "互動\n遊戲",
         path: "/Game",
+    },{
+        title: "台語\n故事集",
+        path: "/StoryModePage",
     },
 
 ];

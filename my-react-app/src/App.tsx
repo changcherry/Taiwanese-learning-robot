@@ -21,9 +21,14 @@ import SportQuestion from './view/SportQuestion';
 import Clothes from './view/ClothesGame';
 import ClothesQuestion from './view/ClothesQuestion';
 //小琳區
+import StoryModePage from "./view/StoryModePage";
 import ThemeSelectionPage from "./view/ThemeSelectionPage";
 import FavoriteCollectionPage from "./view/FavoriteCollectionPage";
 import FlashcardApp from './view/FlashcardApp';
+
+
+
+
 //登入盧冠寧區
 import Login from "./view/Login";
 import LoginFailure from "./view/LoginFailure";
@@ -57,7 +62,14 @@ export default function App() {
           <Route path="/FlashcardApp" element={<FlashcardApp onBack={function (): void {
             throw new Error("Function not implemented.");
           } } />} />
-
+          <Route path="/FavoriteCollection" element={<FavoriteCollectionPage />} />
+           <Route path="/StoryModePage" element={<StoryModePage onBack={function (): void {
+            throw new Error("Function not implemented.");
+          } } onStoryClick={function (story: { id: number; title: string; }): void {
+            throw new Error("Function not implemented.");
+          } } />}/>
+         
+      
 
           {/* 遊戲相關路由 */}
           <Route path="/Game" element={<GameSelection />} />
@@ -72,7 +84,7 @@ export default function App() {
           <Route path="/SportGame" element={<SportGame />} />
           <Route path="/SportQuestion" element={<SportQuestion />} />
           <Route path="/FoodGame" element={<FoodGame />} />
-          <Route path="/FoodQuestion" element={<FoodQuestion />} />"
+          <Route path="/FoodQuestion" element={<FoodQuestion />} />
           <Route path="/ClothesGame" element={<Clothes />} />
           <Route path="/ClothesQuestion" element={<ClothesQuestion />} />
           <Route path="/NatureQuestion" element={<NatureQuestion />} />
