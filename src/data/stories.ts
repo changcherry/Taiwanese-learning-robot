@@ -1,4 +1,5 @@
 import story0Image from '../assets/story0.png';
+import story1Image from '../assets/story1.png';
 // src/data/stories.ts
 export interface Story { 
   id: number; 
@@ -23,7 +24,8 @@ export const stories: Story[] = [
     id: 1, 
     title: '阿里山 ê 大神木', 
     keywords: ['阿里山', '神木', '大樹', '森林', '自然', '觀光'],
-    content: `在阿里山的深山裡，有一棵屹立千年的大神木。牠見證了無數朝霞與雲海，默默守護著森林與族人。遊客到此，無不驚嘆於大神木的雄偉與靈氣。`
+    content: `在阿里山的深山裡，有一棵屹立千年的大神木。牠見證了無數朝霞與雲海，默默守護著森林與族人。遊客到此，無不驚嘆於大神木的雄偉與靈氣。`,
+    image: story1Image
   },
   { 
     id: 2, 
