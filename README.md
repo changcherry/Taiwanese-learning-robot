@@ -12,6 +12,14 @@ git push origin  feature/ 分支名稱
 ```
 - 上傳後可以到 GitHub 上看到這個分支
 
+### 將分支抓下來
+```
+查看所有分支
+git branch -a
+切到你要的分支
+git checkout (分支名稱)
+```
+
 ### 確認沒問題合併分支到主分支（main）
 ```
 # 切換到 main
