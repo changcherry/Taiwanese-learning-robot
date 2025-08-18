@@ -1,0 +1,86 @@
+:root {
+  --header-height: 100px; /* 視你的 header 實際高度調整 */
+}
+/* StoryDetailPage 外層 */
+#story-detail {
+  margin: 0;
+  padding: 0;
+  /* 增加 padding-top，確保圖片不會被 header 遮住 */
+  padding-top: calc(var(--header-height) + 40px);
+  min-height: 180vh;  
+  height: auto;
+  width: 100vw;
+  overflow-y: auto; 
+  font-family: 'Kanit', sans-serif;
+  background-color: #fffbd3;
+  color: #545050;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  box-sizing: border-box;
+  border-top: 1px solid transparent;
+}
+
+.story-image {
+  max-width: 900px;
+  height: auto;
+  border-radius: 16px;
+  display: block;
+}
+
+.story-image-container{ display:flex; justify-content:center; }
+.story-image-row{ display:inline-flex; align-items:flex-end; gap:50px; }
+
+.story-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 40px;
+  width: 90%;
+  max-width: 1400px;
+  /* 移除 margin-top，避免與 #story-detail 的 padding 重複 */
+  margin-top: 0;
+  padding-top: 0; 
+}
+
+.audio-button {
+  margin-left: -10px; /* 向左縮，靠近圖片 */
+}
+
+.audio-button img {
+  width: 70px;
+  height: auto;
+  transition: transform 0.2s ease;
+}
+
+.audio-button:hover img {
+  transform: scale(1.1);
+}
+
+.story-text {
+  font-size: 40px;
+  font-weight: 1000;
+  line-height: 1.8;
+  margin: 0;
+  color: #545050;
+}
+.audio-button img {
+  width: 70px;
+  height: auto;
+  filter: grayscale(100%) brightness(50%);
+}
+
+/* 📱RWD: 小螢幕變直排 */
+@media (max-width: 992px) {
+  .story-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .story-text-container {
+    align-items: center;
+  }
+}
