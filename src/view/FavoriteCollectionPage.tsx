@@ -15,7 +15,7 @@ type FavMap = { [id: number]: boolean };
 
 const DECKS: Record<string, Card[]> = {
   transportation: [
-    { id: 0, front: '捷運\ntsia̍-ūn', back: '我逐工攏坐捷運去上班。\nGuá ta̍k-kang lóng tsē tsiat-ūn khì siōng-pan。\n(我每天都搭捷運去上班。)' },
+    { id: 0, front: '捷運\ntsia̍-ūn\n(捷運)', back: '我逐工攏坐捷運去上班。\nGuá ta̍k-kang lóng tsē tsiat-ūn khì siōng-pan。\n(我每天都搭捷運去上班。)' },
     { id: 1, front: '怪手\nkuài-tshiú', back: '怪手（kuài-tshiú）佇咧挖塗。\n怪手正在挖土。' },
     { id: 2, front: '流籠\nliû-lông', back: '坐流籠上山。\n坐纜車上山。' },
     { id: 3, front: '飛行機\nhui-hîng-ki', back: '我坐飛行機去國外。\n我搭飛機去國外。' },
