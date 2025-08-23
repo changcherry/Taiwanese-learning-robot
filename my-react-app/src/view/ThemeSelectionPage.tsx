@@ -21,7 +21,7 @@ const ThemeSelectionPage: React.FC<ThemeSelectionPageProps> = ({ onSelectTheme }
             type="button"
             className="back-button"
             aria-label="Back"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/Learn")}
           >
             <img src={backIcon} alt="" />
           </button>

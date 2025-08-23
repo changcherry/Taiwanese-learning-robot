@@ -1,7 +1,63 @@
 
+/* 根元素字體大小：用於 rem 單位換算，可以根據需要調整 */
+:root {
+  font-size: 16px; /* 基礎字體大小，1rem = 16px。這是一個很好的起點。 */
+ font-size: 0.8333vw;
+  /* 保持原有變數，方便統一管理顏色 */
+  --bg-color: #fffbd3;
+  --header-bg: #ffec97;
+  --text-primary: #545050;
+  --text-secondary: #5e5e64;
+  --bubble-bg-1: #ffd991;
+  --bubble-bg-2: #fff7b1;
+  --input-bg: #ffffff;
+  --card-focus-border: #f6f3f0; /* 這個變數放在這裡很合理 */
+}
+
+/* 假設 body 和其他通用樣式不變 */
+body, html {
+  height: 100%; /* 確保 html 和 body 佔滿整個視口高度 */
+  margin: 0;
+  padding: 0;
+  background: #ffedcd; /* 可以考慮換成更柔和的淺黃色或淺米色 */
+  overflow-x: hidden; /* 防止水平滾動條，因為您在 .selection-bg 中已經處理了 */
+}
+
+/* 確保全域盒模型 */
+* {
+  box-sizing: border-box; /* 這是響應式設計的基石，非常正確 */
+  margin: 0;
+  padding: 0;
+}
 
 
 
+.story-selection-bg {
+  min-height: 100vh;
+  min-width: 100vw;
+  width: 100vw;
+  height: 100vh; /* 使用 vh 確保高度佔滿視窗 */
+  position: relative;
+  /*background: linear-gradient(to bottom right, #fdffbc, #e0f2f7);*/
+  overflow-x: hidden; /* 防止因背景圖或內容溢出導致的水平滾動條 */
+  overflow-y: auto; /* 允許垂直滾動，以防內容超出視口高度 */
+  z-index: 0;
+}
+
+
+
+.story-selection-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* top, right, bottom, left 都為 0，很好的簡寫 */
+  z-index: 0; /* 確保它在背景層 */
+  background: url('./assets/背景.png') center no-repeat;
+  /* 調整 background-size：使用 'cover' 讓圖片填滿整個螢幕 */
+  background-size: cover; /* <<-- 將這裡從 60vmin auto 改為 cover */
+                                
+  opacity: 0.5; /* 如果您需要透明度，請確保這一行沒有被移除 */
+  pointer-events: none;  /* 不影響點擊，非常正確 */
+}
 /* ===== Layout Containers ===== */
 .page-container {
   max-width: 1920px;
@@ -99,21 +155,22 @@
   box-shadow: 0 6px 14px rgba(0,0,0,0.25);
   padding: 20px 36px;
   width: 100%;
-  height: 80px; /* 放大高度 */
+  height: 40px; /* 放大高度 */
   max-width: 1000px; /* 放寬 */
 
-  margin: 48px auto;
+  margin: -10px auto;
 }
 
 .search-icon {
-  width: 48px;
-  height: 48px;
+  width: 20px;
+  height: 20px;
+   
 }
 
 .search-input {
   color: var(--color-text-secondary);
-  background: #fff;
-  font-size: 28px; /* 放大字體 */
+  background: #ffffff00;
+  font-size: 20px; /* 放大字體 */
   border: none;
   outline: none;
   padding: 20px 28px;
@@ -122,7 +179,8 @@
 }
 
 .search-input::placeholder {
-  font-size: 28px;
+  font-size: 20px;
+  align-items: center;
 }
 
 /* ===== Hero Image ===== */
@@ -135,8 +193,9 @@
 }
 
 .hero-image {
-  width: 100%;
-  max-width: 1250px; /* 放大 hero */
+  width: 70%;
+  max-width: px; /* 放大 hero */
+  max-height: 500px; /* 放大高度 */
   border-radius: 32px;
 }
 
@@ -184,15 +243,21 @@
 }
 
 .story-card {
-  background: #ffeea4;
-  border-radius: 24px;
-  padding: 40px;
+  background: #fff2a7;              /* 更柔和的底色 */
+  border-radius: 32px;              /* 圓角加大 */
+  padding: 32px 48px;               /* 上下縮小、左右加大 */
   display: flex;
-  align-items: center;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-  gap: 24px;
-  font-size: 32px;
+ align-items: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10); /* 陰影更柔和 */
+  gap: 32px;                        /* 卡片內元素間距加大 */
+  font-size: 28px;                  /* 字體略小 */
   width: 100%;
+  transition: box-shadow 0.2s;      /* 滑鼠懸停時有動畫 */
+}
+
+.story-card:hover {
+  box-shadow: 0 16px 48px rgba(0,0,0,0.16); /* 懸停時陰影加深 */
+  background: #fff07a;                      /* 懸停時底色變亮 */
 }
 
 .story-thumbnail {

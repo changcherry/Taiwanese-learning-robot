@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect, useCallback } from "react"; // Added useCallback
-import "../style/GameSelection.css";
+//import "../style/GameSelection.css";
 import "../App.css"
 import BackIcon from "../assets/Back.svg";
 import nature from "../assets/森林俱樂部.png";
@@ -191,7 +191,7 @@ export default function GameSelection() {
           type="button"
           className="back-button"
           aria-label="返回"
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/Learn")}
         >
           <img src={BackIcon} alt="返回" />
         </button>

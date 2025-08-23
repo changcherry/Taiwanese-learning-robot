@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/StoryModePage.css';
-import "../Main.css";
 //import "../style/GameSelection.css"
 import '../style/ThemeSelectionPage.css'; 
 import storyImage from '../assets/story.png';
@@ -54,18 +53,18 @@ const StoryModePage: React.FC<StoryModePageProps> = ({
   const favoriteCount = Object.values(favorites).filter(Boolean).length;
 
   return (
-     <div className="selection-bg">
+     <div className="story-selection-bg">
       <header className="selection-header">
         <div className="header-left">
          <button
             type="button"
             className="back-button"
             aria-label="Back"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/Learn")}
           >
             <img src={backIcon} alt="" />
           </button>
-          <h1 className="header-title">台語單字卡</h1>
+          <h1 className="header-title">故事集</h1>
         </div>
 
         {/* 這個按鈕現在使用 navigate 來切換頁面 */}

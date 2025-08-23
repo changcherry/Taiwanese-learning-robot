@@ -1,8 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import '../style/LearningMode.css';
 import "../style/GameSelection.css";
-//import '../App.css'; 
-import backIcon from '../assets/Back.svg';
+import "../style/Home.css";
+import "../App.css";
+import bellIcon from "../assets/icon-bell.png";
+import gearIcon from "../assets/icon-gear.png";
+import userIcon from "../assets/icon-user.png";
+import chevronIcon from "../assets/icon-chevron.png";
+
 import { useNavigate } from 'react-router-dom';
 
 const cards = [
@@ -61,17 +66,23 @@ export default function LearningMode() {
     }, []);
 
     return (
-        <div className="learn-selection-bg">
+        <div className="selection-bg">
             <header className="selection-header">
-        <button
-          type="button"
-          className="back-button"
-          aria-label="返回"
-          onClick={() => navigate("/")}
-        >
-          <img src={backIcon} alt="返回" />
-        </button>
-        <h1 className="game-header-title">互動遊戲</h1>
+       <p className="greeting-title">產品名稱</p>
+        <h1 className="game-header-title"></h1>
+        <button className="nav-button" onClick={() => navigate("/NotificationPage")}>
+            <img src={bellIcon} alt="通知" className="nav-icon" />
+            <span className="nav-label">通知</span>
+          </button>
+          <button className="nav-button">
+            <img src={gearIcon} alt="設定" className="nav-icon" />
+            <span className="nav-label">設定</span>
+          </button>
+          <button className="nav-button">
+            <img src={userIcon} alt="登入" className="nav-icon" />
+            <span className="nav-label">登入</span>
+            <img src={chevronIcon} alt="Chevron" className="chevron-icon" />
+          </button>
       </header>
       <main className="learn-selection-main">
                 <div className="learn-cards-container" ref={containerRef}>

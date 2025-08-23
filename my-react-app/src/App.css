@@ -1,8 +1,8 @@
 /* 根元素字體大小：用於 rem 單位換算，可以根據需要調整 */
 :root {
-  font-size: 16px; /* 基礎字體大小，1rem = 16px */
-
-  /* 保持原有變數 */
+  font-size: 16px; /* 基礎字體大小，1rem = 16px。這是一個很好的起點。 */
+ font-size: 0.8333vw;
+  /* 保持原有變數，方便統一管理顏色 */
   --bg-color: #fffbd3;
   --header-bg: #ffec97;
   --text-primary: #545050;
@@ -10,19 +10,23 @@
   --bubble-bg-1: #ffd991;
   --bubble-bg-2: #fff7b1;
   --input-bg: #ffffff;
+  --card-focus-border: #f6f3f0; /* 這個變數放在這裡很合理 */
+  --bg-max-width: 1920px;
+  --bg-max-height: 1080px;
 }
 
 /* 假設 body 和其他通用樣式不變 */
 body, html {
-  height: 100%;
+  height: 100%; /* 確保 html 和 body 佔滿整個視口高度 */
   margin: 0;
   padding: 0;
   background: #ffedcd; /* 可以考慮換成更柔和的淺黃色或淺米色 */
+  overflow-x: hidden; /* 防止水平滾動條，因為您在 .selection-bg 中已經處理了 */
 }
 
 /* 確保全域盒模型 */
 * {
-  box-sizing: border-box;
+  box-sizing: border-box; /* 這是響應式設計的基石，非常正確 */
   margin: 0;
   padding: 0;
 }
@@ -33,50 +37,38 @@ body, html {
   width: 100vw;
   height: 100vh; /* 使用 vh 確保高度佔滿視窗 */
   position: relative;
-  background: linear-gradient(to bottom right, #fdffbc, #e0f2f7); /* 淺黃到淺藍漸變 */
-  overflow-x: hidden;
-  overflow-y: auto;
+  /*background: linear-gradient(to bottom right, #fdffbc, #e0f2f7);*/
+  overflow-x: hidden; /* 防止因背景圖或內容溢出導致的水平滾動條 */
+  overflow-y: auto; /* 允許垂直滾動，以防內容超出視口高度 */
   z-index: 0;
 }
+
+
 
 .selection-bg::before {
   content: "";
   position: absolute;
-  inset: 0; /* top, right, bottom, left 都為 0 */
-  z-index: 0;
-  background: url('../assets/22600173.png') center no-repeat;
-  /* 調整 background-size：使用百分比或 vmin 單位使其更具彈性 */
-  background-size: 60vmin auto; /* 寬度佔視窗較小邊的 60%，高度自動 */
-                                /* 也可以試試 80% auto; 或 contain/cover */
-  opacity: 0.15;         /* 透明度，0~1之間可調 */
-  pointer-events: none;  /* 不影響點擊 */
-}
-
-.selection-header {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: 10vh; /* 從 80px 改為視窗高度的 10%，更具彈性 */
-  min-height: 60px; /* 設置最小高度，避免在小螢幕上過於扁平 */
-  max-height: 100px; /* 設置最大高度，避免在大螢幕上過高 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #ffec97;
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* 陰影使用 rem */
-  z-index: 1000;
+  inset: 0; /* top, right, bottom, left 都為 0，很好的簡寫 */
+  z-index: 0; /* 確保它在背景層 */
+  background: url('./assets/背景.png') center no-repeat;
+  /* 調整 background-size：使用 'cover' 讓圖片填滿整個螢幕 */
+  background-size: cover; /* <<-- 將這裡從 60vmin auto 改為 cover */
+                                
+  opacity: 0.5; /* 如果您需要透明度，請確保這一行沒有被移除 */
+  pointer-events: none;  /* 不影響點擊，非常正確 */
 }
 
 .back-button {
   position: absolute;
   left: 5vw; /* 從 70px 改為視窗寬度的 5% */
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%); /* 垂直居中，很棒 */
   width: 5vw; /* 從 80px 改為視窗寬度的 5% */
   height: 5vw; /* 保持正方形比例 */
   min-width: 40px; /* 設置按鈕的最小尺寸 */
   min-height: 40px;
   max-width: 80px; /* 設置按鈕的最大尺寸 */
-  max-height: 80px;
+  max-height: 80px; /* min/max 限制很到位 */
   border: none;
   background: transparent;
   cursor: pointer;
@@ -93,7 +85,7 @@ body, html {
 .back-button img {
   width: 60%; /* 圖片寬度佔按鈕的 60% */
   height: 60%; /* 圖片高度佔按鈕的 60% */
-  object-fit: contain;
+  object-fit: contain; /* 確保圖片縮放時不會被裁切 */
 }
 
 .header-title {
@@ -103,96 +95,18 @@ body, html {
   font-weight: 700;
   font-size: 4vw; /* 從 2.2rem 改為視窗寬度的 4%，更具彈性 */
   min-font-size: 1.5rem; /* 設置最小字體大小，確保可讀性 */
-  max-font-size: 2.5rem; /* 設置最大字體大小，避免過大 */
+  max-font-size: 2.5rem; /* 設置最大字體大小，避免過大。字體大小的 min/max 設定是響應式設計的黃金準則！ */
   color: #3f3e3e;
   text-shadow: 0.0625rem 0.0625rem 0.125rem rgba(255, 255, 255, 0.5); /* 陰影使用 rem */
 }
 
 
 .game-selection-main {
-  padding-top: 100px; /* 原本140px，請加大到180px或更高，直到不被切到為止 */
+  padding-top: 100px; /* 原本140px，這裡應該動態調整，因為 header 是變動的。 */
+                     /* 更好的做法是 `padding-top: calc(10vh + 20px);` (加上額外間距)
+                     /* 或者讓 .game-selection-main 成為 flex-grow: 1; 的元素，
+                     /* 讓它填充 header 下方的所有空間。 */
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-/* --- 媒體查詢 (Media Queries) --- */
-
-/* 針對平板和較小的桌面螢幕 (例如寬度小於 1024px) */
-@media (max-width: 1024px) {
-  .selection-header {
-    height: 9vh; /* 稍微縮小 header 高度 */
-    min-height: 55px;
-  }
-
-  .back-button {
-    left: 4vw; /* 調整左邊距 */
-    width: 6vw;
-    height: 6vw;
-    min-width: 35px;
-    min-height: 35px;
-  }
-
-  .header-title {
-    font-size: 5vw; /* 字體根據視窗寬度調整 */
-    min-font-size: 1.3rem;
-    max-font-size: 2.2rem;
-  }
-
-  .selection-bg::before {
-    background-size: 70vmin auto; /* 背景圖片在平板上可能需要大一點 */
-  }
-}
-
-/* 針對手機 (例如寬度小於 768px) */
-@media (max-width: 768px) {
-  .selection-header {
-    height: 8vh; /* 在手機上header可以再小一點 */
-    min-height: 50px;
-  }
-
-  .back-button {
-    left: 3vw; /* 更小的左邊距 */
-    width: 8vw; /* 按鈕可以再大一點方便點擊 */
-    height: 8vw;
-    min-width: 30px;
-    min-height: 30px;
-  }
-
-  .header-title {
-    font-size: 6.5vw; /* 手機上標題字體佔比可以更大 */
-    min-font-size: 1.2rem;
-    max-font-size: 2rem;
-  }
-
-  .selection-bg::before {
-    background-size: 90vmin auto; /* 背景圖片在手機上可能需要更大，甚至考慮 contain */
-    opacity: 0.1; /* 在小螢幕上可能需要更淡一些 */
-  }
-}
-
-/* 針對極小螢幕手機 (例如寬度小於 480px) */
-@media (max-width: 480px) {
-  .selection-header {
-    height: 7vh;
-    min-height: 45px;
-  }
-
-  .back-button {
-    left: 2vw;
-    width: 10vw;
-    height: 10vw;
-    min-width: 25px;
-    min-height: 25px;
-  }
-
-  .header-title {
-    font-size: 7.5vw;
-    min-font-size: 1.1rem;
-    max-font-size: 1.8rem;
-  }
-
-  .selection-bg::before {
-    background-size: 100vmin auto; /* 讓圖片更明顯 */
-  }
 }

@@ -12,7 +12,7 @@ const LoginSuccess: React.FC = () => {
   const navigate = useNavigate();
 
   const handleEnterHome = () => {
-    navigate("/"); // 要改
+    navigate("/Learn"); // 要改
   };
 
   return (
