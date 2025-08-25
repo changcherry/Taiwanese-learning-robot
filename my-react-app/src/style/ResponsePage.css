@@ -2,69 +2,83 @@
 
 /* 外層容器置中 */
 .response-page {
-	max-width: 1200px;
-	margin: 0 auto;
-	display: flex;
-	flex-direction: column;
-	padding-top: 0; /* 聊天區靠近 header */
-	/* 不設固定高度，避免滾動條 */
-	/* 新增：鎖住背景與頁面高度，讓滾輪只影響聊天內容區 */
-	height: 100vh;
-	overflow: hidden;
-	background-attachment: fixed;
+  /*
+    重要：這裡不再需要設定固定高度
+    flex: 1; 會讓它自動填滿所有可用空間
+  */
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative; /* 為了讓內容滾動區可以相對於它定位 */
 }
 
-/* 聊天區 */
+/* ** 聊天內容滾動區 **
+  這是唯一需要滾動的元素。
+*/
 .response-content {
-	margin: 0 auto;
-	padding: 20px 60px 20px;
-	display: flex;
-	flex-direction: column;
-	gap: 15px;
-	width: 100%;
-	box-sizing: border-box;
-	/* 移除 overflow-y: auto; */
-	/* 新增：讓滾輪只滾動聊天區，並預留輸入欄高度避免被遮住 */
-	flex: 1;
-	overflow-y: auto;
-	padding-bottom: 180px; /* 增加與輸入列的距離 */
-	scroll-behavior: smooth;
+  flex: 1; /* 讓它填滿 .response-page 剩餘空間 */
+  overflow-y: auto; /* 啟用垂直滾動 */
+  scroll-behavior: smooth;
+  padding: 20px 60px; /* 這裡的 padding 是內容的邊距，不需用來避開固定元素 */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 /* 訊息區塊 */
+/* 讓聊天訊息區域成為 Flexbox 容器 */
+.response-content {
+  display: flex;
+  flex-direction: column; /* 將訊息垂直排列，確保每個訊息都在新的一行 */
+  align-items: flex-start; /* 預設靠左對齊 */
+  flex-grow: 1;
+  padding: 10px;
+  overflow-y: auto;
+  gap: 10px; /* 設定訊息群組間的垂直間距 */
+}
+
+/* 訊息群組的通用樣式 */
 .message-group {
-	display: flex;
-	flex-direction: column;
-	gap: 5px;
-	max-width: 100%;
+  width: 100%; /* 確保每個訊息群組佔據整行寬度 */
+  display: flex; /* 讓內部的泡泡和名稱可以對齊 */
+  flex-direction: column;
 }
 
-.message-group.received { align-self: flex-start; align-items: flex-start; }
-.message-group.sent { align-self: flex-end; align-items: flex-end; }
+/* 針對不同類型的訊息設定對齊方式 */
+.message-group.sent {
+  align-items: flex-end; /* 將使用者發送的訊息靠右對齊 */
+}
 
-/* 發送者名稱 */
+.message-group.received {
+  align-items: flex-start; /* 將接收到的訊息靠左對齊 */
+}
+
+/* 泡泡和名稱的樣式 */
 .sender-name {
-	font-weight: 800;
-	font-size: 16px;
-	line-height: 1.2;
-	padding-left: 10px;
+  margin-bottom: 5px;
+  color: #888;
+  font-size: 0.8em;
 }
 
-/* 訊息泡泡 */
 .message-bubble {
-	border-radius: 25px;
-	padding: 10px 16px;
-	max-width: 100%;
-	white-space: pre-wrap;
-	font-size: 14px;
-	box-sizing: border-box;
+  padding: 10px 15px;
+  border-radius: 20px;
+  max-width: 70%;
+  word-wrap: break-word;
 }
 
-/* 讓已送出訊息泡泡靠右 */
 .message-group.sent .message-bubble {
-	margin-left: auto;
-	text-align: right;
+  background-color: #ffe6a7; /* 發送訊息的泡泡顏色 */
 }
+
+.message-group.received .message-bubble {
+  background-color: #FFD991; /* 接收訊息的泡泡顏色 */
+}
+
 
 .received .message-bubble { background-color: #ffd991; }
 .sent .message-bubble { background-color: #fff7b1; }
@@ -76,7 +90,7 @@
 	left: 50%;
 	transform: translateX(-50%);
 	width: 90%;
-	max-width: 900px;
+	max-width: 1100px;
 	display: flex;
 	align-items: center;
 	gap: 12px;

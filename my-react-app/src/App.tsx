@@ -30,6 +30,8 @@ import FlashcardApp from './view/FlashcardApp';
 import InstructionsPage from "./view/InstructionsPage";
 import NotificationPage from "./view/NotificationPage";
 import SettingsPage from "./view/SettingsPage";
+import ProfileEditPage from "./view/ProfileEditPage";
+import ResponsePage from "./view/ResponsePage";
 
 //登入盧冠寧區
 import Login from "./view/Login";
@@ -77,11 +79,15 @@ export default function App() {
           }} />} />
 
           {/*王跌跌區 */}
-          <Route path="/InstructionsPage" element={<InstructionsPage />} />
           <Route path="/NotificationPage" element={<NotificationPage />} />
           <Route path="/SettingsPage" element={<SettingsPage />} />
-
+          <Route path="/ResponsePage" element={<ResponsePage />} />
+           <Route path="/profileedit" element={<ProfileEditPage />} />
+          <Route path="/InstructionsPage" element={<InstructionsPage />} />
           
+
+
+
           {/* 遊戲相關路由 */}
           <Route path="/Game" element={<GameSelection />} />
           <Route path="/CarGame" element={<CarGame />} />

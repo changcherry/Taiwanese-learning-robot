@@ -1,11 +1,14 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
+import React, { useState, useEffect, type ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../styles/ProfileEditPage.css"; // 請確認路徑正確
+import "../style/ProfileEditPage.css"; 
+import BackIcon from "../assets/Back.svg";
+import  avartBg from"../assets/avatar_bg.png";
+import avatar from"../assets/avatar.png";
 
-const defaultAvatar = "/images/images_ProfileEdit/avatar.png";
+const defaultAvatar = avatar;
 
 const ProfileEditPage: React.FC = () => {
   const navigate = useNavigate();
@@ -19,15 +22,16 @@ const ProfileEditPage: React.FC = () => {
 
   const [fullName, setFullName] = useState("");
   const [username, setUsername] = useState("");
-  const [avatarPreview, setAvatarPreview] = useState(defaultAvatar);
+  const [avatarPreview, setAvatarPreview] = useState<string>(defaultAvatar);
 
   useEffect(() => {
     axios.get("https://your-api.com/api/user/me")
       .then(res => {
+        const userData = res.data as { fullName: string; username: string; avatar?: string };
         const data = {
-          fullName: res.data.fullName,
-          username: res.data.username,
-          avatar: res.data.avatar || defaultAvatar,
+          fullName: userData.fullName,
+          username: userData.username,
+          avatar: userData.avatar || defaultAvatar,
         };
         setFullName(data.fullName);
         setUsername(data.username);
@@ -81,15 +85,13 @@ const ProfileEditPage: React.FC = () => {
     <section id="profile-change" className="page-bg">
       {/* 頁面頂部橫幅 */}
       <header className="game-header">
-        <button
-          className="back-button"
+         <button
           type="button"
-          onClick={() => navigate("/")}
+          className="back-button"
+          aria-label="返回"
+          onClick={() => navigate("/Learn")}
         >
-          <img
-            src="/images/back.png"
-            alt="Back Icon"
-          />
+          <img src={BackIcon} alt="返回" />
         </button>
         <h1 className="header-title">個人資料變更</h1>
       </header>
@@ -102,7 +104,7 @@ const ProfileEditPage: React.FC = () => {
           <div className="avatar-section">
             <div className="avatar-wrapper">
               <img
-                src="/images/images_ProfileEdit/avatar_bg.png"
+                src={avartBg}
                 className="avatar-bg"
                 alt="Avatar background"
               />

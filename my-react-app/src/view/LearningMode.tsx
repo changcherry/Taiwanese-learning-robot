@@ -74,13 +74,13 @@ export default function LearningMode() {
             <img src={bellIcon} alt="通知" className="nav-icon" />
             <span className="nav-label">通知</span>
           </button>
-          <button className="nav-button">
+          <button className="nav-button" onClick={() => navigate("/SettingsPage")}>
             <img src={gearIcon} alt="設定" className="nav-icon" />
             <span className="nav-label">設定</span>
           </button>
-          <button className="nav-button">
-            <img src={userIcon} alt="登入" className="nav-icon" />
-            <span className="nav-label">登入</span>
+          <button className="nav-button" onClick={() => navigate("/")}>
+            <img src={userIcon} alt="登出" className="nav-icon" />
+            <span className="nav-label">登出</span>
             <img src={chevronIcon} alt="Chevron" className="chevron-icon" />
           </button>
       </header>

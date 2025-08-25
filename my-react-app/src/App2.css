@@ -35,7 +35,7 @@ html, body {
   position: fixed; /* 背景固定於視窗，不隨內容移動/縮放 */
   top: 0; left: 0; right: 0; bottom: 0;
   z-index: -1;  /* 放在內容下方且不影響層級 */
-  background: url('/images/bg.png') center center no-repeat;
+  background: url('../src/assets/22600173.png') center center no-repeat;
   background-size: cover; /* 覆蓋整個視窗，維持比例 */
   opacity: 0.15;
   pointer-events: none;

@@ -1,6 +1,7 @@
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/SettingsPage.css";
+import "../style/SettingsPage.css";
 import "../App2.css";
 import BackIcon from "../assets/Back.svg";
 import  avartBg from"../assets/avatar_bg.png";
@@ -60,7 +61,7 @@ const SettingsPage: React.FC = () => {
               <li>
                 <div
                   className="menu-item"
-                  onClick={() => navigate("/profile-edit")}
+                  onClick={() => navigate("/profileedit")}
                   role="button"
                 >
                   <div className="menu-icon-container">
@@ -82,7 +83,7 @@ const SettingsPage: React.FC = () => {
               <li>
                 <div
                   className="menu-item"
-                  onClick={() => navigate("/instructions")}
+                  onClick={() => navigate("/InstructionsPage")}
                   role="button"
                 >
                   <div className="menu-icon-container">
@@ -104,7 +105,7 @@ const SettingsPage: React.FC = () => {
               <li>
                 <div
                   className="menu-item"
-                  onClick={() => navigate("/response")}
+                  onClick={() => navigate("/ResponsePage")}
                   role="button"
                 >
                   <div className="menu-icon-container">

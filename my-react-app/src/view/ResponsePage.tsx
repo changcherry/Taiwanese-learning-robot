@@ -1,7 +1,12 @@
+//問題反應
+//還有bug
+
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import "../styles/ResponsePage.css";
-import "../App.css";
+import "../style/ResponsePage.css";
+import "../App2.css";
+
+import BackIcon from "../assets/Back.svg";
 
 interface Message {
   id: number;
@@ -11,25 +16,31 @@ interface Message {
 }
 
 const ResponsePage: React.FC = () => {
-  const navigate = useNavigate();
-  const [messages, setMessages] = useState<Message[]>([
-    { id: 1, type: 'received', sender: '小熊', content: '你好！這是示例訊息。' },
-    { id: 2, type: 'sent', sender: '阿琪', content: '嗨！' },
-    { id: 3, type: 'received', sender: '小熊', content: '請問有什麼需要幫忙的嗎？' },
-  ]);
-
-  const [input, setInput] = useState('');
-  const contentRef = useRef<HTMLDivElement>(null);
+const navigate = useNavigate();
+const [input, setInput] = useState('');
+const [messages, setMessages] = useState<Message[]>([]);
+const contentRef = useRef<HTMLDivElement>(null);
 
   const handleSend = () => {
     if (!input.trim()) return;
-    const newMessage: Message = {
-      id: Date.now(),
+
+    // 添加使用者發送的訊息
+    const userMessage: Message = {
+      id: Date.now()+1,
       type: 'sent',
-      sender: '阿琪',
+      sender: '阿琪', // 使用者名稱
       content: input,
     };
-    setMessages([...messages, newMessage]);
+
+    // 添加自動回覆的訊息
+    const systemResponse: Message = {
+      id: Date.now() + 1, // 確保 ID 唯一
+      type: 'received',
+      sender: '小熊',
+      content: '已收到您的回覆',
+    };
+
+    setMessages(prevMessages => [...prevMessages, userMessage, systemResponse]);
     setInput('');
   };
 
@@ -40,16 +51,17 @@ const ResponsePage: React.FC = () => {
     }
   }, [messages]);
 
-  const handleBack = () => {
-    navigate('/');
-  };
-
   return (
-    <div className="page-bg">
+    <div className=".selection-bg">
       {/* 頁首 */}
       <header className="game-header">
-        <button className="back-button" onClick={handleBack} aria-label="返回上一頁">
-          <img src="/images/back.png" alt="Back" />
+         <button
+          type="button"
+          className="back-button"
+          aria-label="返回"
+          onClick={() => navigate("/SettingsPage")}
+        >
+          <img src={BackIcon} alt="返回" />
         </button>
         <h1 className="header-title">問題反應</h1>
       </header>
@@ -85,14 +97,3 @@ const ResponsePage: React.FC = () => {
 };
 
 export default ResponsePage;
-
-
-
-
-
-
-
-
-
-
-

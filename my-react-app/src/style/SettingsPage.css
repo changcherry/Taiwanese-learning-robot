@@ -103,7 +103,8 @@
   .menu-item {
     background-color: #ffec97;
     border-radius: 30px;
-    min-height: 5.3125rem; /* 約 85px 高度 */
+    min-height: 70px; /* 約 85px 高度 */
+    width: 2000px;
     display: flex;
     align-items: center;
     padding: 0 2.1875rem;  /* 左右內距 */
