@@ -233,9 +233,9 @@ body, html {
 /* ===== Story Grid & Cards ===== */
 .story-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(700px, 1fr));
   gap: 48px;
-  max-width: 1400px;
+  max-width: 2000px;
   margin: 48px auto 0;
   max-height: 700px;
   overflow-y: auto;
@@ -261,10 +261,10 @@ body, html {
 }
 
 .story-thumbnail {
-  width: 120px; /* 放大縮圖 */
-  height: 120px;
-  object-fit: cover;
-  border-radius: 20px;
+   width: 30%;
+  aspect-ratio: 16 / 9; /* 強制長方形比例 (16:9) */
+  object-fit: cover;    /* 保持比例，裁切多餘部分 */
+  border-radius: 12px;
 }
 
 .card-divider {

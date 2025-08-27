@@ -1,5 +1,5 @@
 import React from 'react';
-import './StoryDetailPage.css';
+import '../style/StoryDetailPage.css';
 import backIcon from '../assets/back.svg';
 import storyImage from '../assets/detail.png';
 import volumeIcon from '../assets/volume.png';

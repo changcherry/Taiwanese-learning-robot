@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../App.css"; // 全站共用樣式
+import "../App2.css"; // 全站共用樣式
 import "../style/First.css"; // 本頁專屬樣式
 import BackIcon from "../assets/Back.svg";
 const InstructionsPage: React.FC = () => {

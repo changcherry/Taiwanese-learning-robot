@@ -1,3 +1,5 @@
+// 台語單字卡
+
 import React, { useState } from 'react';
 import '../style/FlashcardApp.css';
 import backIcon from '../assets/back.svg';

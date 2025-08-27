@@ -23,7 +23,7 @@ const cards = [
     },
     {
        title: "互動\n遊戲",
-        path: "/Game",
+        path: "/GameSelection2",
     },{
         title: "台語\n故事集",
         path: "/StoryModePage",
