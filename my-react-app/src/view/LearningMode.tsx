@@ -68,8 +68,7 @@ export default function LearningMode() {
     return (
         <div className="selection-bg">
             <header className="selection-header">
-       <p className="greeting-title">產品名稱</p>
-        <h1 className="game-header-title"></h1>
+        <h1 className="header-title">台語鬥鬧熱</h1>
         <button className="nav-button" onClick={() => navigate("/NotificationPage")}>
             <img src={bellIcon} alt="通知" className="nav-icon" />
             <span className="nav-label">通知</span>

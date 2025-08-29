@@ -72,7 +72,7 @@ const StoryModePage: React.FC<StoryModePageProps> = ({
           type="button"
           aria-label="前往收藏集"
           className="favorite-collection-btn"
-          onClick={() => navigate('/favorites')} // 3. 導航到 "/favorites" 路由
+          onClick={() => navigate('/LoveStoryPage')} // 3. 導航到 "/favorites" 路由
         >
           <img src={favoriteTabFgActive} alt="收藏集圖示" className="favorite-icon" />
           <span className="favorite-text">收藏集</span>

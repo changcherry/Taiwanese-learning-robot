@@ -46,9 +46,9 @@ const ThemeSelectionPage: React.FC<ThemeSelectionPageProps> = ({ onSelectTheme }
           <div className="theme-card-list">
             <button
               className="theme-card card-yellow"
-              onClick={() => onSelectTheme && onSelectTheme('theme1')}
+              onClick={() => navigate('/FlashcardApp')}
             >
-              問候語
+              交通工具
             </button>
             <button
               className="theme-card card-orange"

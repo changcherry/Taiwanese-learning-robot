@@ -4,17 +4,18 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "../style/GameQuestion.css";
 import "../Main.css";
 import "../App.css";
+
 import BackIcon from "../assets/Back.svg";
 import SpeakerIcon from "../assets/播放鍵.svg";
 import CheckIcon from "../assets/正確.png"; 
 import WrongIcon from "../assets/錯誤.png"; 
 import ScoreDisplay from './ScoreDisplay.tsx'; 
-// 引入音效檔案
+
 import CorrectSound from "../assets/正確音效.wav";   
 import WrongSound from "../assets/錯誤音效.wav";     
 import GameOverSound from "../assets/查看分數音效2.wav"; 
 import ButtonClickSound from "../assets/遊戲開始介面音效.wav"; 
-// 引入所有題目資料
+
 import { allGameQuestions } from "../data/gameQuestionsData";
 
 // 定義題目的介面
@@ -151,12 +152,16 @@ export default function GameQuestion() {
     setNextButtonVisible(false);
   };
   
+   const handleRestartToSelection = () => {
+    navigate('/GameMain', { state: { theme } });
+  };
+
   if (quizCompleted) {
     return (
       <ScoreDisplay
         score={score}
         totalQuestions={gameQuestions.length}
-        onRestartGame={handleRestartGame}
+        onRestartGame={handleRestartToSelection} // 範例：導航回主題選擇頁面
       />
     );
   }
