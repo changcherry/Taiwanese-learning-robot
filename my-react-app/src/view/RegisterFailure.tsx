@@ -1,3 +1,5 @@
+//註冊失敗
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../style/RegisterFailure.css";

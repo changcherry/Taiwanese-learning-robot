@@ -1,3 +1,5 @@
+// 故事內容
+
 import React from 'react';
 import '../style/StoryDetailPage.css';
 import backIcon from '../assets/back.svg';

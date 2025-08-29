@@ -1,4 +1,6 @@
-import { useRef, useState, useEffect, useCallback } from "react"; // Added useCallback
+// 遊戲選單介面
+
+import { useRef, useState, useEffect, useCallback } from "react"; 
 //import "../style/GameSelection.css";
 import "../App.css"
 import BackIcon from "../assets/Back.svg";

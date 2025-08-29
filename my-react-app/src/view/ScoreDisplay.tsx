@@ -1,5 +1,5 @@
 
-
+// 分數顯示元件
 import React from 'react';
 import '../style/ScoreDisplay.css'; // 為分數畫面創建一個新的 CSS 檔案
 

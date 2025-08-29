@@ -85,12 +85,12 @@
 .favorite-sentence-stack {
   text-align: center;
   width: 100%;
-  line-height: 1.2; /* 縮減行高 */
+
 }
 
 .favorite-word-stack p,
 .favorite-sentence-stack p {
-  margin: 2px 0; /* 縮減段落間距 */
+
 }
 
 .favorite-word-stack .favorite-word-tl,

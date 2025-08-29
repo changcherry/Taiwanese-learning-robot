@@ -22,9 +22,9 @@ const cards = [
         path: "/Home",
     },
     {
-       title: "互動\n遊戲",
+        title: "互動\n遊戲",
         path: "/GameSelection2",
-    },{
+    }, {
         title: "台語\n故事集",
         path: "/StoryModePage",
     },
@@ -68,22 +68,22 @@ export default function LearningMode() {
     return (
         <div className="selection-bg">
             <header className="selection-header">
-        <h1 className="header-title">台語鬥鬧熱</h1>
-        <button className="nav-button" onClick={() => navigate("/NotificationPage")}>
-            <img src={bellIcon} alt="通知" className="nav-icon" />
-            <span className="nav-label">通知</span>
-          </button>
-          <button className="nav-button" onClick={() => navigate("/SettingsPage")}>
-            <img src={gearIcon} alt="設定" className="nav-icon" />
-            <span className="nav-label">設定</span>
-          </button>
-          <button className="nav-button" onClick={() => navigate("/")}>
-            <img src={userIcon} alt="登出" className="nav-icon" />
-            <span className="nav-label">登出</span>
-            <img src={chevronIcon} alt="Chevron" className="chevron-icon" />
-          </button>
-      </header>
-      <main className="learn-selection-main">
+                <h1 className="header-title">台語鬥鬧熱</h1>
+                <button className="nav-button" onClick={() => navigate("/NotificationPage")}>
+                    <img src={bellIcon} alt="通知" className="nav-icon" />
+                    <span className="nav-label">通知</span>
+                </button>
+                <button className="nav-button" onClick={() => navigate("/SettingsPage")}>
+                    <img src={gearIcon} alt="設定" className="nav-icon" />
+                    <span className="nav-label">設定</span>
+                </button>
+                <button className="nav-button" onClick={() => navigate("/")}>
+                    <img src={userIcon} alt="登出" className="nav-icon" />
+                    <span className="nav-label">登出</span>
+                    <img src={chevronIcon} alt="Chevron" className="chevron-icon" />
+                </button>
+            </header>
+            <main className="learn-selection-main">
                 <div className="learn-cards-container" ref={containerRef}>
                     <div className="learn-modes-container">
                         {cards.map((card, idx) => (
@@ -100,7 +100,7 @@ export default function LearningMode() {
                                     }}
                                     style={{ cursor: card.path ? "pointer" : "default" }}
                                 >
-                                  
+
                                     <div className="learn-active-card-title">
                                         {card.title.split("\n").map((line, i) => (
                                             <span key={i}>
