@@ -6,15 +6,21 @@
   color: #333;
 }
 
+.favorite-cards-grid {
+  display: grid;
+ grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* 讓卡片向右增加 */
+  gap: 10px;
+  padding: 10px;
+  width: 100%;
+  max-width: 1200px; /* 限制網格最大寬度 */
+  justify-content: center;
+}
+
 .favorite-flashcard {
   width: 50vw;
-  /* 將原始的 2500px 改為視口寬度的 50% */
   height: 30vw;
-  /* 將原始的 1300px 改為視口寬度的 30% */
   max-width: 350px;
-  /* 添加最大寬度限制，避免在超大螢幕上過大 */
   max-height: 200px;
-  /* 添加最大高度限制 */
   border-radius: 40px;
   display: flex;
   justify-content: center;
@@ -24,6 +30,7 @@
   perspective: 1500px;
   cursor: pointer;
   margin: 0 auto;
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .favorite-flashcard-inner {
@@ -70,45 +77,52 @@
 
 /* 卡片內容樣式，字體隨卡片縮小 */
 .favorite-flashcard-content {
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100%;
   width: 100%;
-  /* 確保內容在卡片翻轉時的過渡平滑 */
-  padding: 0 5px; /* 稍微縮小左右內邊距 */
+  text-align: center;
+    word-wrap: break-word;  /* 允許長字串換行 */
 }
 
 
 .favorite-word-stack,
 .favorite-sentence-stack {
-  text-align: center;
-  width: 100%;
-
+  margin: 0;
+  padding: 5px 0;
+  line-height: 1.2;
+  font-size: 100px;
+  font-weight: 800; /* 用於拼音 */
+ margin-top: -30px;
 }
 
 .favorite-word-stack p,
 .favorite-sentence-stack p {
+  margin-top: 100px;
+  line-height: -2;          /* 調整行距 */
+  font-size: clamp(0.8rem, 2vw, 1rem); /* 字體自適應縮放 */
 
 }
 
 .favorite-word-stack .favorite-word-tl,
 .favorite-sentence-stack .favorite-sent-tl {
-  font-size: 0.9rem; /* 相對字體大小 */
+  font-size: 1rem; /* 相對字體大小 */
   color: #666;
   font-style: italic;
 }
 
 .favorite-word-stack .favorite-word-zh,
 .favorite-sentence-stack .favorite-sent-zh {
-  font-size: 0.8rem; /* 相對字體大小 */
+  font-size: 1rem; /* 相對字體大小 */
   color: #999;
 }
 
 .thin-text {
-  font-size: 0.7em; /* 相對字體大小 */
+  font-size: 1em; /* 相對字體大小 */
   opacity: 0.8;
+   
 }
 
 /* 卡片圖示樣式 */

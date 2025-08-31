@@ -6,7 +6,7 @@ import '../style/FavoriteCollectionPage.css';
 import '../style/GameSelection.css';
 import '../App.css';
 import volumeIcon from '../assets/volume up.svg';
-import starIcon from '../assets/star.svg';
+
 
 // 與 FlashcardApp.tsx 相同的卡片型別
 type Card = {
@@ -76,10 +76,10 @@ const FavoriteCollectionPage: React.FC = () => {
   const renderFront = (text?: string | null) => {
     const [han = '', tl = '', zh = ''] = safeSplit(text);
     return (
-      <div className="word-stack">
-        <p className="word-han">{han}</p>
-        <p className="word-tl">{tl}</p>
-        <p className="word-zh" dangerouslySetInnerHTML={{ __html: wrapParens(zh) }} />
+      <div className="favorite-word-stack">
+        <p className="favorite-word-han">{han}</p>
+        <p className="favorite-word-tl">{tl}</p>
+        <p className="favorite-word-zh" dangerouslySetInnerHTML={{ __html: wrapParens(zh) }} />
       </div>
     );
   };
@@ -97,10 +97,10 @@ const FavoriteCollectionPage: React.FC = () => {
       han = parts[0];
     }
     return (
-      <div className="sentence-stack">
-        <p className="sent-han">{han}</p>
-        {tl && <p className="sent-tl">{tl}</p>}
-        {zh && <p className="sent-zh" dangerouslySetInnerHTML={{ __html: wrapParens(zh) }} />}
+      <div className="favorite-sentence-stack">
+        <p className="favorite-sent-han">{han}</p>
+        {tl && <p className="favorite-sent-tl">{tl}</p>}
+        {zh && <p className="favorite-sent-zh" dangerouslySetInnerHTML={{ __html: wrapParens(zh) }} />}
       </div>
     );
   };

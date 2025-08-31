@@ -1,236 +1,86 @@
 :root {
-  --text-color: #545050;
-  --bg-main: #fffbd3;
-  --bg-header: #ffec97;
-  --font-title-desktop: 48px;
-  --font-body-desktop: 40px;
-  --font-title-tablet: 36px;
-  --font-body-tablet: 32px;
-  --font-title-mobile: 24px;
-  --font-body-mobile: 18px;
+  --header-height: 100px; /* 視你的 header 實際高度調整 */
 }
-
-* {
-  box-sizing: border-box;
-}
-
-body {
+/* StoryDetailPage 外層 */
+#story-detail {
   margin: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: var(--bg-main);
-  color: var(--text-color);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* CSS from section:header */
-/*.story-header {
-  background: #ffec97;
-  border-radius: 24px 24px 0 0;
-  height: 110px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 1000px;
-  margin: 0 auto;
-}*/
-.story-header {
-    border-radius: 0;
-    padding: 0 16px;
-    height: 80px;
-  }
-
-.header-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  position: relative;
-  width: 100%;
-}
-
-.back-button {
-  position: absolute;
-  left: 32px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.back-button img {
-  width: 85px;
-  height: 90px;
-  display: block;
-}
-
-.story-title {
-  flex: 1;
-  text-align: center;
+  padding: 0;
+  /* 增加 padding-top，確保圖片不會被 header 遮住 */
+  padding-top: calc(var(--header-height) + 40px);
+  min-height: 180vh;  
+  height: auto;
+  width: 100vw;
+  overflow-y: auto; 
+  font-family: 'Kanit', sans-serif;
+  background-color: #fffbd3;
   color: #545050;
-  font-weight: 800;
-  font-size: 40px;
-  margin: 0;
-}
-
-@media (max-width: 1200px) {
-  .header-container {
-    height: 100px;
-    padding: 0 40px;
-  }
-  .back-button {
-    left: 40px;
-  }
-  .back-button img {
-    width: 60px;
-    height: auto;
-  }
-  .story-title {
-    font-size: var(--font-title-tablet);
-  }
-}
-
-@media (max-width: 768px) {
-  .header-container {
-    height: 80px;
-    padding: 0 20px;
-  }
-  .back-button {
-    left: 20px;
-  }
-  .back-button img {
-    width: 40px;
-  }
-  .story-title {
-    font-size: var(--font-title-mobile);
-  }
-}
-
-/* CSS from section:story */
-.story-detail-bg {
-  background: #fffbd3;
-  min-height: 100vh;
-  padding-bottom: 40px;
-}
-
-.story-content-wrapper {
-  /* Based on Figma: container y=1567, image y=1589 -> top padding: 22px */
-  /* Based on Figma: root width=1920, content frame width=1858 -> horizontal padding: (1920-1858)/2 = 31px */
-  max-width: 1000px;
-  margin: 40px auto 0 auto;
-  padding: 22px 31px 60px;
-}
-
-.story-image-container {
-  width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 32px;
+  align-items: center;
+  text-align: left;
+  box-sizing: border-box;
+  border-top: 1px solid transparent;
 }
 
 .story-image {
-  display: block;
-  /* Based on Figma: width=943.5px */
-  width: 943.5px;
-  max-width: 100%;
+  max-width: 900px;
   height: auto;
-  margin: 0 auto;
   border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  display: block;
 }
 
-.story-body {
-  width: 100%;
+.story-image-container{ display:flex; justify-content:center; }
+.story-image-row{ display:inline-flex; align-items:flex-end; gap:50px; }
+
+.story-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 40px;
+  width: 90%;
+  max-width: 1400px;
+  /* 移除 margin-top，避免與 #story-detail 的 padding 重複 */
+  margin-top: 0;
+  padding-top: 0; 
 }
 
 .audio-button {
-  background: none;
-  border: none;
-  margin-bottom: 24px;
-  cursor: pointer;
-  flex-shrink: 0;
-  /* Align button with the first line of text */
-  margin-top: 10px; 
+  margin-left: -10px; /* 向左縮，靠近圖片 */
 }
 
 .audio-button img {
-  /* Based on Figma: width=72.47, height=73.33 */
-  width: 73px;
+  width: 70px;
   height: auto;
-  display: block;
+  transition: transform 0.2s ease;
 }
 
-.story-paragraph {
-  font-weight: 800;
-  font-size: var(--font-body-desktop);
-  /* Based on Figma: line-height=48.4px for font-size=40px -> ~1.21 */
-  line-height: 1.8; /* Increased for better readability */
-  margin: 0 0 32px 0;
-  white-space: pre-wrap; /* Preserves newlines and spaces from Figma */
-  text-align: center;
-  max-width: 800px;
+.audio-button:hover img {
+  transform: scale(1.1);
 }
 
-@media (max-width: 1600px) {
-  .story-body {
-    max-width: 95%;
-  }
+.story-text {
+  font-size: 40px;
+  font-weight: 1000;
+  line-height: 1.8;
+  margin: 0;
+  color: #545050;
+}
+.audio-button img {
+  width: 70px;
+  height: auto;
+  filter: grayscale(100%) brightness(50%);
 }
 
-@media (max-width: 1200px) {
-  .story-content-wrapper {
-    padding: 20px 40px 40px;
-  }
-  .story-body {
-    margin-top: 40px;
-    gap: 20px;
-  }
-  .audio-button img {
-    width: 60px;
-  }
-  .story-paragraph {
-    font-size: var(--font-body-tablet);
-  }
-}
-
-@media (max-width: 768px) {
-  .story-content-wrapper {
-    padding: 20px 20px 30px;
-  }
-  .story-body {
+/* 📱RWD: 小螢幕變直排 */
+@media (max-width: 992px) {
+  .story-container {
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    text-align: center;
   }
-  .audio-button {
-    margin-top: 0;
-  }
-  .audio-button img {
-    width: 50px;
-  }
-  .story-paragraph {
-    font-size: var(--font-body-mobile);
-  }
-}
 
-main {
-  width: 100vw;
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: none;
-  box-shadow: none;
-  border-radius: 0;
-  padding: 0;
+  .story-text-container {
+    align-items: center;
+  }
 }

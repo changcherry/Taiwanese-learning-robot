@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 //遊戲區
 import Home from './view/Home'
 import ScoreDisplay from "./view/ScoreDisplay";
@@ -13,7 +14,8 @@ import ThemeSelectionPage from "./view/ThemeSelectionPage";
 import FavoriteCollectionPage from "./view/FavoriteCollectionPage";
 import FlashcardApp from './view/FlashcardApp';
 import LoveStoryPage from "./view/LoveStoryPage";
-//import StoryDetailPage from './view/StoryDetailPage';
+import StoryDetailPage from './view/StoryDetailPage';
+import StoryCard from "./view/StoryCard";
 
 
 //王跌跌區
@@ -70,8 +72,16 @@ export default function App() {
             throw new Error("Function not implemented.");
           }} />} />
           <Route path="/LoveStoryPage" element={<LoveStoryPage />} />
-
+          <Route path="/StoryDetailPage" element={< StoryDetailPage story={{
+            id: 0,
+            title: "",
+            content: undefined,
+            image: undefined
+          }} onBack={function (): void {
+            throw new Error("Function not implemented.");
+          } }  />} />
          
+
           
           {/*王跌跌區 */}
           <Route path="/NotificationPage" element={<NotificationPage />} />

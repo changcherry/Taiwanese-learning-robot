@@ -37,7 +37,7 @@ body, html {
   width: 100vw;
   height: 100vh; /* 使用 vh 確保高度佔滿視窗 */
   position: relative;
-  /*background: linear-gradient(to bottom right, #fdffbc, #e0f2f7);*/
+  background: linear-gradient(to bottom right, #fdffbc, #e0f2f7);
   overflow-x: hidden; /* 防止因背景圖或內容溢出導致的水平滾動條 */
   overflow-y: auto; /* 允許垂直滾動，以防內容超出視口高度 */
   z-index: 0;
@@ -50,7 +50,7 @@ body, html {
   position: absolute;
   inset: 0; /* top, right, bottom, left 都為 0，很好的簡寫 */
   z-index: 0; /* 確保它在背景層 */
-  background: url('./assets/背景.png') center no-repeat;
+  
   /* 調整 background-size：使用 'cover' 讓圖片填滿整個螢幕 */
   background-size: cover; /* <<-- 將這裡從 60vmin auto 改為 cover */
                                 
