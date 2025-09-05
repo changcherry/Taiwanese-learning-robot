@@ -1,10 +1,12 @@
-import { useRef, useState, useEffect, useCallback } from "react"; // Added useCallback
-import "../style/GameSelection.css";
+// 遊戲選單介面
+
+import { useRef, useState, useEffect, useCallback } from "react"; 
+//import "../style/GameSelection.css";
 import "../App.css"
 import BackIcon from "../assets/Back.svg";
 import nature from "../assets/森林俱樂部.png";
 import sport from "../assets/大家一起動一動.png";
-import place from "../assets/地名小學家.png";
+import place from "../assets/植物百寶袋.png";
 import clothes from "../assets/穿搭小百科.png";
 import car from "../assets/誰是交通王.png";
 import food from "../assets/食物探險家.png";
@@ -34,7 +36,7 @@ const cards = [
      path: "/sportGame",
   },
   {
-    title: "地名小學家",
+    title: "植物百寶袋",
     img: place,
     path: "/PlaceGame",
   },
@@ -55,7 +57,7 @@ const cards = [
   },
 ];
 
-export default function GameSelection() {
+export default function GameSelection2() {
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
   const [focusedIndex, setFocusedIndex] = useState(0);
@@ -191,7 +193,7 @@ export default function GameSelection() {
           type="button"
           className="back-button"
           aria-label="返回"
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/Learn")}
         >
           <img src={BackIcon} alt="返回" />
         </button>
@@ -207,12 +209,12 @@ export default function GameSelection() {
               <div key={idx} className="card-wrapper">
                 <button
                   className={`game-card${focusedIndex === idx % cards.length ? " focused" : ""}`}
-                  onClick={() => card.path && navigate(card.path)}
+                   onClick={() => navigate("/GameMain", { state: { theme: card } })}
                   tabIndex={0}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ") {
                       e.preventDefault();
-                      card.path && navigate(card.path);
+                      navigate("/GameMain", { state: { theme: card } });
                     }
                     if (e.key === "ArrowRight") {
                       e.preventDefault();

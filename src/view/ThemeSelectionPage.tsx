@@ -1,3 +1,4 @@
+//台語單字卡
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // 1. 引入 useNavigate
 import '../style/ThemeSelectionPage.css'; 
@@ -20,7 +21,7 @@ const ThemeSelectionPage: React.FC<ThemeSelectionPageProps> = ({ onSelectTheme }
             type="button"
             className="back-button"
             aria-label="Back"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/Learn")}
           >
             <img src={backIcon} alt="" />
           </button>
@@ -45,9 +46,9 @@ const ThemeSelectionPage: React.FC<ThemeSelectionPageProps> = ({ onSelectTheme }
           <div className="theme-card-list">
             <button
               className="theme-card card-yellow"
-              onClick={() => onSelectTheme && onSelectTheme('theme1')}
+              onClick={() => navigate('/FlashcardApp')}
             >
-              問候語
+              交通工具
             </button>
             <button
               className="theme-card card-orange"

@@ -4,10 +4,10 @@
     min-height: 100vh;
     min-width: 100vw;
     width: 100vw;
-
+background: linear-gradient(to bottom right, #fdffbc, #e0f2f7);
     height: auto; /* <--- 確保高度可以自動調整 */
     position: relative;
-    background: #ffebe7a4; /* 遊戲背景的底色 */
+   
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -21,7 +21,7 @@
     width: 100%;
      height: 100%; 
     z-index: 0; /* 確保它在最底層 */
-    background: url('../assets/森林俱樂部.png') center no-repeat; /* <--- 你的背景圖片路徑和檔名 */
+    /* <--- 你的背景圖片路徑和檔名 */
     background-size: cover; /* 確保圖片覆蓋整個區域，防止背景空白 */
     opacity: 0.15; /* 調整透明度，讓內容更突出 */
     pointer-events: none; /* 讓鼠標事件穿透背景 */

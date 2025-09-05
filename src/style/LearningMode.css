@@ -1,46 +1,6 @@
-/* 假設 body 和其他通用樣式不變 */
-body, html {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background: #fdf5e6; /* 可以考慮換成更柔和的淺黃色或淺米色 */
-}
 
-.learn-selection-bg {
-  min-height: 100vh;
-  min-width: 100vw;
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-  /* 背景色可以調整為更活潑的淺色，例如： */
-  background: linear-gradient(to bottom right, #fdf5e6, #e0f2f7); /* 淺黃到淺藍漸變 */
-  overflow-x: hidden;
-  overflow-y: auto;
-  z-index: 0;
-}
 
-.learn-selection-bg::before {
-   content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: url('../assets/22600173.png') center no-repeat;
-  background-size: 120% auto; /* 寬度60%，高度自動 */
-  opacity: 0.15;         /* 透明度，0~1之間可調 */
-  pointer-events: none;  /* 不影響點擊 */
-}
 
-.selection-header {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #ffec97; /* 更鮮明的黃色 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 增加一點陰影 */
-  z-index: 1000;
-}
 
 .back-button {
   position: absolute;
@@ -72,9 +32,48 @@ body, html {
   text-align: center;
   margin: 0;
   font-weight: 700; /* 字體可以再粗一點 */
-  font-size: 2.2rem; /* 稍微放大 */
-  color: #3f3e3e; /* 更深的顏色，增加對比 */
+  font-size: 200px; /* 稍微放大 */
+  color: #552626; /* 更深的顏色，增加對比 */
   text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); /* 輕微的文字陰影讓字體更突出 */
+}
+
+.nav-button {
+   width: 35%;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 28px ; /* 從 28px 改為視窗寬度 */
+  cursor: pointer;
+  padding: 1.5vw 2.5vw; /* 調整 padding 為相對單位 */
+  font-size: 3vw; /* 從 120px 改為視窗寬度的 3% */
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: background 0.2s ease;
+  min-font-size: 16px; /* 確保最小可讀字體 */
+}
+
+.nav-icon { 
+  width: 50px; /* 從 120px 改為視窗寬度的 7% */
+  height: 50ox; /* 保持比例 */
+  object-fit: contain; 
+  min-width: 50px; /* 最小尺寸 */
+  min-height: 50px;
+}
+.nav-label { 
+  
+  font-weight: 600; 
+ font-weight: 700; /* 字體可以再粗一點 */
+  font-size: 20px; /* 稍微放大 */
+  color: #3f3e3e; /* 更深的顏色，增加對比 */
+}
+.chevron-icon { 
+  width: 2vw; /* 從 42px 改為視窗寬度的 2% */
+  height: 2vw; 
+  object-fit: contain; 
+  margin-left: 0.5vw; 
+  min-width: 16px; /* 最小尺寸 */
+  min-height: 16px;
 }
 
 /* 確保 learn-selection-main 是個 flex 容器，且內容居中 */
@@ -136,27 +135,24 @@ body, html {
   overflow: hidden; /* 確保內容不會溢出圓角 */
   border: 4px solid transparent; /* 預留邊框空間，hover時使用 */
   cursor: pointer; /* 顯示可點擊 */
+    background-color: #a8dadc;
 }
 
-/* 建議為三張卡片設定不同的鮮豔顏色，而不是單一顏色 */
-/* 範例：你可以為不同的卡片加不同的 class，或在 JS 中動態賦予顏色 */
-.learn-card:nth-child(1) { /* 第一張卡片 */
-  background-color: #a8dadc; /* 活潑的淺藍色 */
-}
 
-.learn-card:nth-child(2) { /* 第二張卡片 */
-  background-color: #fca3b7; /* 溫暖的粉紅色 */
+.learn-card-image {
+  /* 讓圖片絕對定位，並填滿整個父層元素（卡片） */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* 讓圖片保持比例，裁切多餘的部分 */
+  object-fit: cover; 
+  
+  /* 把圖片放到最底層，這樣文字才能顯示在上面 */
+  z-index: 1; 
 }
-
-.learn-card:nth-child(3) { /* 第三張卡片 */
-  background-color: #c9e265; /* 清新的淺綠色 */
-}
-
-/* 調整 .learn-card.color-red 的定義，如果還需要使用 */
-.learn-card.color-red {
-  background-color: #F9AB5D; /* 保持原有的，或改成更活潑的橙紅色 */
-}
-
 
 .learn-active-card-title {
   position: absolute;

@@ -1,114 +1,146 @@
-import React, { useState } from 'react';
-import './StoryModePage.css';
-import storyImage from '../assets/story.png';
-import backIcon from '../assets/back.svg';
-import searchIcon from '../assets/search.svg';
-import recommendTabBg from '../assets/recommendbg.svg';
-import recommendTabFg from '../assets/check.svg';
-//import favoriteTabBg from '../assets/收藏背景.svg';
-import favoriteTabFg from '../assets/愛心.png';
-import storyThumbnail from '../assets/moon.png';
+// src/view/StoryModePage.tsx
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import '../style/StoryModePage.css';
+import '../style/ThemeSelectionPage.css';
+import '../App.css';
+import storyImage from '../assets/story.png';
+import backIcon from '../assets/Back.svg';
+import searchIcon from '../assets/search.svg';
+import favoriteIcon from '../assets/收藏.png';
+import favoriteTabFgActive from '../assets/red.svg';
+import storyThumbnail from '../assets/moon.png';
+import { stories } from '../data/stories';
+import StoryCard from '../view/StoryCard';
 interface StoryModePageProps {
   onBack: () => void;
-  onFavorite: () => void;
-  onRecommend: () => void;
-  onStoryClick: (story: { id: number; title: string }) => void; // 新增 onStoryClick 屬性
+  onStoryClick: (story: { id: number; title: string }) => void; // 兼容保留
 }
 
-const StoryModePage: React.FC<StoryModePageProps> = ({ onBack, onFavorite, onRecommend, onStoryClick }) => {
+const LOVESTORY_FAV_KEY = 'lovestory_favorites';
+
+const normalize = (s: string) =>
+  (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+const StoryModePage: React.FC<StoryModePageProps> = ({ onBack }) => {
   const [searchText, setSearchText] = useState('');
-     const navigate = useNavigate();
+  const [favorites, setFavorites] = useState<{ [key: number]: boolean }>({});
+  const navigate = useNavigate();
+
+  // 掛載時載入收藏
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(LOVESTORY_FAV_KEY);
+      setFavorites(saved ? JSON.parse(saved) : {});
+    } catch {
+      setFavorites({});
+    }
+  }, []);
+
+  // 點心形：只切換收藏，不導頁
+  const handleFavoriteToggle = (e: React.MouseEvent, storyId: number) => {
+    e.stopPropagation();
+    setFavorites(prev => {
+      const next = { ...prev, [storyId]: !prev[storyId] };
+      localStorage.setItem(LOVESTORY_FAV_KEY, JSON.stringify(next));
+      return next;
+    });
+  };
+
+  // 依關鍵字過濾
+  const visibleStories = useMemo(() => {
+    const q = normalize(searchText.trim());
+    if (!q) return stories;
+    return stories.filter(st => {
+      const inTitle = normalize(st.title).includes(q);
+      const inKeywords = Array.isArray((st as any).keywords)
+        ? (st as any).keywords.some((k: string) => normalize(k).includes(q))
+        : false;
+      return inTitle || inKeywords;
+    });
+  }, [searchText]);
 
   return (
-    <>
-      <header className="story-header">
-        <div className="header-container">
+    <div className=".story-selection-bg">
+      <header className="selection-header">
+        <div className="header-left">
           <button
-          type="button"
-          className="back-button"
-          aria-label="返回"
-          onClick={() => navigate("/")}
-        >
-          <img src={backIcon} alt="返回" />
-        </button>
-        
-          <h1 className="story-title">台語故事集</h1>
+            type="button"
+            className="back-button"
+            aria-label="Back"
+            onClick={() => navigate('/Learn')}
+          >
+            <img src={backIcon} alt="" />
+          </button>
+          <h1 className="header-title">台語單字卡</h1>
         </div>
+
+        {/* 收藏故事清單入口（保留原樣） */}
+        <button
+          type="button"
+          aria-label="前往收藏集"
+          className="favorite-collection-btn"
+          onClick={() => navigate('/LoveStoryPage')}
+        >
+          <img src={favoriteTabFgActive} alt="收藏集圖示" className="favorite-icon" />
+          <span className="favorite-text">收藏集</span>
+        </button>
       </header>
 
-      <main id="stories">
+      <main className="game-selection-main">
         <div className="search-bar">
-          <img
-            src={searchIcon}
-            alt="Search Icon"
-            className="search-icon"
-          />
+          <img src={searchIcon} alt="Search Icon" className="search-icon" />
           <input
             type="text"
             className="search-input"
-            placeholder="揣故事"
+            placeholder="揣故事（例：月亮、海、貓…）"
             value={searchText}
             onChange={e => setSearchText(e.target.value)}
+            aria-label="搜尋故事"
           />
         </div>
 
         <div className="hero-image-container">
-          <img
-            src={storyImage}
-            alt="A bear reading a book in bed"
-            className="hero-image"
-          />
+          <img src={storyImage} alt="A bear reading a book in bed" className="hero-image" />
         </div>
 
-        {/* 推薦頁 tab 樣式 */}
-        <nav className="filters">
-          <button className="filter-button active" onClick={onRecommend}>
-            <div className="icon-wrapper">
-              <img
-                src={recommendTabBg}
-                alt=""
-                className="icon-bg"
-              />
-              <img
-                src={recommendTabFg}
-                alt="Check icon"
-                className="icon-fg"
-              />
-            </div>
-            <span className="filter-text">推薦</span>
-          </button>
-          <button className="filter-button" onClick={onFavorite}>
-            <span className="filter-text">收藏</span>
-          </button>
-        </nav>
+        {visibleStories.length === 0 ? (
+          <p style={{ marginTop: 16 }}>找不到相關故事，試試其他關鍵字～</p>
+        ) : (
+          <div className="story-grid">
+            {visibleStories.map(story => (
+              <article
+                key={story.id}
+                className="story-card"
+                onClick={() => navigate(`/story/${story.id}`)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') navigate(`/story/${story.id}`);
+                }}
+              >
+                <img src={storyThumbnail} alt="Story thumbnail" className="story-thumbnail" />
+                <div className="card-divider"></div>
+                <h2 className="story-title">《{story.title}》</h2>
 
-        <div className="story-grid">
-          {Array(4).fill(null).map((_, index) => (
-            <article
-              key={index}
-              className="story-card"
-              onClick={() => onStoryClick({ id: index, title: '月娘花開的暗暝' })}
-            >
-              <img
-                src={storyThumbnail}
-                alt="Story thumbnail"
-                className="story-thumbnail"
-              />
-              <div className="card-divider"></div>
-              <h2 className="story-title">《月娘花開的暗暝》</h2>
-              <button className={`favorite-button${index === 1 ? ' active' : ''}`}>
-                <img
-                  src={favoriteTabFg}
-                  alt={index === 1 ? 'Favorited' : 'Add to favorites'}
-                />
-              </button>
-            </article>
-          ))}
-        </div>
+                <button
+                  className={`favorite-button ${favorites[story.id] ? 'active' : ''}`}
+                  onClick={(e) => handleFavoriteToggle(e, story.id)}
+                  aria-label={favorites[story.id] ? '移除收藏' : '加入收藏'}
+                  title={favorites[story.id] ? '再次點擊移除收藏' : '點擊加入收藏'}
+                >
+                  <img
+                    src={favorites[story.id] ? favoriteTabFgActive : favoriteIcon}
+                    alt={favorites[story.id] ? 'Favorited' : 'Add to favorites'}
+                  />
+                </button>
+              </article>
+
+            ))}
+          </div>
+        )}
       </main>
-    </>
+    </div>
   );
 };
 

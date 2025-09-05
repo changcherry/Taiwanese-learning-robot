@@ -1,75 +1,80 @@
-/* ScoreDisplay.css */
-
 .score-display-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* 讓分數畫面佔滿整個視窗高度 */
-    background: #fff6c7; /* 與遊戲背景色保持一致 */
-    position: fixed; /* 固定在最上層 */
+  background: linear-gradient(13deg, #d0f6ff, #faffd1);
+    min-height: 100vh;
+
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 2000; /* 確保它在所有遊戲內容之上 */
+    z-index: 2000;
 }
 
 .score-card {
-    background-color: #ffec97; /* 卡片的背景色 */
-    border: 5px solid #ffcc00; /* 卡片的邊框 */
-    border-radius: 25px;
-    padding: 50px 80px;
+    /* 使用漸層和多層次陰影，增加立體感 */
+    background: linear-gradient(135deg, #fefde8, #fdf8d4);
+    border: 4px solid #d9bf89;
+    border-radius: 30px; /* 更大的圓角 */
+    padding: 100px 130px;
     text-align: center;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    animation: fadeInScale 0.5s ease-out forwards; /* 添加動畫效果 */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 
+                0 5px 10px rgba(0, 0, 0, 0.05); /* 多層陰影 */
+    animation: fadeInScale 0.6s ease-out forwards;
 }
 
 .score-title {
     font-size: 3.5rem;
-    color: #545050;
+    color: #5c4a3c; /* 柔和的深棕色 */
     margin-bottom: 25px;
     font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); /* 輕微的文字陰影 */
 }
 
 .final-score {
     font-size: 2.8rem;
-    color: #4a2f00;
+    color: #5c4a3c;
     margin-bottom: 40px;
     font-weight: 600;
 }
 
 .final-score span {
-    font-size: 3.5rem; /* 分數數字更大更突出 */
-    color: #F9AB5D; /* 分數數字的顏色 */
-    font-weight: bold;
+    font-size: 3.8rem; /* 分數數字更大更突出 */
+    color: #e74343; /* 柔和的橘色，提供亮點 */
+    font-weight: 800; /* 更粗的字重 */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .restart-button {
-    background-color: #F9AB5D; /* 按鈕背景色 */
+    background: #ff9c4b; /* 使用與分數數字一致的顏色 */
     color: #ffffff;
     font-size: 2.2rem;
-    padding: 15px 40px;
+    padding: 16px 45px; /* 稍微加大按鈕 */
     border: none;
-    border-radius: 15px;
+    border-radius: 18px; /* 更柔和的圓角 */
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1), 
+                inset 0 -3px 0 rgba(0, 0, 0, 0.15); /* 內陰影創造按鈕的立體感 */
 }
 
 .restart-button:hover {
-    background-color: #e58a3d;
-    transform: translateY(-3px);
+    background-color: #d47a32;
+    transform: translateY(-3px) scale(1.02); /* 輕微放大和上移 */
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
 }
 
 .restart-button:active {
-    transform: translateY(1px);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transform: translateY(1px) scale(0.98);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 按壓效果 */
 }
 
-/* 動畫效果 */
+/* 動畫效果 - 微調速度，讓它更流暢 */
 @keyframes fadeInScale {
     from {
         opacity: 0;
-        transform: scale(0.8);
+        transform: scale(0.85);
     }
     to {
         opacity: 1;
@@ -80,26 +85,24 @@
 /* RWD - 手機版適應 */
 @media (max-width: 768px) {
     .score-card {
-        padding: 30px 40px;
-        border-radius: 20px;
+        padding: 40px 50px;
+        border-radius: 25px;
     }
 
     .score-title {
-        font-size: 2.5rem;
-        margin-bottom: 15px;
+        font-size: 2.8rem;
     }
 
     .final-score {
-        font-size: 2rem;
-        margin-bottom: 30px;
+        font-size: 2.2rem;
     }
 
     .final-score span {
-        font-size: 2.5rem;
+        font-size: 3rem;
     }
 
     .restart-button {
-        font-size: 1.8rem;
-        padding: 12px 30px;
+        font-size: 2rem;
+        padding: 14px 35px;
     }
 }

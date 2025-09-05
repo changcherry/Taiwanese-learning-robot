@@ -1,8 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import '../style/LearningMode.css';
 import "../style/GameSelection.css";
-//import '../App.css'; 
-import backIcon from '../assets/Back.svg';
+import "../style/Home.css";
+import "../App.css";
+import bellIcon from "../assets/icon-bell.png";
+import gearIcon from "../assets/icon-gear.png";
+import userIcon from "../assets/icon-user.png";
+import chevronIcon from "../assets/icon-chevron.png";
+
+
 import { useNavigate } from 'react-router-dom';
 
 const cards = [
@@ -10,14 +16,19 @@ const cards = [
         title: "台語\n單字卡",
 
         path: "/ThemeSelection",
+      
     },
+
     {
-        title: "台語\n故事集",
-        path: "/Game",
+        title: "情境\n對話",
+        path: "/Home",
     },
     {
         title: "互動\n遊戲",
-        path: "/Game",
+        path: "/GameSelection2",
+    }, {
+        title: "台語\n故事集",
+        path: "/StoryModePage",
     },
 
 ];
@@ -57,19 +68,24 @@ export default function LearningMode() {
     }, []);
 
     return (
-        <div className="learn-selection-bg">
+        <div className="selection-bg">
             <header className="selection-header">
-        <button
-          type="button"
-          className="back-button"
-          aria-label="返回"
-          onClick={() => navigate("/")}
-        >
-          <img src={backIcon} alt="返回" />
-        </button>
-        <h1 className="game-header-title">互動遊戲</h1>
-      </header>
-      <main className="learn-selection-main">
+                <h1 className="header-title">台語鬥鬧熱</h1>
+                <button className="nav-button" onClick={() => navigate("/NotificationPage")}>
+                    <img src={bellIcon} alt="通知" className="nav-icon" />
+                    <span className="nav-label">通知</span>
+                </button>
+                <button className="nav-button" onClick={() => navigate("/SettingsPage")}>
+                    <img src={gearIcon} alt="設定" className="nav-icon" />
+                    <span className="nav-label">設定</span>
+                </button>
+                <button className="nav-button" onClick={() => navigate("/")}>
+                    <img src={userIcon} alt="登出" className="nav-icon" />
+                    <span className="nav-label">登出</span>
+                    <img src={chevronIcon} alt="Chevron" className="chevron-icon" />
+                </button>
+            </header>
+            <main className="learn-selection-main">
                 <div className="learn-cards-container" ref={containerRef}>
                     <div className="learn-modes-container">
                         {cards.map((card, idx) => (
@@ -86,7 +102,7 @@ export default function LearningMode() {
                                     }}
                                     style={{ cursor: card.path ? "pointer" : "default" }}
                                 >
-                                  
+                                    
                                     <div className="learn-active-card-title">
                                         {card.title.split("\n").map((line, i) => (
                                             <span key={i}>

@@ -1,7 +1,7 @@
 // GameMain.tsx
 import { useState, useRef } from "react"; // 引入 useRef
 import { useNavigate } from "react-router-dom";
-import CardImg from "../assets/地名小學家.png";
+import CardImg from "../assets/植物百寶袋.png";
 import ButtonClickSound from "../assets/遊戲開始介面音效.wav"; // <--- 引入按鈕點擊音效檔案
 import "../style/Game.css";
 
