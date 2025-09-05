@@ -17,7 +17,7 @@ const SettingsPage: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="page-bg">
+    <div className="selection-bg ">
       {/* ===== 頁首（Header 區） ===== */}
       <header className="game-header">
         {/* 返回上一頁按鈕 */}
@@ -34,7 +34,7 @@ const SettingsPage: React.FC = () => {
       </header>
 
       {/* ===== 主要內容區（Main Content） ===== */}
-      <main className="page-container">
+      <main className="game-selection-main">
         <section className="profile-content">
 
           {/* --- 使用者資訊區（頭像 + 名稱） --- */}

@@ -143,7 +143,7 @@ export default function FlashcardApp({ onBack, themeId }: FlashcardAppProps) {
   };
 
   return (
-   <div className="selection-bg">
+   <div className=".selection-bg">
       <header className="selection-header">
         <button
           type="button"

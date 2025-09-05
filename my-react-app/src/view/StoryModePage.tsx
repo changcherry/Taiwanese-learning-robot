@@ -61,7 +61,7 @@ const StoryModePage: React.FC<StoryModePageProps> = ({ onBack }) => {
   }, [searchText]);
 
   return (
-    <div className="selection-bg">
+    <div className=".story-selection-bg">
       <header className="selection-header">
         <div className="header-left">
           <button

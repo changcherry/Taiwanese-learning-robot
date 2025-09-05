@@ -8,6 +8,7 @@ import gearIcon from "../assets/icon-gear.png";
 import userIcon from "../assets/icon-user.png";
 import chevronIcon from "../assets/icon-chevron.png";
 
+
 import { useNavigate } from 'react-router-dom';
 
 const cards = [
@@ -15,6 +16,7 @@ const cards = [
         title: "台語\n單字卡",
 
         path: "/ThemeSelection",
+      
     },
 
     {
@@ -100,7 +102,7 @@ export default function LearningMode() {
                                     }}
                                     style={{ cursor: card.path ? "pointer" : "default" }}
                                 >
-
+                                    
                                     <div className="learn-active-card-title">
                                         {card.title.split("\n").map((line, i) => (
                                             <span key={i}>

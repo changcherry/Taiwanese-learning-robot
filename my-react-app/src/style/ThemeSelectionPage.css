@@ -110,12 +110,11 @@ body {
 .favorite-collection-btn {
   display: flex;
   position: fixed;
-  top: 10px;
+  top: 20px;
   right: 50px;
-  gap: 24px;
-  /* 圖標與文字間距 */
-  padding: 10px 10px;
-  /* 按鈕內邊距 */
+  gap: 2px; /* 圖標與文字間距 */
+  padding: 5px 15px; /* 調整內邊距以控制大小 */
+  align-items: center; /* 讓子元素（圖示與文字）垂直置中 */
   background-color: #ffffff;
   border: none;
   border-radius: 50px;
@@ -123,31 +122,22 @@ body {
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   z-index: 10;
-
-  /* 確保在 header-title 之上 */
-
 }
 
 .favorite-collection-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-
 }
 
 .favorite-icon {
-  width: 40px;
-  /* 圖標尺寸 */
-  height: 40px;
-  
+  width: 25px; /* 調整圖標尺寸 */
+  height: 25px; /* 調整圖標尺寸 */
 }
 
 .favorite-text {
-  font-size: 25px;
-  /* 文字尺寸 */
+  font-size: 15px; /* 文字尺寸 */
   font-weight: 700;
   color: #545050;
-
-
 }
 
 /* 主要內容區塊 */

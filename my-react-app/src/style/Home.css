@@ -1,3 +1,6 @@
+
+
+
 .site-header {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -79,14 +82,14 @@
 }
 
 .reset-button {
-    background-color: #f0f0f0;
+    background-color: #4e4742;
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 10px 15px;
     margin-top: 10px; /* 增加與上方文字的距離 */
     cursor: pointer;
     font-size: 16px;
-    color: #333;
+    color: #fffcdc;
 }
 
 .reset-button:hover {
@@ -133,8 +136,8 @@
 /* Chat Area */
 .chat-area {
   position: absolute;
-  left: 40%; /* 保持百分比 */
-  top: 22%; /* 保持百分比 */
+  left: 35% !important; /* 保持百分比 */
+  top: -13% !important;/* 保持百分比 */
   width: 52%; /* 保持百分比 */
   height: 65%; /* 保持百分比 */
   display: flex;
@@ -153,7 +156,7 @@
 }
 
 .message-group.incoming { align-items: flex-start; left: 0; }
-.message-group.outgoing { align-items: flex-end; right: 5%; }
+.message-group.outgoing { align-items: flex-end; right: -15%; }
 
 .message-group:nth-child(1) { top: 0; }
 .message-group:nth-child(2) { top: 18%; }
@@ -167,14 +170,27 @@
   min-font-size: 18px;
 }
 
-.message-bubble {
-  border-radius: 1.5vw; /* 從 30px 改為視窗寬度 */
-  min-height: 5vw; /* 從 100px 改為視窗寬度 */
-  padding: 1vw 1.5vw; /* 調整 padding 為相對單位 */
-  font-size: 2vw; /* 從 40px 改為視窗寬度 */
+message-bubble {
+  border-radius: 1.5vw;
+   display: inline-block !important;
+  min-height: 30px; /* 保持最小高度，防止內容過少時泡泡太小 */
+  padding: 1vw 1.5vw;
+  font-size: 2vw;
   line-height: 1.4;
   min-font-size: 14px;
-  min-height: 30px; /* 最小高度 */
+  max-width: 70%; /* 設定最大寬度，防止泡泡過長。這個百分比可以根據您的設計調整 */
+  word-wrap: break-word; /* 確保長單詞也能換行 */
+  white-space: normal; /* 確保文字會換行，而不是一直保持 nowrap */
+}
+
+.bubble-style-1 {
+  background-color: var(--bubble-bg-1);
+}
+
+
+
+.bubble-style-2 {
+  background-color: var(--bubble-bg-2);
 }
 
 
@@ -183,9 +199,9 @@
 /* 選單容器 */
 .topic-selection-container {
   /* 根據圖片，這個容器有一個圓角邊框和陰影，並且可能在 chat-area 中間 */
-  background-color: #f6f3f0; /* 或其他淺色背景 */
+  background-color: hsl(35, 100%, 73%); /* 或其他淺色背景 */
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
   width: 100%; /* 填滿父容器的寬度 */
   max-width: 400px; /* 或者根據需要設定最大寬度 */
   padding: 20px;
