@@ -125,8 +125,8 @@ const SettingsPage: React.FC = () => {
       {import.meta.env.MODE !== "production" && (
         <button
           type="button"
-          onClick={() => navigate("/notifications")}
-          aria-label="前往通知頁（開發用）"
+          onClick={() => navigate("/search")}
+          aria-label="前往台語辭典頁（開發用）"
           style={{
             position: "fixed",
             right: 20,
@@ -140,7 +140,7 @@ const SettingsPage: React.FC = () => {
             opacity: 0.7,
           }}
         >
-          通知頁（開發）
+          台語辭典頁（開發）
         </button>
       )}
       

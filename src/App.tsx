@@ -6,7 +6,7 @@ import SettingsPage from "./components/SettingsPage";
 import ProfileEditPage from "./components/ProfileEditPage";
 import InstructionsPage from "./components/InstructionsPage";
 import ResponsePage from "./components/ResponsePage";
-import NotificationPage from "./components/NotificationPage";
+import SearchPage from "./components/SearchPage";
 
 const App: React.FC = () => {
   return (
@@ -16,7 +16,7 @@ const App: React.FC = () => {
         <Route path="/profile-edit" element={<ProfileEditPage />} />
         <Route path="/instructions" element={<InstructionsPage />} />
         <Route path="/response" element={<ResponsePage />} />
-        <Route path="/notifications" element={<NotificationPage />} />
+        <Route path="/search" element={<SearchPage />} />
       </Routes>
     </Router>
   );
