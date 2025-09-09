@@ -1,110 +1,110 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import '../style/LearningMode.css';
+import '../style/Home.css';
 import '../style/OverView.css';
+import '../App.css';
 import backIcon from '../assets/Back.svg';
 
-type ImageCard = {
-  id: number | string;
-  imageUrl: string;
-  title?: string;
-};
+// 匯入六張圖片
+import busImg from '../assets/公車.png';
+import trainImg from '../assets/火車.png';
+import truckImg from '../assets/卡車.png';
+import carImg from '../assets/汽車.png';
+import excavatorImg from '../assets/怪手.png';
+import helicopterImg from '../assets/直升機.png';
 
-// 可選：環境變數有設定才打 API，否則用本地 mock 圖片
-const API_BASE =
-  (import.meta as any)?.env?.VITE_API_BASE ||
-  (process as any)?.env?.REACT_APP_API_BASE ||
-  '';
+// 卡片型別
+interface Card {
+  id: number;
+  image: string;
+}
 
 export default function OverView() {
-  const navigate = useNavigate();
-  const { themeId = 'transportation' } = useParams();
+  const [cards, setCards] = useState<Card[]>([]);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null); // 目前被點擊放大的圖片
 
-  const [data, setData] = useState<ImageCard[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [err, setErr] = useState<string | null>(null);
-
-  const url = useMemo(
-    () => (API_BASE ? `${API_BASE}/api/themes/${encodeURIComponent(themeId)}/cards/images` : ''),
-    [themeId]
-  );
-
-  // 本地測試用（請把圖片放到 public/mock/<themeId>/）
-  const localMock: ImageCard[] = Array.from({ length: 9 }).map((_, i) => ({
-    id: i,
-    imageUrl: `/mock/${themeId}/${i}.jpg`,
-    title: `示例 ${i}`,
-  }));
-
+  // 模擬後端載入資料
   useEffect(() => {
-    const ac = new AbortController();
-    setLoading(true);
-    setErr(null);
+    const initialCards: Card[] = [
+      { id: 1, image: busImg },
+      { id: 2, image: trainImg },
+      { id: 3, image: truckImg },
+      { id: 4, image: carImg },
+      { id: 5, image: excavatorImg },
+      { id: 6, image: helicopterImg },
+    ];
+    setCards(initialCards);
+  }, []);
 
-    if (!url) {
-      setData(localMock);
-      setLoading(false);
-      return;
-    }
+  // 點擊卡片 → 打開 Modal
+  const handleImageClick = (image: string) => {
+    setSelectedImage(image);
+  };
 
-    fetch(url, { signal: ac.signal })
-      .then(async (res) => {
-        if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
-        const json = await res.json();
-        setData(json.items ?? []);
-      })
-      .catch((e: any) => {
-        if (e.name !== 'AbortError') {
-          setErr(`改用本地資料（${e.message || '載入失敗'}）`);
-          setData(localMock);
-        }
-      })
-      .finally(() => setLoading(false));
-
-    return () => ac.abort();
-  }, [url]);
+  // 關閉 Modal
+  const handleCloseModal = () => {
+    setSelectedImage(null);
+  };
 
   return (
     <div className="selection-bg">
       <header className="selection-header">
+        {/* 返回鍵 */}
         <button
           type="button"
           className="back-button"
           aria-label="返回"
-          onClick={() => navigate('/ThemeSelection')}
+          onClick={() => window.history.back()}
         >
           <img src={backIcon} alt="返回" />
         </button>
-        {/* 標題沿用你的 .header-title 樣式 */}
-        <h1 className="header-title">台語單字卡</h1>
+        <h1 className="header-title">單字總覽區</h1>
       </header>
 
-      {/* 內容區：三張一行的圖片總覽 */}
-      <main className="overview-shell">
-        {loading && <div className="ov-status">載入中...</div>}
-        {err && <div className="ov-status ov-error">{err}</div>}
-        {!loading && !err && data.length === 0 && (
-          <div className="ov-status">目前沒有圖片</div>
-        )}
-
+      {/* 主內容：圖片網格 */}
+      <main className="learn-selection-main">
         <div className="overview-grid">
-          {data.map((card) => (
-            <button
+          {cards.map((card) => (
+            <div
               key={card.id}
-              className="overview-item"
-              onClick={() =>
-                navigate(`/flashcards/${themeId}?card=${encodeURIComponent(String(card.id))}`)
-              }
-              aria-label={`前往卡片 ${card.title ?? card.id}`}
-              title={card.title}
+              className="overview-card"
+              onClick={() => handleImageClick(card.image)} // 點擊圖片放大
             >
-              <div className="thumb-wrap">
-                <img src={card.imageUrl} alt={card.title ?? `Card ${card.id}`} loading="lazy" />
-              </div>
-              <div className="thumb-caption">{card.title ?? `#${card.id}`}</div>
-            </button>
+              <img
+                src={card.image}
+                alt={`圖片-${card.id}`}
+                className="overview-image"
+              />
+            </div>
           ))}
         </div>
       </main>
+
+      {/* Modal 顯示 */}
+      {selectedImage && (
+        <div className="image-modal">
+          <div className="image-modal-content">
+            {/* 左上角 X */}
+            <button
+              className="modal-close-btn"
+              onClick={handleCloseModal}
+            >
+              ✕
+            </button>
+
+            {/* 右上角 單字卡 */}
+            <button
+              className="modal-flashcard-btn"
+              onClick={() => alert('進入單字卡功能')}
+            >
+              單字卡
+            </button>
+
+            {/* 放大的圖片 */}
+            <img src={selectedImage} alt="放大圖片" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

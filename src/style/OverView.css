@@ -1,73 +1,145 @@
-/* 外層主體：留出標題空間並置中內容 */
-.overview-shell {
-  padding: 150px 24px 32px; /* 和你 learn-selection-main 類似的上間距 */
-  max-width: 1200px;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
-
-/* 狀態訊息 */
-.ov-status { margin: 8px 0 16px; color: #374151; font-size: 14px; }
-.ov-error  { color: #b91c1c; }
-
-/* 三張一行：桌機 3 欄，RWD 自適應 */
+/* 外層 Grid：三欄平均分配 */
 .overview-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(3, 1fr); /* ✅ 三張一列 */
+  gap: 30px;                             /* 卡片間距 */
+  width: 100%;                            /* 滿版寬度 */
+  max-width: 900px;                       /* 控制最大寬度 */
+  margin: 40px auto;                      /* 水平完全置中 */
+  padding: 0 20px;
+  justify-content: center;                /* Grid 水平置中 */
+  align-items: center;                    /* Grid 垂直置中 */
 }
 
-/* 單張圖片卡 */
-.overview-item {
-  position: relative;
-  border-radius: 24px;
-  background: #fff;
-  border: 3px solid transparent;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+/* 每個卡片：固定大小 */
+.overview-card {
+  width: 650px;            /* 卡片寬度 */
+  height: 550px;           /* 卡片高度 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffffcc;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease;
   overflow: hidden;
   cursor: pointer;
-  transition: transform .25s ease, box-shadow .25s ease, border-color .2s ease;
+}
+
+.overview-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 圖片：保持在卡片內，不會撐開卡片 */
+.overview-image {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
+  transform-origin: center center;
+  transition: transform 0.25s ease;
+  margin: auto;
+}
+
+.overview-card:hover .overview-image {
+  transform: scale(1.1);
+}
+
+/* 返回鍵 */
+.back-button {
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 60px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
   display: flex;
-  flex-direction: column;
-  text-align: left;
+  align-items: center;
+  justify-content: center;
+}
+.back-button img {
+  width: 40px;
+  height: 40px;
 }
 
-.overview-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 25px -8px rgba(89,79,79,.45);
-  border-color: var(--card-focus-border, #f6f3f0);
+/* 標題 */
+.header-title {
+  text-align: center;
+  margin: 0 auto;
+  font-weight: 700;
+  font-size: 48px;
+  color: #552626;
 }
 
-/* 縮圖 */
-.thumb-wrap {
-  aspect-ratio: 4 / 3;      /* 你可以改 1/1 或 16/9 */
-  background: #f3f4f6;
-  overflow: hidden;
-}
-.thumb-wrap img {
+/* ===== 圖片放大 Modal ===== */
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  display: block;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
 }
 
-/* 圖片下方標題 */
-.thumb-caption {
-  padding: 10px 12px 14px;
-  font-weight: 700;
+.image-modal-content {
+  position: relative;
+  max-width: 80%;
+  max-height: 80%;
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-modal-content img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+/* 左上角的關閉按鈕 */
+.modal-close-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ff4d4d;
+  color: white;
+  border: none;
   font-size: 18px;
-  color: #3f3e3e;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.modal-close-btn:hover {
+  background: #e60000;
 }
 
-/* RWD：平板兩欄、手機一欄；上方間距也縮小一點 */
-@media (max-width: 1024px) {
-  .overview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+/* 右上角的單字卡按鈕 */
+.modal-flashcard-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
-@media (max-width: 640px) {
-  .overview-shell { padding: 120px 16px 24px; }
-  .overview-grid  { grid-template-columns: 1fr; gap: 16px; }
-  .thumb-caption  { font-size: 16px; }
+.modal-flashcard-btn:hover {
+  background: #1e40af;
 }

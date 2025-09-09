@@ -15,7 +15,7 @@ import FavoriteCollectionPage from "./view/FavoriteCollectionPage";
 import FlashcardApp from './view/FlashcardApp';
 import LoveStoryPage from "./view/LoveStoryPage";
 import StoryDetailPage from './view/StoryDetailPage';
-
+import OverView from "./view/OverView";
 
 
 
@@ -81,6 +81,7 @@ export default function App() {
           }} onBack={function (): void {
             throw new Error("Function not implemented.");
           } }  />} />
+          <Route path="/overview" element={<OverView />} />
           
 
           {/*王跌跌區 */}
