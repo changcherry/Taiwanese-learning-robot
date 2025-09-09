@@ -1,0 +1,131 @@
+/* ===== 使用說明頁專屬樣式 ===== */
+.instructions-container {
+  max-width: 1920px;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column; /* 垂直排列 header + main */
+}
+
+/* ===== 使用說明內容區 ===== */
+.main-content {
+  margin-top: var(--header-height, 80px);
+  height: calc(100vh - var(--header-height, 80px));
+  overflow-y: auto;
+  padding: clamp(12px, 3vw, 20px);
+  padding-bottom: clamp(20px, 5vh, 60px);
+  box-sizing: border-box;
+}
+
+.content-wrapper {
+  max-width: 1553px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  /* 內縮統一設定，會隨裝置縮放 */
+  padding-left: clamp(20px, 8vw, 140px);
+  padding-right: clamp(20px, 8vw, 140px);
+}
+
+/* 標題字體自適應 */
+.card-section-title {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 600;
+  /* 內縮統一設定，會隨裝置縮放 */
+  padding-left: clamp(20px, 8vw, 140px);
+  padding-right: clamp(20px, 8vw, 140px);
+  font-size: clamp(24px, 2vw, 30px); /* 桌面基準 */
+  margin: 0 0 16px 0;
+}
+
+/* 圖片外框，自適應圖片大小 */
+.card-placeholder {
+  width: 100%;
+  max-width: 550px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px auto;
+  border: 7px solid #ffc081;
+  border-radius: 30px;
+  background-color: rgba(255, 247, 171, 0.5);
+  overflow: hidden;
+}
+
+/* 圖片自適應外框 */
+.card-placeholder img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: inherit;
+}
+
+/* 文字描述自適應 */
+.content-description {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  /* 內縮統一設定，會隨裝置縮放 */
+  padding-left: clamp(20px, 8vw, 140px);
+  padding-right: clamp(20px, 8vw, 140px);
+  font-size: clamp(16px, 1.5vw, 20px);
+  line-height: 1.5;
+  margin-bottom: 80px;
+}
+
+/* ===== 響應式調整 ===== */
+
+/* 平板橫向 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .content-wrapper,
+  .card-section-title,
+  .content-description {
+    padding-left: clamp(20px, 6vw, 100px);
+    padding-right: clamp(20px, 6vw, 100px);
+  }
+  .card-section-title {
+    font-size: clamp(26px, 3vw, 32px);
+  }
+  .card-placeholder {
+    max-width: 500px;
+  }
+  .content-description {
+    font-size: clamp(16px, 2vw, 20px);
+  }
+}
+
+/* 平板直向 */
+@media (max-width: 768px) {
+  .content-wrapper,
+  .card-section-title,
+  .content-description {
+    padding-left: clamp(16px, 5vw, 80px);
+    padding-right: clamp(16px, 5vw, 80px);
+  }
+  .card-section-title {
+    font-size: clamp(24px, 3vw, 28px);
+  }
+  .card-placeholder {
+    max-width: 400px;
+  }
+  .content-description {
+    font-size: clamp(14px, 2.5vw, 18px);
+  }
+}
+
+/* 手機 */
+@media (max-width: 480px) {
+  .content-wrapper,
+  .card-section-title,
+  .content-description {
+    padding-left: clamp(12px, 4vw, 40px);
+    padding-right: clamp(12px, 4vw, 40px);
+  }
+  .card-section-title {
+    font-size: clamp(20px, 4vw, 24px);
+  }
+  .card-placeholder {
+    max-width: 250px;
+  }
+  .content-description {
+    font-size: clamp(12px, 3vw, 16px);
+  }
+}
