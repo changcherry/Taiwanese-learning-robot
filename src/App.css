@@ -9,8 +9,6 @@
   --bg-max-width: 1920px;
   --bg-max-height: 1080px;
   --heard-height: 10vh;
-   --bubble-bg-1: #cceeff; /* 淺藍色 */
-  --bubble-bg-2: #ccffcc; /* 淺綠色 */
 }
 
 /* 假設 body 和其他通用樣式不變 */

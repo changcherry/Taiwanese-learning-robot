@@ -7,6 +7,8 @@ import LearningMode from './view/LearningMode';
 import GameQuestion from "./view/GameQuestion";
 import GameMain from "./view/GameMain";
 import GameSelection2 from "./view/GameSelection2";
+import Monopoly from "./view/Monopoly";
+import ScoreSummary from "./view/ScoreSummary";
 
 //小琳區
 import StoryModePage from "./view/StoryModePage";
@@ -101,7 +103,8 @@ export default function App() {
           <Route path="/ScoreDisplay" element={<ScoreDisplay score={0} totalQuestions={10} onRestartGame={function (): void {
             throw new Error("Function not implemented.");
           }} />} />
-
+          <Route path="/Monopoly" element={<Monopoly />} />
+          <Route path="/score-summary" element={<ScoreSummary />} />
           {/* 新增收藏頁面路由 */}
 
           <Route path="/favorites" element={<FavoriteCollectionPage />} />
