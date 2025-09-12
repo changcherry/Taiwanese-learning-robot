@@ -104,7 +104,7 @@ export default function App() {
             throw new Error("Function not implemented.");
           }} />} />
           <Route path="/Monopoly" element={<Monopoly />} />
-          <Route path="/score-summary" element={<ScoreSummary />} />
+          <Route path="/ScoreSummary" element={<ScoreSummary />} />
           {/* 新增收藏頁面路由 */}
 
           <Route path="/favorites" element={<FavoriteCollectionPage />} />

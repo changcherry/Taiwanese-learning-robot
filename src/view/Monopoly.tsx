@@ -105,14 +105,18 @@ const Monopoly: React.FC = () => {
   const [showThemeSelection, setShowThemeSelection] = useState(true);
   const [selectedTheme, setSelectedTheme] = useState<string | null>(null);
   
-  // 火車挑戰狀態
-  const [canUseShortcut, setCanUseShortcut] = useState<boolean>(false);
-  const [nextMoveToShortcut, setNextMoveToShortcut] = useState<boolean>(false);
+  // 火車挑戰狀態 - 改為按玩家記錄
+  const [playerShortcutPrivileges, setPlayerShortcutPrivileges] = useState<{[playerId: number]: {canUseShortcut: boolean, nextMoveToShortcut: boolean}}>({});
   
   // 暫停狀態
   const [playerSkipped, setPlayerSkipped] = useState<boolean>(false);
   // 道路施工專用暫停狀態
   const [roadConstructionSkip, setRoadConstructionSkip] = useState<{[playerId: number]: boolean}>({});
+  // 暫停提示視窗狀態
+  const [showSkipAlert, setShowSkipAlert] = useState(false);
+  const [skipAlertMessage, setSkipAlertMessage] = useState('');
+  // 追蹤玩家是否已經開始遊戲（用於判斷是否為第一次起點）
+  const [playerGameStarted, setPlayerGameStarted] = useState<{[playerId: number]: boolean}>({});
 
   // 單字卡片數據庫 - 交通工具
   const wordCards = [
@@ -245,7 +249,7 @@ const Monopoly: React.FC = () => {
       { id: 27, name: "道路施工", type: "special", description: "道路施工，暫時停用", 
         challenge: { type: "action", title: "道路施工", content: "道路施工，停一回合", reward: "停一回合" }},
       
-      // 頂部 (水平向右) - 位置 28-35
+      // 頂部 (水平向右) - 位置 28-36
       { id: 28, name: "椰林大道", type: "property", description: "椰林地產" },
       { id: 29, name: "六合街", type: "property", description: "六合地產" },
       { id: 30, name: "挑戰", type: "challenge", description: "情境挑戰", 
@@ -256,10 +260,9 @@ const Monopoly: React.FC = () => {
       { id: 34, name: "機會卡", type: "chance", description: "機會卡", 
         chance: { type: "positive", title: "機會卡", content: "獲得意外獎勵", effect: "+150分" }},
       { id: 35, name: "成功街", type: "property", description: "成功地產" },
+    
       
-      // 內圈捷徑 - 位置 36-41
-      { id: 36, name: "幸福大道", type: "shortcut", description: "捷徑入口", 
-        shortcut: { target: 37, description: "跳轉到來學單字" }},
+      // 內圈捷徑 - 位置 37-42
       { id: 37, name: "來學單字", type: "challenge", description: "單字學習挑戰", 
         challenge: { type: "vocabulary", title: "單字挑戰", content: "學習新的台語單字", reward: "抽取單字卡片" }},
         { id: 38, name: "建國路", type: "property", description: "建國地產" },
@@ -267,6 +270,7 @@ const Monopoly: React.FC = () => {
           challenge: { type: "action", title: "捷徑挑戰", content: "完成挑戰可以繼續", reward: "繼續前進" }},
           { id: 40, name: "中央商圈", type: "property", description: "中央地產" },
           { id: 41, name: "新生街", type: "property", description: "新生地產" },
+          { id: 42, name: "幸福大道", type: "property", description: "幸福地產" },
        ];
 
     // 遊戲歷程狀態
@@ -426,22 +430,91 @@ const Monopoly: React.FC = () => {
     );
 
     // 檢查是否應該使用捷徑路線（火車挑戰成功後）
-    if (nextMoveToShortcut) {
-      setNextMoveToShortcut(false); // 重置狀態
+    const currentPlayerShortcut = playerShortcutPrivileges[currentPlayer.id];
+    if (currentPlayerShortcut?.nextMoveToShortcut) {
+      // 不立即重置 nextMoveToShortcut，讓玩家走完捷徑路線
       
-      // 按照骰子數字移動，但使用內圈捷徑路線 (36-41)
+      // 按照骰子數字移動，但使用內圈捷徑路線 (37-42)
       let newLocation;
-      if (currentPlayer.location >= 36 && currentPlayer.location <= 41) {
+      if (currentPlayer.location >= 37 && currentPlayer.location <= 42) {
         // 已經在內圈，按照內圈路線移動
-        newLocation = 36 + ((currentPlayer.location - 36 + value) % 6);
-        if (newLocation > 41) {
-          newLocation = 36 + (newLocation - 41 - 1);
+        newLocation = currentPlayer.location + value;
+        // 如果超過 id42，則回到外圈並清除捷徑特權
+        if (newLocation > 42) {
+          newLocation = 0; // 回到起點
+          
+          // 檢查是否通過起點（捷徑路線）
+          const hasPlayerStarted = playerGameStarted[currentPlayer.id] || false;
+          if (hasPlayerStarted) {
+            // 通過起點，增加回合數
+            const newRoundNumber = currentPlayer.round + 1;
+            recordGameAction(
+              currentPlayer.id,
+              currentPlayer.name,
+              'move',
+              `${currentPlayer.name} 通過捷徑回到起點，完成第${newRoundNumber}回合`,
+              { passedStart: true, newRound: true, roundNumber: newRoundNumber, usedShortcut: true }
+            );
+            
+            // 顯示回合完成慶祝訊息
+            setRoundCompleteMessage(`${currentPlayer.name} 完成第 ${newRoundNumber} 回合！🎉`);
+            setShowRoundComplete(true);
+            
+            // 3秒後自動隱藏慶祝訊息
+            setTimeout(() => {
+              setShowRoundComplete(false);
+            }, 3000);
+          }
+          
+          // 清除捷徑特權
+          setPlayerShortcutPrivileges(prev => ({
+            ...prev,
+            [currentPlayer.id]: {
+              ...prev[currentPlayer.id],
+              nextMoveToShortcut: false,
+              canUseShortcut: false // 走完捷徑後清除所有特權
+            }
+          }));
         }
       } else {
-        // 從外圈進入內圈，從位置36開始移動骰子數字
-        newLocation = 36 + ((value - 1) % 6);
-        if (newLocation > 41) {
-          newLocation = 36 + (newLocation - 41 - 1);
+        // 從外圈進入內圈，從位置37開始移動骰子數字
+        newLocation = 37 + value;
+        // 如果超過 id42，則回到外圈並清除捷徑特權
+        if (newLocation > 42) {
+          newLocation = 0; // 回到起點
+          
+          // 檢查是否通過起點（捷徑路線）
+          const hasPlayerStarted = playerGameStarted[currentPlayer.id] || false;
+          if (hasPlayerStarted) {
+            // 通過起點，增加回合數
+            const newRoundNumber = currentPlayer.round + 1;
+            recordGameAction(
+              currentPlayer.id,
+              currentPlayer.name,
+              'move',
+              `${currentPlayer.name} 通過捷徑回到起點，完成第${newRoundNumber}回合`,
+              { passedStart: true, newRound: true, roundNumber: newRoundNumber, usedShortcut: true }
+            );
+            
+            // 顯示回合完成慶祝訊息
+            setRoundCompleteMessage(`${currentPlayer.name} 完成第 ${newRoundNumber} 回合！🎉`);
+            setShowRoundComplete(true);
+            
+            // 3秒後自動隱藏慶祝訊息
+            setTimeout(() => {
+              setShowRoundComplete(false);
+            }, 3000);
+          }
+          
+          // 清除捷徑特權
+          setPlayerShortcutPrivileges(prev => ({
+            ...prev,
+            [currentPlayer.id]: {
+              ...prev[currentPlayer.id],
+              nextMoveToShortcut: false,
+              canUseShortcut: false // 走完捷徑後清除所有特權
+            }
+          }));
         }
       }
       
@@ -449,8 +522,10 @@ const Monopoly: React.FC = () => {
         currentPlayer.id,
         currentPlayer.name,
         'shortcut',
-        `${currentPlayer.name} 擲出 ${value} 點，使用火車挑戰成功的權利，在捷徑路線移動到位置 ${newLocation}`,
-        { diceValue: value, from: currentPlayer.location, to: newLocation, usedTrainShortcut: true }
+        newLocation === 0 ? 
+          `${currentPlayer.name} 擲出 ${value} 點，完成火車捷徑路線，回到起點` :
+          `${currentPlayer.name} 擲出 ${value} 點，使用火車挑戰成功的權利，在捷徑路線移動到位置 ${newLocation}`,
+        { diceValue: value, from: currentPlayer.location, to: newLocation, usedTrainShortcut: true, shortcutCompleted: newLocation === 0 }
       );
 
       // 獲取新位置的屬性
@@ -471,10 +546,22 @@ const Monopoly: React.FC = () => {
       );
 
       // 添加玩家記錄
-      addPlayerRecord(currentPlayer.id, newLocation, newProperty.name, '移動到', `擲出${value}點，使用火車捷徑路線`);
+      addPlayerRecord(
+        currentPlayer.id, 
+        newLocation, 
+        newProperty.name, 
+        '移動到', 
+        newLocation === 0 ? 
+          `擲出${value}點，完成火車捷徑路線` : 
+          `擲出${value}點，使用火車捷徑路線`
+      );
 
         // 根據格子類型顯示不同的視窗
-        if (newProperty.type === 'challenge') {
+        if (newProperty.type === 'property') {
+          // 地產格子顯示優惠券視窗
+          setCouponType('property');
+          setShowCouponPanel(true);
+        } else if (newProperty.type === 'challenge') {
           // 檢查是否為"來學單字"格子
           if (newProperty.challenge?.type === 'vocabulary') {
             // 來學單字格子觸發單字卡片
@@ -485,7 +572,9 @@ const Monopoly: React.FC = () => {
               // 根據遊戲主題過濾單字卡片
               const filteredCards = gameTheme === 'traffic' 
                 ? wordCards.filter(card => card.category === '交通工具') // 交通王主題使用交通工具卡片
-                : wordCards.filter(card => card.category === '交通工具'); // 植物主題也使用交通工具卡片（暫時）
+                : gameTheme === 'plant' 
+                ? wordCards.filter(card => card.category === '植物') // 植物主題使用植物卡片
+                : wordCards.filter(card => card.category === '交通工具'); // 預設使用交通工具卡片
               
               const randomIndex = Math.floor(Math.random() * filteredCards.length);
               const selectedCard = filteredCards[randomIndex];
@@ -519,19 +608,20 @@ const Monopoly: React.FC = () => {
     }
 
     // 計算新位置
-    let newLocation = (currentPlayer.location + value) % 36; // 36個外圈位置
+    let newLocation = (currentPlayer.location + value) % 37; // 37個外圈位置 (0-36)
     
     // 檢查是否進入內圈捷徑 - 只有通過火車挑戰的玩家才能使用捷徑
-    if (newLocation === 33 && canUseShortcut) { // 飛機場路 - 需要捷徑權限
-      newLocation = 36; // 進入內圈
+    const currentPlayerCanUseShortcut = playerShortcutPrivileges[currentPlayer.id]?.canUseShortcut || false;
+    if (newLocation === 33 && currentPlayerCanUseShortcut) { // 飛機場路 - 需要捷徑權限
+      newLocation = 37; // 進入內圈
       recordGameAction(
         currentPlayer.id,
         currentPlayer.name,
         'shortcut',
-        `${currentPlayer.name} 使用火車捷徑進入：新生街`,
-        { from: 33, to: 36, usedTrainShortcut: true }
+        `${currentPlayer.name} 使用火車捷徑進入：來學單字`,
+        { from: 33, to: 37, usedTrainShortcut: true }
       );
-    } else if (newLocation === 33 && !canUseShortcut) {
+    } else if (newLocation === 33 && !currentPlayerCanUseShortcut) {
       // 沒有捷徑權限，記錄原因
       recordGameAction(
         currentPlayer.id,
@@ -542,12 +632,36 @@ const Monopoly: React.FC = () => {
       );
     }
 
-    // 檢查是否通過起點 - 從id41或35經過起點才算通過
+    // 檢查是否通過起點 - 從id35或id42經過起點才算通過，但第一次起點不算
     let passedStart = false;
+    const hasPlayerStarted = playerGameStarted[currentPlayer.id] || false;
+    
     if ((currentPlayer.location === 35 && value >= 1) || 
-        (currentPlayer.location === 41 && value >= 1) ||
-        (currentPlayer.location + value >= 36 && currentPlayer.location < 36)) {
-      passedStart = true;
+        (currentPlayer.location === 42 && value >= 1) ||
+        (currentPlayer.location + value >= 37 && currentPlayer.location < 37)) {
+      
+      // 如果玩家已經開始過遊戲，則算作通過起點
+      if (hasPlayerStarted) {
+        passedStart = true;
+      } else {
+        // 第一次經過起點，標記為已開始遊戲
+        setPlayerGameStarted(prev => ({
+          ...prev,
+          [currentPlayer.id]: true
+        }));
+        
+        // 記錄第一次經過起點
+        recordGameAction(
+          currentPlayer.id,
+          currentPlayer.name,
+          'move',
+          `${currentPlayer.name} 第一次經過起點，遊戲開始`,
+          { firstTimePassStart: true }
+        );
+      }
+    }
+    
+    if (passedStart) {
       const newRoundNumber = currentPlayer.round + 1;
       recordGameAction(
         currentPlayer.id,
@@ -633,7 +747,9 @@ const Monopoly: React.FC = () => {
             // 根據遊戲主題過濾單字卡片
             const filteredCards = gameTheme === 'traffic' 
               ? wordCards.filter(card => card.category === '交通工具') // 交通王主題使用交通工具卡片
-              : wordCards.filter(card => card.category === '交通工具'); // 植物主題也使用交通工具卡片（暫時）
+              : gameTheme === 'plant' 
+              ? wordCards.filter(card => card.category === '植物') // 植物主題使用植物卡片
+              : wordCards.filter(card => card.category === '交通工具'); // 預設使用交通工具卡片
             
             const randomIndex = Math.floor(Math.random() * filteredCards.length);
             const selectedCard = filteredCards[randomIndex];
@@ -697,6 +813,10 @@ const Monopoly: React.FC = () => {
       // 檢查下一個玩家是否有道路施工暫停狀態
       const nextPlayer = prevPlayers[nextIndex];
       if (nextPlayer && roadConstructionSkip[nextPlayer.id]) {
+        // 顯示暫停提示視窗
+        setSkipAlertMessage(`${nextPlayer.name} 因道路施工暫停一回合，換下一位玩家`);
+        setShowSkipAlert(true);
+        
         // 記錄跳過動作
         recordGameAction(
           nextPlayer.id,
@@ -806,15 +926,18 @@ const Monopoly: React.FC = () => {
       
       // 檢查是否為火車挑戰
       if (currentChallenge?.type === 'train') {
-        setCanUseShortcut(isCorrect);
-        
-        // 如果挑戰成功，設置下一次移動到捷徑
-        if (isCorrect) {
-          setNextMoveToShortcut(true);
+        const currentPlayer = players.find(p => p.isCurrentPlayer);
+        if (currentPlayer) {
+          setPlayerShortcutPrivileges(prev => ({
+            ...prev,
+            [currentPlayer.id]: {
+              canUseShortcut: isCorrect,
+              nextMoveToShortcut: isCorrect // 如果挑戰成功，設置下一次移動到捷徑
+            }
+          }));
         }
         
         // 記錄火車挑戰結果
-        const currentPlayer = players.find(p => p.isCurrentPlayer);
         if (currentPlayer) {
           recordGameAction(
             currentPlayer.id,
@@ -870,7 +993,7 @@ const Monopoly: React.FC = () => {
     setShowChallengePanel(false);
     setCurrentChallenge(null);
     
-    // 注意：不重置 canUseShortcut 和 nextMoveToShortcut，因為這些是挑戰結果
+    // 注意：不重置 playerShortcutPrivileges，因為這些是挑戰結果，按玩家記錄
     
     // 如果是火車挑戰，完成後自動切換到下一位玩家
     if (wasTrainChallenge) {
@@ -915,6 +1038,8 @@ const Monopoly: React.FC = () => {
         // 根據優惠券類型顯示不同的獎勵/懲罰消息
         if (couponType === 'road_construction') {
           reward = isCorrect ? '免於暫停一回合' : '暫停一回合';
+        } else if (couponType === 'gas_station') {
+          reward = isCorrect ? '免費加油一次' : '挑戰失敗請支付一百元';
         } else {
           reward = isCorrect ? '房地產減免100元' : '請付原價';
         }
@@ -980,7 +1105,9 @@ const Monopoly: React.FC = () => {
       // 根據遊戲主題過濾單字卡片
       const filteredCards = gameTheme === 'traffic' 
         ? wordCards.filter(card => card.category === '交通工具') // 交通王主題使用交通工具卡片
-        : wordCards.filter(card => card.category === '交通工具'); // 植物主題也使用交通工具卡片（暫時）
+        : gameTheme === 'plant' 
+        ? wordCards.filter(card => card.category === '植物') // 植物主題使用植物卡片
+        : wordCards.filter(card => card.category === '交通工具'); // 預設使用交通工具卡片
       
       const randomIndex = Math.floor(Math.random() * filteredCards.length);
       const selectedCard = filteredCards[randomIndex];
@@ -1023,14 +1150,14 @@ const Monopoly: React.FC = () => {
                 className={`theme-option-btn ${selectedTheme === 'traffic' ? 'selected' : ''}`}
                 onClick={() => setSelectedTheme('traffic')}
               >
-                <img src="/src/assets/誰是交通王.png" alt="誰是交通王" />
+                <img src="../src/assets/誰是交通王.png" alt="誰是交通王" />
                 <span>誰是交通王</span>
               </button>
               <button 
                 className={`theme-option-btn ${selectedTheme === 'plant' ? 'selected' : ''}`}
                 onClick={() => setSelectedTheme('plant')}
               >
-                <img src="/src/assets/植物百寶袋.png" alt="植物大冒險" />
+                <img src="../src/assets/植物百寶袋.png" alt="植物大冒險" />
                 <span>植物大冒險</span>
               </button>
             </div>
@@ -1138,7 +1265,9 @@ const Monopoly: React.FC = () => {
               </div>
               <div className="detail-row">
                 <span className="detail-label">狀態:</span>
-                <div className="detail-value">{currentPlayer.status}</div>
+                <div className="detail-value">
+                  {roadConstructionSkip[currentPlayer.id] ? '暫停一回合' : currentPlayer.status}
+                </div>
               </div>
               <div className="detail-row">
                 <span className="detail-label">位置:</span>
@@ -1147,7 +1276,7 @@ const Monopoly: React.FC = () => {
               <div className="detail-row">
                 <span className="detail-label">捷徑:</span>
                 <div className="detail-value">
-                  {((currentPlayer.location >= 36 && currentPlayer.location <= 41) || nextMoveToShortcut) ? '🚂可' : '🚂否'}
+                  {((currentPlayer.location >= 37 && currentPlayer.location <= 42) || playerShortcutPrivileges[currentPlayer.id]?.nextMoveToShortcut) ? '🚂可' : '🚂否'}
                 </div>
               </div>
              
@@ -1290,6 +1419,8 @@ const Monopoly: React.FC = () => {
                   <div className={`reward-bubble ${couponChallengeResult}`}>
                     {couponType === 'road_construction' ? (
                       couponChallengeResult === 'success' ? '✅ 免於暫停一回合' : '⏸️ 暫停一回合'
+                    ) : couponType === 'gas_station' ? (
+                      couponChallengeResult === 'success' ? '⛽ 免費加油一次' : '💰 挑戰失敗請支付一百元'
                     ) : (
                       couponChallengeResult === 'success' ? '🏠 房地產減免100元' : '💰 挑戰失敗請付原價'
                     )}
@@ -1431,7 +1562,7 @@ const Monopoly: React.FC = () => {
               className="close-button"
               onClick={() => {
                 setShowGameOver(false);
-                navigate('/score-summary', { 
+                navigate('/Scoresummary', { 
                   state: { players: players } 
                 });
               }}
@@ -1633,7 +1764,7 @@ const Monopoly: React.FC = () => {
                             currentPlayer.id,
                             currentPlayer.name,
                             'move',
-                            `${currentPlayer.name} 在道路施工選擇不使用優惠券，下一次輪到時暫停一次`,
+                            `${currentPlayer.name} 在道路施工選擇不使用優惠券，下一次輪到時暫停一回合`,
                             { location: currentPlayer.location, skipped: true, couponType, roadConstructionSkip: true }
                           );
                         } else {
@@ -1656,6 +1787,20 @@ const Monopoly: React.FC = () => {
                 </>
               )}
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* 暫停提示視窗 */}
+      {showSkipAlert && (
+        <div className="skip-alert-overlay">
+          <div className="skip-alert-content">
+            <div className="skip-icon">⏸️</div>
+            <h2 className="skip-title">暫停提示</h2>
+            <p className="skip-message">{skipAlertMessage}</p>
+            <button className="skip-close-button" onClick={() => setShowSkipAlert(false)}>
+              了解
+            </button>
           </div>
         </div>
       )}

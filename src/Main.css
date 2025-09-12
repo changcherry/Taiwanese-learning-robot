@@ -31,3 +31,22 @@ html {
   background: #ffedcd;
   /* 可以考慮換成更柔和的淺黃色或淺米色 */
 }
+
+/* 響應式設計 */
+@media (max-width: 1024px) {
+  :root {
+    font-size: 0.9vw;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    font-size: 1vw;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    font-size: 1.2vw;
+  }
+}

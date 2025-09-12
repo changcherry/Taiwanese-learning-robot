@@ -150,3 +150,22 @@ html {
   align-items: center;
   overflow-x: hidden;
 }
+
+/* 響應式設計 */
+@media (max-width: 1024px) {
+  .game-selection-main {
+    padding-top: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .game-selection-main {
+    padding-top: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-selection-main {
+    padding-top: 40px;
+  }
+}
