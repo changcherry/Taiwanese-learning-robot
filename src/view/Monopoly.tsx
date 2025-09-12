@@ -663,6 +663,16 @@ const Monopoly: React.FC = () => {
     
     if (passedStart) {
       const newRoundNumber = currentPlayer.round + 1;
+      
+      // 更新玩家的回合數
+      setPlayers(prevPlayers => 
+        prevPlayers.map(player => 
+          player.id === currentPlayer.id 
+            ? { ...player, round: newRoundNumber }
+            : player
+        )
+      );
+      
       recordGameAction(
         currentPlayer.id,
         currentPlayer.name,
