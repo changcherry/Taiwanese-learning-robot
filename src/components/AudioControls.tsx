@@ -37,20 +37,6 @@ const AudioControls: React.FC<AudioControlsProps> = ({ className = '' }) => {
       >
         {isEnabled ? '🔊' : '🔇'}
       </button>
-      
-      <div className="volume-control">
-        <input
-          type="range"
-          min="0"
-          max="1"
-          step="0.1"
-          value={volume}
-          onChange={handleVolumeChange}
-          className="volume-slider"
-          disabled={!isEnabled}
-        />
-        <span className="volume-text">{Math.round(volume * 100)}%</span>
-      </div>
     </div>
   );
 };

@@ -23,6 +23,8 @@ interface Player {
   record: string;
   records: PlayerRecord[];
   isCurrentPlayer: boolean;
+  score: number;
+  diceSum: number;
 }
 
 const ScoreSummary: React.FC = () => {
@@ -37,7 +39,12 @@ const ScoreSummary: React.FC = () => {
       if (a.status === '破產' && b.status !== '破產') return 1;
       if (b.status === '破產' && a.status !== '破產') return -1;
       
-      // 非破產玩家按照成功挑戰數量排序
+      // 非破產玩家按照骰子點數加總排序（點數越高排名越前面）
+      if (a.diceSum !== b.diceSum) {
+        return b.diceSum - a.diceSum;
+      }
+      
+      // 如果骰子點數相同，按照成功挑戰數量排序
       const aSuccessCount = a.records.filter((r: PlayerRecord) => r.details?.includes('成功')).length;
       const bSuccessCount = b.records.filter((r: PlayerRecord) => r.details?.includes('成功')).length;
       
@@ -45,7 +52,7 @@ const ScoreSummary: React.FC = () => {
         return bSuccessCount - aSuccessCount;
       }
       
-      // 如果成功挑戰數量相同，按照記錄數量排序
+      // 如果成功挑戰數量也相同，按照記錄數量排序
       return b.records.length - a.records.length;
     });
   };

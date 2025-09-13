@@ -28,6 +28,8 @@ interface Player {
   record: string; // 保留用於顯示最新記錄
   records: PlayerRecord[]; // 詳細記錄數組
   isCurrentPlayer: boolean;
+  score: number; // 玩家分數
+  diceSum: number; // 骰子點數加總
 }
 
 interface Property {
@@ -62,7 +64,7 @@ interface GameAction {
   timestamp: Date;
   playerId: number;
   playerName: string;
-  actionType: 'dice_roll' | 'move' | 'challenge' | 'bankruptcy' | 'shortcut';
+  actionType: 'dice_roll' | 'move' | 'challenge' | 'bankruptcy' | 'shortcut' | 'victory';
   description: string;
   details?: any;
 }
@@ -81,6 +83,7 @@ const Monopoly: React.FC = () => {
     // 音效管理器
     const audioManager = AudioManager.getInstance();
     const [showGameOver, setShowGameOver] = useState(false);
+    const [winner, setWinner] = useState<Player | null>(null);
     const [showGameHistory, setShowGameHistory] = useState(false);
     const [showLocationDetail, setShowLocationDetail] = useState(false);
     const [currentLocationDetail, setCurrentLocationDetail] = useState<Property | null>(null);
@@ -308,6 +311,8 @@ const Monopoly: React.FC = () => {
         details: '準備開始遊戲'
       }],
       isCurrentPlayer: true,
+      score: 0,
+      diceSum: 0,
     },
     {
       id: 2,
@@ -328,6 +333,8 @@ const Monopoly: React.FC = () => {
         details: '準備開始遊戲'
       }],
       isCurrentPlayer: false,
+      score: 0,
+      diceSum: 0,
     },
     {
       id: 3,
@@ -348,6 +355,8 @@ const Monopoly: React.FC = () => {
         details: '準備開始遊戲'
       }],
       isCurrentPlayer: false,
+      score: 0,
+      diceSum: 0,
     },
     {
       id: 4,
@@ -368,6 +377,8 @@ const Monopoly: React.FC = () => {
         details: '準備開始遊戲'
       }],
       isCurrentPlayer: false,
+      score: 0,
+      diceSum: 0,
     }
   ]);
 
@@ -425,6 +436,15 @@ const Monopoly: React.FC = () => {
   // 處理骰子點擊 - 玩家實體擲骰子後點擊對應數字
   const handleDiceClick = (value: number) => {
     if (!currentPlayer) return;
+
+    // 累計骰子點數
+    setPlayers(prevPlayers => 
+      prevPlayers.map(player => 
+        player.id === currentPlayer.id 
+          ? { ...player, diceSum: player.diceSum + value }
+          : player
+      )
+    );
 
     // 播放骰子音效
     audioManager.play(AudioType.THEME_SELECTION, 0.2); // 使用按鈕音效作為骰子音效
@@ -674,19 +694,42 @@ const Monopoly: React.FC = () => {
       const newRoundNumber = currentPlayer.round + 1;
       
       // 更新玩家的回合數
-      setPlayers(prevPlayers => 
-        prevPlayers.map(player => 
+      setPlayers(prevPlayers => {
+        const updatedPlayers = prevPlayers.map(player => 
           player.id === currentPlayer.id 
             ? { ...player, round: newRoundNumber }
             : player
-        )
-      );
+        );
+        
+        // 檢查是否有玩家達到3回合（獲勝條件）
+        const winningPlayer = updatedPlayers.find(player => player.round >= 3);
+        if (winningPlayer) {
+          // 設置獲勝者
+          setWinner(winningPlayer);
+          
+          // 記錄獲勝
+          recordGameAction(
+            winningPlayer.id,
+            winningPlayer.name,
+            'victory',
+            `${winningPlayer.name} 完成第3回合，獲得勝利！`,
+            { winner: true, finalRound: winningPlayer.round }
+          );
+          
+          // 顯示遊戲結束畫面
+          setTimeout(() => {
+            setShowGameOver(true);
+          }, 1000); // 延遲1秒顯示，讓慶祝訊息先顯示
+        }
+        
+        return updatedPlayers;
+      });
       
       recordGameAction(
         currentPlayer.id,
         currentPlayer.name,
         'move',
-        `${currentPlayer.name} 通過起點，完成第${newRoundNumber}回合，獲得獎勵`,
+        `${currentPlayer.name} 通過起點，完成第${newRoundNumber}回合`,
         { passedStart: true, newRound: true, roundNumber: newRoundNumber }
       );
       
@@ -896,6 +939,8 @@ const Monopoly: React.FC = () => {
       // 切換到下一玩家
       switchToNextPlayer();
     }
+    // 破產時不設置獲勝者，直接顯示遊戲結束
+    setWinner(null);
     setShowGameOver(true);
   };
 
@@ -1246,7 +1291,7 @@ const Monopoly: React.FC = () => {
         </div>
         <div className="room-info">
           {/* 音效控制組件 */}
-          <AudioControls className="inline" />
+          <AudioControls />
           <button 
             className="history-button"
             onClick={() => {
@@ -1625,7 +1670,14 @@ const Monopoly: React.FC = () => {
       {showGameOver && (
         <div className="game-over-overlay">
           <div className="game-over-content">
-            <h2 className="game-over-title">遊戲結束</h2>
+            <h2 className="game-over-title">
+              {winner ? `${winner.name} 獲勝！` : '遊戲結束'}
+            </h2>
+            {winner && (
+              <p className="winner-message">
+                {winner.name} 完成了第 {winner.round} 回合，恭喜獲勝！🎉
+              </p>
+            )}
             <button 
               className="close-button"
               onClick={() => {
@@ -1902,6 +1954,7 @@ const Monopoly: React.FC = () => {
             <div className="celebration-icon">🎉</div>
             <h2 className="celebration-title">回合完成！</h2>
             <p className="celebration-message">{roundCompleteMessage}</p>
+            <p className="celebration-title">獎勵500元</p>
             <div className="celebration-effects">
               <div className="confetti"></div>
               <div className="confetti"></div>
