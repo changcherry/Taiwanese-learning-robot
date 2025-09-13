@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import '../style/Monopoly.css';
 import "../App.css";
 import BackIcon from "../assets/Back.svg";
+import { AudioManager, AudioType } from '../config/audioConfig';
+import AudioControls from '../components/AudioControls';
+import '../style/AudioControls.css';
 
 interface PlayerRecord {
   id: number;
@@ -74,6 +77,9 @@ interface GameHistory {
 
 const Monopoly: React.FC = () => {
     const navigate = useNavigate();
+    
+    // 音效管理器
+    const audioManager = AudioManager.getInstance();
     const [showGameOver, setShowGameOver] = useState(false);
     const [showGameHistory, setShowGameHistory] = useState(false);
     const [showLocationDetail, setShowLocationDetail] = useState(false);
@@ -419,6 +425,9 @@ const Monopoly: React.FC = () => {
   // 處理骰子點擊 - 玩家實體擲骰子後點擊對應數字
   const handleDiceClick = (value: number) => {
     if (!currentPlayer) return;
+
+    // 播放骰子音效
+    audioManager.play(AudioType.THEME_SELECTION, 0.2); // 使用按鈕音效作為骰子音效
 
     // 記錄擲骰子動作
     recordGameAction(
@@ -868,6 +877,8 @@ const Monopoly: React.FC = () => {
   // 處理破產
   const handleBankruptcy = () => {
     if (currentPlayer) {
+      // 播放遊戲結束音效
+      audioManager.play(AudioType.VIEW_SCORE, 0.7);
       recordGameAction(
         currentPlayer.id,
         currentPlayer.name,
@@ -910,6 +921,9 @@ const Monopoly: React.FC = () => {
   const handleChallengeTypeSelect = () => {
     if (!gameTheme) return;
     
+    // 播放開始挑戰音效
+    audioManager.play(AudioType.START_CHALLENGE, 0.6);
+    
     setSelectedChallengeType(gameTheme);
     setChallengeResult(null);
     setPlayerAnswer('');
@@ -933,6 +947,13 @@ const Monopoly: React.FC = () => {
       );
       
       setChallengeResult(isCorrect ? 'success' : 'failure');
+      
+      // 播放挑戰結果音效
+      if (isCorrect) {
+        audioManager.play(AudioType.CORRECT_ANSWER, 0.6);
+      } else {
+        audioManager.play(AudioType.WRONG_ANSWER, 0.6);
+      }
       
       // 檢查是否為火車挑戰
       if (currentChallenge?.type === 'train') {
@@ -1015,6 +1036,9 @@ const Monopoly: React.FC = () => {
   const handleCouponChallengeTypeSelect = () => {
     if (!gameTheme) return;
     
+    // 播放開始挑戰音效
+    audioManager.play(AudioType.START_CHALLENGE, 0.6);
+    
     setSelectedCouponChallengeType(gameTheme);
     setCouponChallengeResult(null);
     setCouponPlayerAnswer('');
@@ -1038,6 +1062,13 @@ const Monopoly: React.FC = () => {
       );
       
       setCouponChallengeResult(isCorrect ? 'success' : 'failure');
+      
+      // 播放挑戰結果音效
+      if (isCorrect) {
+        audioManager.play(AudioType.CORRECT_ANSWER, 0.6);
+      } else {
+        audioManager.play(AudioType.WRONG_ANSWER, 0.6);
+      }
       
       // 記錄遊戲動作
       const currentPlayer = players.find(p => p.isCurrentPlayer);
@@ -1158,17 +1189,23 @@ const Monopoly: React.FC = () => {
             <div className="theme-options">
               <button 
                 className={`theme-option-btn ${selectedTheme === 'traffic' ? 'selected' : ''}`}
-                onClick={() => setSelectedTheme('traffic')}
+                onClick={() => {
+                  setSelectedTheme('traffic');
+                  audioManager.play(AudioType.THEME_SELECTION, 0.3);
+                }}
               >
                 <img src="../src/assets/誰是交通王.png" alt="誰是交通王" />
                 <span>誰是交通王</span>
               </button>
               <button 
                 className={`theme-option-btn ${selectedTheme === 'plant' ? 'selected' : ''}`}
-                onClick={() => setSelectedTheme('plant')}
+                onClick={() => {
+                  setSelectedTheme('plant');
+                  audioManager.play(AudioType.THEME_SELECTION, 0.3);
+                }}
               >
-                <img src="../src/assets/植物百寶袋.png" alt="植物大冒險" />
-                <span>植物大冒險</span>
+                <img src="../src/assets/植物百寶袋.png" alt="職涯大冒險" />
+                <span>職涯大冒險</span>
               </button>
             </div>
             
@@ -1178,6 +1215,7 @@ const Monopoly: React.FC = () => {
                 if (selectedTheme) {
                   setGameTheme(selectedTheme);
                   setShowThemeSelection(false);
+                  audioManager.play(AudioType.GAME_START, 0.5);
                 }
               }}
               disabled={!selectedTheme}
@@ -1193,7 +1231,10 @@ const Monopoly: React.FC = () => {
           type="button"
           className="back-button"
           aria-label="返回"
-          onClick={() => navigate("/Learn")}
+          onClick={() => {
+            audioManager.play(AudioType.THEME_SELECTION, 0.3);
+            navigate("/Learn");
+          }}
         >
           <img src={BackIcon} alt="返回" />
         </button>
@@ -1204,16 +1245,24 @@ const Monopoly: React.FC = () => {
           </span>
         </div>
         <div className="room-info">
+          {/* 音效控制組件 */}
+          <AudioControls className="inline" />
           <button 
             className="history-button"
-            onClick={() => setShowGameHistory(true)}
+            onClick={() => {
+              audioManager.play(AudioType.THEME_SELECTION, 0.3);
+              setShowGameHistory(true);
+            }}
             title="查看遊戲歷程"
           >
             📊 歷程
           </button>
           <button 
             className="switch-player-button"
-            onClick={switchToNextPlayer}
+            onClick={() => {
+              audioManager.play(AudioType.THEME_SELECTION, 0.3);
+              switchToNextPlayer();
+            }}
             title="手動切換玩家"
           >
             🔄 換人
@@ -1373,7 +1422,10 @@ const Monopoly: React.FC = () => {
                   ) : (
                     <div className="challenge-actions">
                       {challengeResult && (
-                        <button className="challenge-complete-btn" onClick={resetChallenge}>
+                        <button className="challenge-complete-btn" onClick={() => {
+                          audioManager.play(AudioType.THEME_SELECTION, 0.3);
+                          resetChallenge();
+                        }}>
                           完成挑戰
                         </button>
                       )}
@@ -1452,9 +1504,12 @@ const Monopoly: React.FC = () => {
               ) : (
                 <div className="challenge-actions">
                   {couponChallengeResult && (
-                    <button className="challenge-complete-btn" onClick={resetCouponChallenge}>
-                      完成挑戰
-                    </button>
+                        <button className="challenge-complete-btn" onClick={() => {
+                          audioManager.play(AudioType.THEME_SELECTION, 0.3);
+                          resetCouponChallenge();
+                        }}>
+                          完成挑戰
+                        </button>
                   )}
                 </div>
               )}
@@ -1535,7 +1590,10 @@ const Monopoly: React.FC = () => {
                 </div>
               </div>
               
-              <button className="close-card-button" onClick={closeWordCard}>
+              <button className="close-card-button" onClick={() => {
+                audioManager.play(AudioType.THEME_SELECTION, 0.3);
+                closeWordCard();
+              }}>
                 完成
               </button>
             </div>
@@ -1571,6 +1629,7 @@ const Monopoly: React.FC = () => {
             <button 
               className="close-button"
               onClick={() => {
+                audioManager.play(AudioType.THEME_SELECTION, 0.3);
                 setShowGameOver(false);
                 navigate('/Scoresummary', { 
                   state: { players: players } 
@@ -1592,7 +1651,10 @@ const Monopoly: React.FC = () => {
               <div className="header-right">
                 <button 
                   className="close-button"
-                  onClick={() => setShowLocationDetail(false)}
+                  onClick={() => {
+                    audioManager.play(AudioType.THEME_SELECTION, 0.3);
+                    setShowLocationDetail(false);
+                  }}
                 >
                   ✕
                 </button>
@@ -1607,6 +1669,7 @@ const Monopoly: React.FC = () => {
               <button 
                 className="skip-button"
                 onClick={() => {
+                  audioManager.play(AudioType.THEME_SELECTION, 0.3);
                   setShowLocationDetail(false);
                   // 立即切換到下一玩家
                   switchToNextPlayer();
@@ -1625,6 +1688,7 @@ const Monopoly: React.FC = () => {
                   <button 
                     className="complete-challenge-button"
                     onClick={() => {
+                      audioManager.play(AudioType.THEME_SELECTION, 0.3);
                       if (currentLocationDetail.challenge) {
                         handleChallengeComplete(currentLocationDetail.challenge.type, currentLocationDetail.challenge.reward);
                         setShowLocationDetail(false);
@@ -1649,6 +1713,7 @@ const Monopoly: React.FC = () => {
                   <button 
                     className="draw-chance-button"
                     onClick={() => {
+                      audioManager.play(AudioType.THEME_SELECTION, 0.3);
                       setShowLocationDetail(false);
                       // 立即切換到下一玩家
                       switchToNextPlayer();
@@ -1665,6 +1730,7 @@ const Monopoly: React.FC = () => {
                   <button 
                     className="use-shortcut-button"
                     onClick={() => {
+                      audioManager.play(AudioType.THEME_SELECTION, 0.3);
                       setShowLocationDetail(false);
                       // 立即切換到下一玩家
                       switchToNextPlayer();
@@ -1688,6 +1754,7 @@ const Monopoly: React.FC = () => {
                   <button 
                     className="complete-button"
                     onClick={() => {
+                      audioManager.play(AudioType.THEME_SELECTION, 0.3);
                       setShowLocationDetail(false);
                       // 立即切換到下一玩家
                       switchToNextPlayer();
@@ -1710,7 +1777,10 @@ const Monopoly: React.FC = () => {
               <h2 className="coupon-title">優惠券</h2>
               <button 
                 className="close-button"
-                onClick={() => setShowCouponPanel(false)}
+                onClick={() => {
+                  audioManager.play(AudioType.THEME_SELECTION, 0.3);
+                  setShowCouponPanel(false);
+                }}
               >
                 ✕
               </button>
@@ -1721,13 +1791,17 @@ const Monopoly: React.FC = () => {
                 <>
                   <button 
                     className="coupon-button taiwanese-challenge"
-                    onClick={handleWordChallenge}
+                    onClick={() => {
+                      audioManager.play(AudioType.THEME_SELECTION, 0.3);
+                      handleWordChallenge();
+                    }}
                   >
                     台語大單挑
                   </button>
                   <button 
                     className="coupon-button scenario-challenge"
                     onClick={() => {
+                      audioManager.play(AudioType.THEME_SELECTION, 0.3);
                       setShowCouponPanel(false);
                       setShowCouponChallengePanel(true);
                     }}
@@ -1737,6 +1811,7 @@ const Monopoly: React.FC = () => {
                   <button 
                     className="coupon-button no-coupon"
                     onClick={() => {
+                      audioManager.play(AudioType.THEME_SELECTION, 0.3);
                       setShowCouponPanel(false);
                       switchToNextPlayer();
                     }}
@@ -1752,6 +1827,7 @@ const Monopoly: React.FC = () => {
                   <button 
                     className="coupon-button scenario-challenge"
                     onClick={() => {
+                      audioManager.play(AudioType.THEME_SELECTION, 0.3);
                       setShowCouponPanel(false);
                       setShowCouponChallengePanel(true);
                     }}
@@ -1761,6 +1837,7 @@ const Monopoly: React.FC = () => {
                   <button 
                     className="coupon-button no-coupon"
                     onClick={() => {
+                      audioManager.play(AudioType.THEME_SELECTION, 0.3);
                       setShowCouponPanel(false);
                       const currentPlayer = players.find(p => p.isCurrentPlayer);
                       if (currentPlayer) {
@@ -1808,7 +1885,10 @@ const Monopoly: React.FC = () => {
             <div className="skip-icon">⏸️</div>
             <h2 className="skip-title">暫停提示</h2>
             <p className="skip-message">{skipAlertMessage}</p>
-            <button className="skip-close-button" onClick={() => setShowSkipAlert(false)}>
+            <button className="skip-close-button" onClick={() => {
+              audioManager.play(AudioType.THEME_SELECTION, 0.3);
+              setShowSkipAlert(false);
+            }}>
               了解
             </button>
           </div>
@@ -1839,7 +1919,10 @@ const Monopoly: React.FC = () => {
               <h2 className="history-title">遊戲歷程</h2>
               <button 
                 className="close-button"
-                onClick={() => setShowGameHistory(false)}
+                onClick={() => {
+                  audioManager.play(AudioType.THEME_SELECTION, 0.3);
+                  setShowGameHistory(false);
+                }}
               >
                 ✕
               </button>
