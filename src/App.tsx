@@ -9,6 +9,7 @@ import GameMain from "./view/GameMain";
 import GameSelection2 from "./view/GameSelection2";
 import Monopoly from "./view/Monopoly";
 import ScoreSummary from "./view/ScoreSummary";
+import LearningStats from "./view/LearningStats";
 
 //小琳區
 import StoryModePage from "./view/StoryModePage";
@@ -105,6 +106,7 @@ export default function App() {
           }} />} />
           <Route path="/Monopoly" element={<Monopoly />} />
           <Route path="/ScoreSummary" element={<ScoreSummary />} />
+          <Route path="/LearningStats" element={<LearningStats />} />
           {/* 新增收藏頁面路由 */}
 
           <Route path="/favorites" element={<FavoriteCollectionPage />} />

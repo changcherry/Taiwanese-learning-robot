@@ -295,3 +295,219 @@
       font-size: 14px;
     }
   }
+
+  /* 台語教案成績統計區域 */
+  .challenge-stats-section {
+    margin: 30px 0;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .stats-header {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  .stats-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .player-stats-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    padding: 20px;
+    border: 2px solid #dee2e6;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .player-stats-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border-color: #007bff;
+  }
+
+  .stats-player-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #dee2e6;
+  }
+
+  .stats-avatar {
+    margin-right: 12px;
+  }
+
+  .stats-avatar .avatar-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #007bff;
+  }
+
+  .stats-avatar .avatar-emoji {
+    font-size: 30px;
+  }
+
+  .stats-player-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2c3e50;
+  }
+
+  .stats-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #e9ecef;
+  }
+
+  .stat-item:last-child {
+    border-bottom: none;
+  }
+
+  .stat-label {
+    font-size: 14px;
+    color: #6c757d;
+    font-weight: 500;
+  }
+
+  .stat-value {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2c3e50;
+  }
+
+  .stat-value.success {
+    color: #28a745;
+  }
+
+  .stat-value.failure {
+    color: #dc3545;
+  }
+
+  .trend-item {
+    background: linear-gradient(90deg, rgba(0, 123, 255, 0.1) 0%, rgba(0, 123, 255, 0.05) 100%);
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin: 5px 0;
+    border: 1px solid rgba(0, 123, 255, 0.2);
+  }
+
+  .stat-value.trend {
+    font-size: 15px;
+  }
+
+  .stat-value.trend-up {
+    color: #28a745;
+  }
+
+  .stat-value.trend-down {
+    color: #dc3545;
+  }
+
+  /* 響應式設計 */
+  @media (max-width: 768px) {
+    .challenge-stats-section {
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .stats-title {
+      font-size: 20px;
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .player-stats-card {
+      padding: 15px;
+    }
+
+    .stats-player-info {
+      margin-bottom: 12px;
+    }
+
+    .stats-avatar .avatar-image {
+      width: 35px;
+      height: 35px;
+    }
+
+    .stats-avatar .avatar-emoji {
+      font-size: 25px;
+    }
+
+    .stats-player-name {
+      font-size: 16px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+    }
+
+    .stat-value {
+      font-size: 15px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .challenge-stats-section {
+      padding: 15px;
+      margin: 15px 0;
+    }
+
+    .stats-title {
+      font-size: 18px;
+    }
+
+    .player-stats-card {
+      padding: 12px;
+    }
+
+    .stats-avatar .avatar-image {
+      width: 30px;
+      height: 30px;
+    }
+
+    .stats-avatar .avatar-emoji {
+      font-size: 22px;
+    }
+
+    .stats-player-name {
+      font-size: 15px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+    }
+
+    .stat-value {
+      font-size: 14px;
+    }
+
+    .stat-value.trend {
+      font-size: 13px;
+    }
+  }

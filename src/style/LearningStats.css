@@ -1,0 +1,389 @@
+/* 台語學習成果統計頁面 */
+.learning-stats-container {
+
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('../src/assets/成績總結背景.png') center center no-repeat;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        overflow-y: auto;
+      }
+
+
+
+
+/* 標題 */
+.stats-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.stats-header h1 {
+  font-size: 28px;
+  color: #2c3e50;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 用戶資訊 */
+.user-info-section {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 25px;
+  border: 2px solid #dee2e6;
+}
+
+.user-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-avatar {
+  flex-shrink: 0;
+}
+
+.user-avatar img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #007bff;
+}
+
+.user-avatar span {
+  font-size: 40px;
+  display: block;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  background: #f8f9fa;
+  border-radius: 50%;
+  border: 3px solid #007bff;
+}
+
+.user-details h2 {
+  margin: 0 0 10px 0;
+  color: #2c3e50;
+  font-size: 22px;
+}
+
+.user-meta {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.user-meta span {
+  font-size: 14px;
+  color: #6c757d;
+  background: rgba(0, 123, 255, 0.1);
+  padding: 5px 10px;
+  border-radius: 15px;
+}
+
+/* 通用區塊樣式 */
+.progress-section,
+.challenge-section,
+.theme-section,
+.trend-section,
+.improvement-section,
+.study-plan-section {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-left: 4px solid #007bff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.progress-section h3,
+.challenge-section h3,
+.theme-section h3,
+.trend-section h3,
+.improvement-section h3,
+.study-plan-section h3 {
+  margin: 0 0 15px 0;
+  color: #2c3e50;
+  font-size: 18px;
+}
+
+/* 進度條 */
+.progress-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.progress-bar {
+  font-family: monospace;
+  font-size: 16px;
+  color: #007bff;
+}
+
+.progress-text {
+  font-size: 14px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-left: 10px;
+}
+
+/* 挑戰類型統計 */
+.challenge-stats,
+.theme-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.challenge-item,
+.theme-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: rgba(248, 249, 250, 0.8);
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.challenge-item span:first-child,
+.theme-item span:first-child {
+  font-weight: bold;
+  color: #2c3e50;
+  min-width: 120px;
+}
+
+/* 學習趨勢 */
+.trend-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.trend-item {
+  padding: 10px;
+  background: linear-gradient(90deg, rgba(0, 123, 255, 0.1) 0%, rgba(0, 123, 255, 0.05) 100%);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 123, 255, 0.2);
+}
+
+.trend-item span {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+/* 加強項目 */
+.improvement-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.improvement-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid;
+}
+
+.improvement-item.priority-high {
+  background: rgba(220, 53, 69, 0.1);
+  border-color: #dc3545;
+}
+
+.improvement-item.priority-medium {
+  background: rgba(255, 193, 7, 0.1);
+  border-color: #ffc107;
+}
+
+.improvement-area {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.improvement-progress {
+  font-size: 14px;
+  color: #6c757d;
+}
+
+/* 學習計畫 */
+.study-plan-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.study-plan-item {
+  padding: 12px;
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  border-radius: 8px;
+  border-left: 4px solid #2196f3;
+  color: #2c3e50;
+  font-weight: 500;
+}
+
+.back-button {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+  }
+  
+  .back-button:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .back-button img {
+    width: 60%;
+    /* 圖片寬度佔按鈕的 60% */
+    height: 60%;
+    /* 圖片高度佔按鈕的 60% */
+    object-fit: contain;
+    /* 確保圖片縮放時不會被裁切 */
+  }
+  
+
+  
+  
+
+/* 載入中 */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 18px;
+  color: #2c3e50;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .learning-stats-container {
+    padding: 10px;
+  }
+
+  .learning-stats-content {
+    padding: 20px;
+    margin-top: 10px;
+  }
+
+  .stats-header h1 {
+    font-size: 24px;
+  }
+
+  .user-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .user-avatar img,
+  .user-avatar span {
+    width: 50px;
+    height: 50px;
+  }
+
+  .user-avatar span {
+    font-size: 30px;
+    line-height: 50px;
+  }
+
+  .user-details h2 {
+    font-size: 18px;
+  }
+
+  .user-meta {
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .user-meta span {
+    font-size: 12px;
+  }
+
+  .back-button {
+    width: 45px;
+    height: 45px;
+    left: 18px;
+    top: 18px;
+  }
+
+  .challenge-item,
+  .theme-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .challenge-item span:first-child,
+  .theme-item span:first-child {
+    min-width: auto;
+  }
+
+  .improvement-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .learning-stats-content {
+    padding: 15px;
+  }
+
+  .stats-header h1 {
+    font-size: 20px;
+  }
+
+  .progress-section,
+  .challenge-section,
+  .theme-section,
+  .trend-section,
+  .improvement-section,
+  .study-plan-section {
+    padding: 15px;
+  }
+
+  .progress-section h3,
+  .challenge-section h3,
+  .theme-section h3,
+  .trend-section h3,
+  .improvement-section h3,
+  .study-plan-section h3 {
+    font-size: 16px;
+  }
+
+  .back-button {
+    width: 40px;
+    height: 40px;
+    left: 15px;
+    top: 15px;
+  }
+}
