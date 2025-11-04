@@ -34,3 +34,8 @@ git merge feature/about
 # 把合併後的 main 推回 GitHub
 git push origin main
 ```
+
+## MCP 工具整合
+
+如需啟動 Figma MCP 伺服器並接入 Cursor、Claude Code 等工具，
+請參考 `BackEnd/docs/figma-mcp.md`。
